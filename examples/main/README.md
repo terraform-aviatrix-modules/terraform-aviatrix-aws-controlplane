@@ -1,17 +1,7 @@
-<!-- BEGIN_TF_DOCS -->
-# terraform-aviatrix-aws-controlplane
+This is a deployment example for this module.
 
-### Description
-This module deploys the Aviatrix control plane, or individual parts thereof.
+Execute the following Terraform code:
 
-### Requirements
-
-### Compatibility
-Module version | Terraform version
-:--- | :---
-v1.0.0 | >= 1.3.0
-
-### Usage Example
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
@@ -31,11 +21,3 @@ output "controlplane_data" {
   value = module.control_plane
 }
 ```
-## Inputs
-
-No inputs.
-
-## Outputs
-
-No outputs.
-<!-- END_TF_DOCS -->

@@ -1,0 +1,3 @@
+#cloud-config
+avx-controller:
+  avx-controller-version: latest
