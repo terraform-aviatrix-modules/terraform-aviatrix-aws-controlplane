@@ -148,7 +148,9 @@ resource "aws_instance" "aviatrix_controller" {
     delete_on_termination = true
   }
 
-  user_data = var.user_data != "" ? var.user_data : data.local_file.cloud_init.content
+  # user_data = var.user_data != "" ? var.user_data : data.local_file.cloud_init.content
+  user_data        = var.user_data != "" ? var.user_data : null
+  user_data_base64 = var.user_data == "" ? data.local_file.cloud_init.content_base64 : null
 
   tags = merge(local.common_tags, {
     Name = local.controller_name
@@ -156,7 +158,7 @@ resource "aws_instance" "aviatrix_controller" {
 
   lifecycle {
     ignore_changes = [
-      ami, key_name, user_data, network_interface
+      ami, key_name, user_data, user_data_base64, network_interface
     ]
   }
 }
