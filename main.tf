@@ -1,14 +1,7 @@
 module "iam_roles" {
   count  = var.module_config.iam_roles ? 1 : 0
   source = "./modules/iam_roles"
-
-  name_prefix = "controller_iam"
-
-  depends_on = [
-    module.controller_init,
-  ]
 }
-
 
 module "controller_build" {
   count = var.module_config.controller_deployment ? 1 : 0
@@ -27,6 +20,10 @@ module "controller_build" {
   vpc_cidr          = var.controlplane_vpc_cidr
   subnet_cidr       = var.controlplane_subnet_cidr
   environment       = var.environment #For internal use only
+
+  depends_on = [
+    module.iam_roles
+  ]
 }
 
 module "controller_init" {
@@ -101,18 +98,17 @@ module "copilot_init" {
 }
 
 #Onboard the account
-# module "account_onboarding" {
-#   count  = var.module_config.account_onboarding ? 1 : 0
-#   source = "./modules/account_onboarding"
+module "account_onboarding" {
+  count  = var.module_config.account_onboarding ? 1 : 0
+  source = "./modules/account_onboarding"
 
-#   controller_public_ip      = module.controller_build[0].controller_public_ip_address
-#   controller_admin_password = var.controller_admin_password
+  controller_public_ip      = module.controller_build[0].public_ip
+  controller_admin_password = var.controller_admin_password
 
-#   access_account_name = var.access_account_name
-#   account_email       = var.account_email
+  access_account_name = var.access_account_name
+  account_email       = var.account_email
 
-#   depends_on = [
-#     module.controller_init,
-#     module.iam_roles
-#   ]
-# }
+  depends_on = [
+    module.controller_init,
+  ]
+}

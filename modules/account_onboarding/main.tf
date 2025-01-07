@@ -23,21 +23,23 @@ data "http" "controller_login" {
   }
 }
 
-resource "terracurl_request" "azure_access_account" {
-  name            = "azure_access_account"
+data "aws_caller_identity" "current" {}
+
+resource "terracurl_request" "aws_access_account" {
+  name            = "aws_access_account"
   url             = "https://${var.controller_public_ip}/v2/api"
   method          = "POST"
   skip_tls_verify = true
+  timeout         = 300
   request_body = jsonencode({
-    action                        = "setup_account_profile",
-    CID                           = jsondecode(data.http.controller_login.response_body)["CID"],
-    account_name                  = var.access_account_name,
-    cloud_type                    = "8",
-    account_email                 = var.account_email,
-    arm_subscription_id           = var.arm_subscription_id,
-    arm_application_endpoint      = var.arm_directory_id,
-    arm_application_client_id     = var.arm_client_id,
-    arm_application_client_secret = var.arm_application_key,
+    action             = "setup_account_profile",
+    CID                = jsondecode(data.http.controller_login.response_body)["CID"],
+    account_name       = var.access_account_name,
+    cloud_type         = "1",
+    account_email      = var.account_email,
+    aws_account_number = data.aws_caller_identity.current.account_id,
+    aws_iam            = true,
+    aws_role_ec2       = format("arn:aws:iam::%s:role/%s", data.aws_caller_identity.current.account_id, var.aws_role_ec2)
   })
 
   headers = {
@@ -48,8 +50,7 @@ resource "terracurl_request" "azure_access_account" {
     200,
   ]
 
-  max_retry      = 5
-  retry_interval = 1
+  # Disabled destroy lifecycle, as terracurl cannot cope with dynamic credentials at this time. See https://github.com/devops-rob/terraform-provider-terracurl/issues/83.
 
   lifecycle {
     postcondition {
@@ -60,40 +61,7 @@ resource "terracurl_request" "azure_access_account" {
     ignore_changes = all
   }
 
-  depends_on = [data.http.controller_login]
-}
-
-# Enable controller security group management
-resource "terracurl_request" "enable_controller_security_group_management" {
-  name            = "enable_controller_security_group_management"
-  url             = "https://${var.controller_public_ip}/v2/api"
-  method          = "POST"
-  skip_tls_verify = true
-  request_body = jsonencode({
-    action : "enable_controller_security_group_management",
-    CID = jsondecode(data.http.controller_login.response_body)["CID"],
-    access_account_name : var.access_account_name
-  })
-
-  headers = {
-    Content-Type = "application/json"
-  }
-
-  response_codes = [
-    200,
+  depends_on = [
+    data.http.controller_login,
   ]
-
-  max_retry      = 3
-  retry_interval = 3
-
-  lifecycle {
-    postcondition {
-      condition     = jsondecode(self.response)["return"]
-      error_message = "Failed to enable security group management: ${jsondecode(self.response)["reason"]}"
-    }
-
-    ignore_changes = all
-  }
-
-  depends_on = [terracurl_request.azure_access_account]
 }

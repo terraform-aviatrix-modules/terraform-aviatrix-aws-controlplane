@@ -18,7 +18,7 @@ variable "controller_admin_password" {
 variable "access_account_name" {
   type        = string
   description = "Access account name"
-  default     = "Azure"
+  default     = "AWS"
 }
 
 variable "account_email" {
@@ -26,23 +26,7 @@ variable "account_email" {
   description = "Account email address"
 }
 
-variable "arm_subscription_id" {
-  type        = string
-  description = "Azure subscription ID"
-}
-
-variable "arm_directory_id" {
-  type        = string
-  description = "Azure directory ID"
-}
-
-variable "arm_client_id" {
-  type        = string
-  description = "Azure client ID"
-}
-
-variable "arm_application_key" {
-  type        = string
-  sensitive   = true
-  description = "Azure application key"
+variable "aws_role_ec2" {
+  type    = string
+  default = "aviatrix-role-ec2"
 }

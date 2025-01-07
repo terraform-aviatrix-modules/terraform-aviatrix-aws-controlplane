@@ -119,6 +119,7 @@ variable "module_config" {
     copilot_deployment        = true,
     copilot_initialization    = true,
     iam_roles                 = true,
+    account_onboarding        = true,
   }
 }
 
