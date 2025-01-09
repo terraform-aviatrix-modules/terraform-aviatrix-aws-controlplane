@@ -1,43 +1,20 @@
-## Providers
+<!-- BEGIN_TF_DOCS -->
+# terraform-aviatrix-azure-controlplane - controller-build
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-| <a name="provider_http"></a> [http](#provider\_http) | n/a |
-| <a name="provider_local"></a> [local](#provider\_local) | n/a |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | n/a |
+### Description
+This submodule helps with building the controller instance.
 
-## Modules
+### Usage Example
+```hcl
+module "controller_build" {
+  source = "./modules/controller_build"
 
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [aws_eip.controller_eip](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
-| [aws_eip_association.eip_assoc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip_association) | resource |
-| [aws_instance.aviatrix_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
-| [aws_internet_gateway.igw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway) | resource |
-| [aws_key_pair.controller_key_pair](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
-| [aws_network_interface.eni_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_interface) | resource |
-| [aws_route.public_internet_gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
-| [aws_route_table.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table) | resource |
-| [aws_route_table_association.rta](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association) | resource |
-| [aws_security_group.aviatrix_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
-| [aws_security_group_rule.egress_rule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.ingress_rule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_subnet.controller_subnet](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
-| [aws_vpc.controller_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | resource |
-| [local_file.private_key](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
-| [tls_private_key.key_pair_material](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
-| [aws_availability_zones.all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
-| [aws_ec2_instance_type_offering.offering](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ec2_instance_type_offering) | data source |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
-| [aws_subnet.controller_subnet](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet) | data source |
-| [aws_vpc.controller_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
-| [http_http.avx_ami_id](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
-
+  controller_name    = "My-Controller"
+  incoming_ssl_cidrs = ["1.2.3.4/32"]
+  vpc_cidr           = "10.0.0.0/20"
+  subnet_cidr        = "10.0.0.0/24"
+}
+```
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -74,3 +51,4 @@ No modules.
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | Security group id used by Aviatrix controller |
 | <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | Subnet where Aviatrix controller was built |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | VPC where Aviatrix controller was built |
+<!-- END_TF_DOCS -->

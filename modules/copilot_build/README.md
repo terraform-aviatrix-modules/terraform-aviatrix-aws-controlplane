@@ -1,44 +1,43 @@
-## Providers
+<!-- BEGIN_TF_DOCS -->
+# terraform-aviatrix-azure-controlplane - copilot-build
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-| <a name="provider_http"></a> [http](#provider\_http) | n/a |
-| <a name="provider_local"></a> [local](#provider\_local) | n/a |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | n/a |
+### Description
+This submodule helps with building a copilot instance.
 
-## Modules
+### Usage Example
+```hcl
+module "copilot_build" {
+  source = "./modules/copilot_build"
 
-No modules.
+  use_existing_vpc = true
+  subnet_id        = "subnet-123456789"
+  vpc_id           = "vpc-123456789"
 
-## Resources
+  controller_public_ip     = "1.2.3.4"
+  controller_private_ip    = "10.2.3.4"
+  copilot_name             = "my-copilot"
+  default_data_volume_name = "/dev/sdf"
+  default_data_volume_size = "100"
 
-| Name | Type |
-|------|------|
-| [aws_ebs_volume.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_volume) | resource |
-| [aws_eip.copilot_eip](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
-| [aws_eip_association.eip_assoc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip_association) | resource |
-| [aws_instance.aviatrixcopilot](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
-| [aws_internet_gateway.igw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway) | resource |
-| [aws_key_pair.copilot_key_pair](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
-| [aws_network_interface.eni-copilot](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_interface) | resource |
-| [aws_route.public_internet_gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
-| [aws_route_table.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table) | resource |
-| [aws_route_table_association.rta](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association) | resource |
-| [aws_security_group.AviatrixCopilotSecurityGroup](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
-| [aws_subnet.copilot_subnet](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
-| [aws_volume_attachment.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/volume_attachment) | resource |
-| [aws_volume_attachment.ebs_att](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/volume_attachment) | resource |
-| [aws_vpc.copilot_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | resource |
-| [local_file.private_key](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
-| [tls_private_key.key_pair_material](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
-| [aws_availability_zones.all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
-| [aws_ec2_instance_type_offering.offering](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ec2_instance_type_offering) | data source |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
-| [aws_subnet.subnet](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet) | data source |
-| [aws_vpc.copilot_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
-| [http_http.copilot_iam_id](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
-
+  allowed_cidrs = {
+    "tcp_cidrs" = {
+      protocol = "Tcp"
+      port     = 443
+      cidrs    = ["1.2.3.4/32"]
+    }
+    "udp_5000_cidrs" = {
+      protocol = "Udp"
+      port     = 5000
+      cidrs    = ["1.2.3.4/32"]
+    },
+    "udp_31283_cidrs" = {
+      protocol = "Udp"
+      port     = 31283
+      cidrs    = ["1.2.3.4/32"]
+    }
+  }
+}
+```
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -77,3 +76,4 @@ No modules.
 | <a name="output_region"></a> [region](#output\_region) | Current AWS region |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | VPC ID |
 | <a name="output_vpc_name"></a> [vpc\_name](#output\_vpc\_name) | VPC name |
+<!-- END_TF_DOCS -->
