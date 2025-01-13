@@ -70,12 +70,6 @@ variable "incoming_ssl_cidrs" {
   description = "Incoming cidrs for security group used by controller"
 }
 
-variable "location" {
-  type        = string
-  description = "Resource Group Location for Aviatrix Controller"
-  default     = "West US"
-}
-
 variable "use_existing_vpc" {
   type        = bool
   description = "Flag to indicate whether to use an existing VPC"
