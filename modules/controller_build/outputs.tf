@@ -27,3 +27,9 @@ output "instance_id" {
   value       = aws_instance.aviatrix_controller.id
   description = "Controller instance ID"
 }
+
+output "controller_name" {
+  value       = local.controller_name
+  description = "Name of the Aviatrix controller created."
+}
+
