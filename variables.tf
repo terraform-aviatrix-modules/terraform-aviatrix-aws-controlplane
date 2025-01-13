@@ -40,12 +40,6 @@ variable "controller_name" {
   }
 }
 
-variable "controller_version" {
-  description = "The desired controller version"
-  type        = string
-  default     = null
-}
-
 # terraform-docs-ignore
 variable "controller_ami_id" {
   type        = string
