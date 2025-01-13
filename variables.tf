@@ -46,6 +46,20 @@ variable "controller_version" {
   default     = null
 }
 
+variable "controller_ami_id" {
+  type        = string
+  description = "AMI ID for controller. If unset, use official image."
+  default     = ""
+  nullable    = false
+}
+
+variable "controller_key_pair_name" {
+  type        = string
+  description = "Key pair name"
+  default     = ""
+  nullable    = false
+}
+
 variable "copilot_name" {
   type        = string
   description = "Customized Name for Aviatrix Copilot"

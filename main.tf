@@ -19,7 +19,9 @@ module "controller_build" {
   availability_zone = var.availability_zone
   vpc_cidr          = var.controlplane_vpc_cidr
   subnet_cidr       = var.controlplane_subnet_cidr
-  environment       = var.environment #For internal use only
+  environment       = var.environment              #For internal use only
+  ami_id            = var.controller_ami_id        #For internal use only
+  key_pair_name     = var.controller_key_pair_name #For internal use only
 
   depends_on = [
     module.iam_roles
