@@ -40,6 +40,12 @@ variable "controller_name" {
   }
 }
 
+variable "controller_version" {
+  description = "The desired controller version"
+  type        = string
+  default     = null
+}
+
 variable "copilot_name" {
   type        = string
   description = "Customized Name for Aviatrix Copilot"

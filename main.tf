@@ -38,6 +38,7 @@ module "controller_init" {
   controller_admin_password = var.controller_admin_password
   customer_id               = var.customer_id
   wait_for_setup_duration   = "0s"
+  controller_version        = var.controller_version
 
   depends_on = [
     module.controller_build
