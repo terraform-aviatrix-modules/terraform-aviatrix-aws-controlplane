@@ -32,7 +32,7 @@ module "controller_init" {
   count = var.module_config.controller_initialization ? 1 : 0
 
   source  = "terraform-aviatrix-modules/controller-init/aviatrix"
-  version = "v1.0.3"
+  version = "v1.0.4"
 
   controller_public_ip      = module.controller_build[0].public_ip
   controller_private_ip     = module.controller_build[0].private_ip
@@ -87,7 +87,7 @@ module "copilot_init" {
   count = var.module_config.copilot_initialization ? 1 : 0
 
   source  = "terraform-aviatrix-modules/copilot-init/aviatrix"
-  version = "v1.0.4"
+  version = "v1.0.5"
 
   controller_public_ip             = module.controller_build[0].public_ip
   controller_admin_password        = var.controller_admin_password
