@@ -1,0 +1,7 @@
+#cloud-config
+avx-controller:
+  avx-controller-version: latest
+  environment: ${environment}
+  extra-bootstrap-args:
+    image-registry: registry-release.${environment}.sre.aviatrix.com
+    image-registry-auth: ${registry_auth_token}

@@ -60,7 +60,7 @@ resource "tls_private_key" "key_pair_material" {
 resource "local_file" "private_key" {
   count           = var.use_existing_keypair ? 0 : 1
   filename        = "${local.name_prefix}controller-priv-key.pem"
-  content         = tls_private_key.key_pair_material[0].private_key_pem
+  content         = tls_private_key.key_pair_material[0].private_key_openssh
   file_permission = "0600"
 }
 
@@ -123,10 +123,6 @@ data "aws_subnet" "controller_subnet" {
   id = var.use_existing_vpc ? var.subnet_id : aws_subnet.controller_subnet[0].id
 }
 
-data "local_file" "cloud_init" {
-  filename = format("%s/cloud-init-%s.yml", path.module, var.environment)
-}
-
 resource "aws_instance" "aviatrix_controller" {
   ami                     = local.ami_id
   instance_type           = var.instance_type
@@ -148,9 +144,7 @@ resource "aws_instance" "aviatrix_controller" {
     delete_on_termination = true
   }
 
-  # user_data = var.user_data != "" ? var.user_data : data.local_file.cloud_init.content
-  user_data        = var.user_data != "" ? var.user_data : null
-  user_data_base64 = var.user_data == "" ? data.local_file.cloud_init.content_base64 : null
+  user_data = var.user_data != "" ? var.user_data : local.cloud_init
 
   tags = merge(local.common_tags, {
     Name = local.controller_name
