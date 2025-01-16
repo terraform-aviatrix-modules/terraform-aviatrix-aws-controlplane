@@ -177,6 +177,13 @@ variable "environment" {
   }
 }
 
+# terraform-docs-ignore
+variable "registry_auth_token" {
+  description = "The token used to authenticate to the controller artifact registry. For internal use only."
+  type        = string
+  default     = ""
+  nullable    = false
+}
 
 locals {
   name_prefix       = var.name_prefix != "" ? "${var.name_prefix}_" : ""
@@ -194,6 +201,11 @@ locals {
       module    = "aviatrix-controller-build"
       Createdby = "Terraform+Aviatrix"
   })
+
+  cloud_init = base64encode(templatefile("${path.module}/cloud-init.tftpl", {
+    environment         = var.environment
+    registry_auth_token = var.registry_auth_token
+  }))
 }
 
 data "http" "avx_ami_id" {

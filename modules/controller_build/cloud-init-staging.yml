@@ -1,4 +1,0 @@
-#cloud-config
-avx-controller:
-  environment: staging
-  avx-controller-version: latest

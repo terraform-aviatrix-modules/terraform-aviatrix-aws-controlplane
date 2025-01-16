@@ -49,6 +49,13 @@ variable "controller_ami_id" {
 }
 
 # terraform-docs-ignore
+variable "controller_use_existing_keypair" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether to use an existing key pair"
+}
+
+# terraform-docs-ignore
 variable "controller_key_pair_name" {
   type        = string
   description = "Key pair name"
@@ -144,4 +151,12 @@ variable "environment" {
     condition     = contains(["prod", "staging"], var.environment)
     error_message = "The environment must be either 'prod' or 'staging'."
   }
+}
+
+# terraform-docs-ignore
+variable "registry_auth_token" {
+  description = "The token used to authenticate to the controller artifact registry. For internal use only."
+  type        = string
+  default     = ""
+  nullable    = false
 }
