@@ -168,7 +168,12 @@ data "http" "copilot_iam_id" {
   }
 }
 
-data "aws_availability_zones" "all" {}
+data "aws_availability_zones" "all" {
+  filter {
+    name   = "opt-in-status"
+    values = ["opt-in-not-required"]
+  }
+}
 
 data "aws_ec2_instance_type_offering" "offering" {
   for_each = toset(data.aws_availability_zones.all.names)

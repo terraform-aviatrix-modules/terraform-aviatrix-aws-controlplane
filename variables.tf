@@ -69,6 +69,21 @@ variable "copilot_name" {
   default     = "Aviatrix-Copilot"
 }
 
+# terraform-docs-ignore
+variable "copilot_use_existing_keypair" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether to use an existing key pair"
+}
+
+# terraform-docs-ignore
+variable "copilot_key_pair_name" {
+  type        = string
+  description = "Key pair name"
+  default     = ""
+  nullable    = false
+}
+
 variable "controlplane_subnet_cidr" {
   type        = string
   description = "CIDR for controlplane subnet."

@@ -128,6 +128,12 @@ variable "controller_name" {
   nullable    = false
 }
 
+variable "controller_version" {
+  type        = string
+  description = "Aviatrix Controller version"
+  default     = "latest"
+}
+
 variable "root_volume_encrypted" {
   type        = bool
   description = "Whether the root volume is encrypted"
@@ -144,7 +150,12 @@ variable "root_volume_kms_key_id" {
 
 data "aws_region" "current" {}
 
-data "aws_availability_zones" "all" {}
+data "aws_availability_zones" "all" {
+  filter {
+    name   = "opt-in-status"
+    values = ["opt-in-not-required"]
+  }
+}
 
 data "aws_ec2_instance_type_offering" "offering" {
   for_each = toset(data.aws_availability_zones.all.names)
@@ -203,6 +214,7 @@ locals {
   })
 
   cloud_init = base64encode(templatefile("${path.module}/cloud-init.tftpl", {
+    controller_version  = var.controller_version
     environment         = var.environment
     registry_auth_token = var.registry_auth_token
   }))
