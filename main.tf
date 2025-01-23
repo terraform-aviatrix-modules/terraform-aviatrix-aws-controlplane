@@ -8,7 +8,8 @@ module "controller_build" {
 
   source = "./modules/controller_build"
   // please do not use special characters such as `\/"[]:|<>+=;,?*@&~!#$%^()_{}'` in the controller_name
-  controller_name = var.controller_name
+  controller_name    = var.controller_name
+  controller_version = var.controller_version
 
   instance_type      = var.controller_instance_type
   incoming_ssl_cidrs = local.controller_allowed_cidrs
@@ -64,7 +65,9 @@ module "copilot_build" {
   copilot_name             = var.copilot_name
   default_data_volume_name = "/dev/sdf"
   default_data_volume_size = "100"
-  environment              = var.environment #For internal use only
+  environment              = var.environment                  #For internal use only
+  use_existing_keypair     = var.copilot_use_existing_keypair #For internal use only
+  key_pair_name            = var.copilot_key_pair_name        #For internal use only
 
   allowed_cidrs = {
     "tcp_cidrs" = {
