@@ -40,7 +40,7 @@ resource "aws_subnet" "controller_subnet" {
   count             = var.use_existing_vpc ? 0 : 1
   vpc_id            = aws_vpc.controller_vpc[0].id
   cidr_block        = var.subnet_cidr
-  availability_zone = local.availability_zone
+  availability_zone = var.availability_zone
   tags = {
     Name = "${local.name_prefix}controller_subnet"
   }

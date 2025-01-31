@@ -18,6 +18,10 @@ output "controller_instance_id" {
   value = var.module_config.controller_deployment ? module.controller_build[0].instance_id : null
 }
 
+output "controller_security_group_id" {
+  value = var.module_config.controller_deployment ? module.controller_build[0].security_group_id : null
+}
+
 output "controller_name" {
   value = var.module_config.controller_deployment ? module.controller_build[0].controller_name : null
 }

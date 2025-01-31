@@ -17,7 +17,7 @@ module "controller_build" {
   vpc_id             = var.vpc_id
   subnet_id          = var.subnet_id
 
-  availability_zone    = var.availability_zone
+  availability_zone    = var.availability_zone == "" ? local.default_az : var.availability_zone
   vpc_cidr             = var.controlplane_vpc_cidr
   subnet_cidr          = var.controlplane_subnet_cidr
   environment          = var.environment                     #For internal use only
