@@ -196,6 +196,12 @@ variable "registry_auth_token" {
   nullable    = false
 }
 
+# terraform-docs-ignore
+variable "additional_bootstrap_args" {
+  type = map(any)
+  default = {}
+}
+
 locals {
   name_prefix       = var.name_prefix != "" ? "${var.name_prefix}_" : ""
   controller_name   = var.controller_name != "" ? var.controller_name : "${local.name_prefix}AviatrixController"
@@ -214,9 +220,10 @@ locals {
   })
 
   cloud_init = base64encode(templatefile("${path.module}/cloud-init.tftpl", {
-    controller_version  = var.controller_version
-    environment         = var.environment
-    registry_auth_token = var.registry_auth_token
+    controller_version        = var.controller_version
+    environment               = var.environment
+    registry_auth_token       = var.registry_auth_token
+    additional_bootstrap_args = yamlencode(var.additional_bootstrap_args)
   }))
 }
 
