@@ -178,6 +178,7 @@ variable "registry_auth_token" {
 
 # terraform-docs-ignore
 variable "additional_bootstrap_args" {
-  type = map(any)
-  default = {}
+  description = "Additional bootstrap arguments. For internal use only."
+  type        = map(any)
+  default     = {}
 }
