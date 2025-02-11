@@ -23,5 +23,5 @@ output "controller_name" {
 }
 
 output "controller_security_group_id" {
-  value = module.controller_build[0].security_group_id
+  value = var.module_config.controller_deployment ? module.controller_build[0].security_group_id : null
 }
