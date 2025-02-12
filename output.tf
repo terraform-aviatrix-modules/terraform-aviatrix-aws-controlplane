@@ -25,3 +25,11 @@ output "controller_name" {
 output "controller_security_group_id" {
   value = var.module_config.controller_deployment ? module.controller_build[0].security_group_id : null
 }
+
+output "controller_vpc_id" {
+  value = var.module_config.controller_deployment ? module.controller_build[0].vpc_id : null
+}
+
+output "controller_subnet_id" {
+  value = var.module_config.controller_deployment ? module.controller_build[0].subnet_id : null
+}
