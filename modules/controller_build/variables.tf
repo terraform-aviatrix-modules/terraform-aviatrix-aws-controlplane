@@ -223,7 +223,7 @@ locals {
     controller_version        = var.controller_version
     environment               = var.environment
     registry_auth_token       = var.registry_auth_token
-    additional_bootstrap_args = length(var.additional_bootstrap_args) > 0 ? yamlencode(var.additional_bootstrap_args) : ""
+    additional_bootstrap_args = length(var.additional_bootstrap_args) > 0 ? indent(4, yamlencode(var.additional_bootstrap_args)) : ""
   }))
 }
 
