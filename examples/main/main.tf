@@ -9,7 +9,6 @@ module "control_plane" {
   account_email             = "admin@domain.com"
   access_account_name       = "AWS"
   customer_id               = "xxxxxxx-abu-xxxxxxxxx"
-  location                  = "us-east-1"
 }
 
 output "controlplane_data" {

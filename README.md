@@ -24,7 +24,6 @@ module "control_plane" {
   account_email             = "admin@domain.com"
   access_account_name       = "AWS"
   customer_id               = "xxxxxxx-abu-xxxxxxxxx"
-  location                  = "us-east-1"
 }
 
 output "controlplane_data" {
@@ -49,7 +48,7 @@ output "controlplane_data" {
 | <a name="input_copilot_service_account_password"></a> [copilot\_service\_account\_password](#input\_copilot\_service\_account\_password) | n/a | `string` | `""` | no |
 | <a name="input_customer_id"></a> [customer\_id](#input\_customer\_id) | aviatrix customer license id | `string` | n/a | yes |
 | <a name="input_incoming_ssl_cidrs"></a> [incoming\_ssl\_cidrs](#input\_incoming\_ssl\_cidrs) | Incoming cidrs for security group used by controller | `list(string)` | n/a | yes |
-| <a name="input_module_config"></a> [module\_config](#input\_module\_config) | n/a | `map` | <pre>{<br>  "account_onboarding": true,<br>  "controller_deployment": true,<br>  "controller_initialization": true,<br>  "copilot_deployment": true,<br>  "copilot_initialization": true,<br>  "iam_roles": true<br>}</pre> | no |
+| <a name="input_module_config"></a> [module\_config](#input\_module\_config) | n/a | `map` | <pre>{<br/>  "account_onboarding": true,<br/>  "controller_deployment": true,<br/>  "controller_initialization": true,<br/>  "copilot_deployment": true,<br/>  "copilot_initialization": true,<br/>  "iam_roles": true<br/>}</pre> | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | Subnet ID, only required when use\_existing\_vpc is true. | `string` | `""` | no |
 | <a name="input_subnet_name"></a> [subnet\_name](#input\_subnet\_name) | subnet name, only required when use\_existing\_vpc is true. | `string` | `""` | no |
 | <a name="input_use_existing_vpc"></a> [use\_existing\_vpc](#input\_use\_existing\_vpc) | Flag to indicate whether to use an existing VPC | `bool` | `false` | no |
@@ -63,6 +62,9 @@ output "controlplane_data" {
 | <a name="output_controller_name"></a> [controller\_name](#output\_controller\_name) | n/a |
 | <a name="output_controller_private_ip"></a> [controller\_private\_ip](#output\_controller\_private\_ip) | n/a |
 | <a name="output_controller_public_ip"></a> [controller\_public\_ip](#output\_controller\_public\_ip) | n/a |
+| <a name="output_controller_security_group_id"></a> [controller\_security\_group\_id](#output\_controller\_security\_group\_id) | n/a |
+| <a name="output_controller_subnet_id"></a> [controller\_subnet\_id](#output\_controller\_subnet\_id) | n/a |
+| <a name="output_controller_vpc_id"></a> [controller\_vpc\_id](#output\_controller\_vpc\_id) | n/a |
 | <a name="output_copilot_private_ip"></a> [copilot\_private\_ip](#output\_copilot\_private\_ip) | n/a |
 | <a name="output_copilot_public_ip"></a> [copilot\_public\_ip](#output\_copilot\_public\_ip) | n/a |
 <!-- END_TF_DOCS -->
