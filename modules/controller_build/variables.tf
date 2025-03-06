@@ -96,7 +96,7 @@ variable "root_volume_type" {
 variable "instance_type" {
   type        = string
   description = "Controller instance size"
-  default     = "t3.large"
+  default     = "t3.xlarge"
   nullable    = false
 }
 
