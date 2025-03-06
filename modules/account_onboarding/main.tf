@@ -52,6 +52,9 @@ resource "terracurl_request" "aws_access_account" {
 
   # Disabled destroy lifecycle, as terracurl cannot cope with dynamic credentials at this time. See https://github.com/devops-rob/terraform-provider-terracurl/issues/83.
 
+  destroy_url    = var.destroy_url
+  destroy_method = "GET"
+
   lifecycle {
     postcondition {
       condition     = jsondecode(self.response)["return"]

@@ -30,3 +30,10 @@ variable "aws_role_ec2" {
   type    = string
   default = "aviatrix-role-ec2"
 }
+
+# terraform-docs-ignore
+variable "destroy_url" {
+  type        = string
+  description = "Dummy URL used by terracurl during destroy operations."
+  default     = "https://checkip.amazonaws.com"
+}
