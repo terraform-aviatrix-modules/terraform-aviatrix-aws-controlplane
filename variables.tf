@@ -188,3 +188,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "name_prefix" {
+  description = "Prefix to apply to all resources"
+  type        = string
+  default     = ""
+}
