@@ -182,3 +182,15 @@ variable "additional_bootstrap_args" {
   type        = map(any)
   default     = {}
 }
+
+variable "tags" {
+  description = "Tags to apply to all resources"
+  type        = map(string)
+  default     = {}
+}
+
+variable "name_prefix" {
+  description = "Prefix to apply to all resources"
+  type        = string
+  default     = ""
+}

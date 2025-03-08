@@ -26,7 +26,8 @@ module "controller_build" {
   key_pair_name             = var.controller_key_pair_name        #For internal use only
   registry_auth_token       = var.registry_auth_token             #For internal use only
   additional_bootstrap_args = var.additional_bootstrap_args       #For internal use only
-
+  tags                      = var.tags
+  name_prefix               = var.name_prefix
   depends_on = [
     module.iam_roles
   ]
@@ -69,7 +70,8 @@ module "copilot_build" {
   environment              = var.environment                  #For internal use only
   use_existing_keypair     = var.copilot_use_existing_keypair #For internal use only
   key_pair_name            = var.copilot_key_pair_name        #For internal use only
-
+  tags                     = var.tags
+  name_prefix              = var.name_prefix
   allowed_cidrs = {
     "tcp_cidrs" = {
       protocol = "Tcp"
