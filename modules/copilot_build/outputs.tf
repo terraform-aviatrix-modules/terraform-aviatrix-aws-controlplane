@@ -27,3 +27,8 @@ output "region" {
   value       = data.aws_region.current.name
   description = "Current AWS region"
 }
+
+output "security_group_id" {
+  value       = aws_security_group.copilot_security_group.id
+  description = "Security group ID"
+}
