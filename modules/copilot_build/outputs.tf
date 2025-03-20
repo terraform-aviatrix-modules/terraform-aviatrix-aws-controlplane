@@ -29,6 +29,6 @@ output "region" {
 }
 
 output "security_group_id" {
-  value       = aws_security_group.copilot_security_group.id
+  value       = aws_security_group.AviatrixCopilotSecurityGroup.id
   description = "Security group ID"
 }
