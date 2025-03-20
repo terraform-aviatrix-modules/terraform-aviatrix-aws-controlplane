@@ -71,9 +71,11 @@ module "copilot_build" {
 | Name | Description |
 |------|-------------|
 | <a name="output_ec2-info"></a> [ec2-info](#output\_ec2-info) | EC2 instance info |
+| <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | Copilot Instance ID |
 | <a name="output_private_ip"></a> [private\_ip](#output\_private\_ip) | Private IP address of the Aviatrix Copilot |
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | Public IP address of the Aviatrix Copilot |
 | <a name="output_region"></a> [region](#output\_region) | Current AWS region |
+| <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | Copilot Security group ID |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | VPC ID |
 | <a name="output_vpc_name"></a> [vpc\_name](#output\_vpc\_name) | VPC name |
 <!-- END_TF_DOCS -->
