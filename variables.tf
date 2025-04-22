@@ -144,6 +144,12 @@ variable "controller_instance_type" {
   default     = "t3.large"
 }
 
+variable "copilot_instance_type" {
+  type        = string
+  description = "The instance type used for deploying copilot."
+  default     = null
+}
+
 variable "module_config" {
   default = {
     controller_deployment     = true,
