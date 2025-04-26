@@ -1,4 +1,4 @@
 ### Compatibility
 Module version | Terraform version
-:--- | :--- | :--- | :---
-v1.0.0 | >=1.3
+:--- | :---
+v0.9.0 | >=1.3
