@@ -144,7 +144,7 @@ resource "aws_instance" "aviatrix_controller" {
     delete_on_termination = true
   }
 
-  user_data = var.user_data != "" ? var.user_data : local.cloud_init
+  user_data = var.user_data
 
   tags = merge(local.common_tags, {
     Name = local.controller_name

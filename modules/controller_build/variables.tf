@@ -128,12 +128,6 @@ variable "controller_name" {
   nullable    = false
 }
 
-variable "controller_version" {
-  type        = string
-  description = "Aviatrix Controller version"
-  default     = "latest"
-}
-
 variable "root_volume_encrypted" {
   type        = bool
   description = "Whether the root volume is encrypted"
@@ -208,7 +202,7 @@ locals {
   key_pair_name     = var.key_pair_name != "" ? var.key_pair_name : "aviatrix_controller_kp"
   ec2_role_name     = var.ec2_role_name != "" ? var.ec2_role_name : "aviatrix-role-ec2"
   is_aws_cn         = element(split("-", data.aws_region.current.name), 0) == "cn" ? true : false
-  images            = jsondecode(data.http.avx_ami_id.response_body)["g4"]["amd64"]
+  images            = jsondecode(data.http.avx_ami_id.response_body)["g3"]["amd64"]
   ami_id            = var.ami_id != "" ? var.ami_id : local.images[data.aws_region.current.name]
   default_az        = keys({ for az, details in data.aws_ec2_instance_type_offering.offering : az => details.instance_type if details.instance_type == var.instance_type })[0]
   availability_zone = var.availability_zone != "" ? var.availability_zone : local.default_az
@@ -218,13 +212,6 @@ locals {
       module    = "aviatrix-controller-build"
       Createdby = "Terraform+Aviatrix"
   })
-
-  cloud_init = base64encode(templatefile("${path.module}/cloud-init.tftpl", {
-    controller_version        = var.controller_version
-    environment               = var.environment
-    registry_auth_token       = var.registry_auth_token
-    additional_bootstrap_args = length(var.additional_bootstrap_args) > 0 ? indent(4, yamlencode(var.additional_bootstrap_args)) : ""
-  }))
 }
 
 data "http" "avx_ami_id" {

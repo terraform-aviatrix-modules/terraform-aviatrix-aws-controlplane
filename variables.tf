@@ -168,21 +168,6 @@ variable "environment" {
   }
 }
 
-# terraform-docs-ignore
-variable "registry_auth_token" {
-  description = "The token used to authenticate to the controller artifact registry. For internal use only."
-  type        = string
-  default     = ""
-  nullable    = false
-}
-
-# terraform-docs-ignore
-variable "additional_bootstrap_args" {
-  description = "Additional bootstrap arguments. For internal use only."
-  type        = map(any)
-  default     = {}
-}
-
 variable "tags" {
   description = "Tags to apply to all resources"
   type        = map(string)

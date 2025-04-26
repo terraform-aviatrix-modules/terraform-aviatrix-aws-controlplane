@@ -5,7 +5,7 @@ Execute the following Terraform code:
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
-  version = "1.0.1"
+  version = "1.0.0"
 
   controller_name           = "my_controller"
   incoming_ssl_cidrs        = ["1.2.3.4"]
@@ -14,7 +14,6 @@ module "control_plane" {
   account_email             = "admin@domain.com"
   access_account_name       = "AWS"
   customer_id               = "xxxxxxx-abu-xxxxxxxxx"
-  location                  = "us-east-1"
 }
 
 output "controlplane_data" {

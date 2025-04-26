@@ -8,8 +8,7 @@ module "controller_build" {
 
   source = "./modules/controller_build"
   // please do not use special characters such as `\/"[]:|<>+=;,?*@&~!#$%^()_{}'` in the controller_name
-  controller_name    = var.controller_name
-  controller_version = var.controller_version
+  controller_name = var.controller_name
 
   instance_type      = var.controller_instance_type
   incoming_ssl_cidrs = local.controller_allowed_cidrs
@@ -17,17 +16,15 @@ module "controller_build" {
   vpc_id             = var.vpc_id
   subnet_id          = var.subnet_id
 
-  availability_zone         = var.availability_zone
-  vpc_cidr                  = var.controlplane_vpc_cidr
-  subnet_cidr               = var.controlplane_subnet_cidr
-  environment               = var.environment                     #For internal use only
-  ami_id                    = var.controller_ami_id               #For internal use only
-  use_existing_keypair      = var.controller_use_existing_keypair #For internal use only
-  key_pair_name             = var.controller_key_pair_name        #For internal use only
-  registry_auth_token       = var.registry_auth_token             #For internal use only
-  additional_bootstrap_args = var.additional_bootstrap_args       #For internal use only
-  tags                      = var.tags
-  name_prefix               = var.name_prefix
+  availability_zone    = var.availability_zone
+  vpc_cidr             = var.controlplane_vpc_cidr
+  subnet_cidr          = var.controlplane_subnet_cidr
+  environment          = var.environment                     #For internal use only
+  ami_id               = var.controller_ami_id               #For internal use only
+  use_existing_keypair = var.controller_use_existing_keypair #For internal use only
+  key_pair_name        = var.controller_key_pair_name        #For internal use only
+  tags                 = var.tags
+  name_prefix          = var.name_prefix
   depends_on = [
     module.iam_roles
   ]
@@ -44,7 +41,7 @@ module "controller_init" {
   controller_admin_email    = var.controller_admin_email
   controller_admin_password = var.controller_admin_password
   customer_id               = var.customer_id
-  wait_for_setup_duration   = "0s"
+  wait_for_setup_duration   = "10m"
   controller_version        = var.controller_version
 
   depends_on = [
