@@ -9,7 +9,7 @@ This module deploys the Aviatrix control plane, or individual parts thereof.
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.0 | >= 1.3.0
+v0.9.0 | >= 1.3.0
 
 ### Usage Example
 ```hcl
