@@ -65,6 +65,7 @@ module "copilot_build" {
   controller_public_ip     = module.controller_build[0].public_ip
   controller_private_ip    = module.controller_build[0].private_ip
   copilot_name             = var.copilot_name
+  ami_id                   = var.copilot_ami_id
   instance_type            = var.copilot_instance_type
   default_data_volume_name = "/dev/sdf"
   default_data_volume_size = "100"

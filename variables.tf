@@ -49,6 +49,14 @@ variable "controller_ami_id" {
 }
 
 # terraform-docs-ignore
+variable "copilot_ami_id" {
+  type        = string
+  description = "AMI ID for copilot. If unset, use official image."
+  default     = ""
+  nullable    = false
+}
+
+# terraform-docs-ignore
 variable "controller_use_existing_keypair" {
   type        = bool
   default     = false
