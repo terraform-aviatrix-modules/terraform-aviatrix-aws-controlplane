@@ -16,7 +16,7 @@ module "controller_build" {
   vpc_id             = var.vpc_id
   subnet_id          = var.subnet_id
 
-  availability_zone    = var.availability_zone
+  availability_zone    = var.availability_zone == "" ? local.default_az : var.availability_zone
   vpc_cidr             = var.controlplane_vpc_cidr
   subnet_cidr          = var.controlplane_subnet_cidr
   environment          = var.environment                     #For internal use only
@@ -62,6 +62,8 @@ module "copilot_build" {
   controller_public_ip     = module.controller_build[0].public_ip
   controller_private_ip    = module.controller_build[0].private_ip
   copilot_name             = var.copilot_name
+  ami_id                   = var.copilot_ami_id
+  instance_type            = var.copilot_instance_type
   default_data_volume_name = "/dev/sdf"
   default_data_volume_size = "100"
   environment              = var.environment                  #For internal use only
