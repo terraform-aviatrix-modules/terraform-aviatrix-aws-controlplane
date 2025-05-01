@@ -12,8 +12,8 @@ data "http" "controller_login" {
     password = var.controller_admin_password,
   })
   retry {
-    attempts     = 30
-    min_delay_ms = 10000
+    attempts     = 5
+    min_delay_ms = 1000
   }
   lifecycle {
     postcondition {
