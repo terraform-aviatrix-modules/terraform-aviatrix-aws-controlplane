@@ -169,6 +169,12 @@ variable "module_config" {
   }
 }
 
+variable "controller_ec2_role_name" {
+  type        = string
+  description = "EC2 role for controller"
+  default     = null
+}
+
 # terraform-docs-ignore
 variable "environment" {
   description = "Determines the deployment environment. For internal use only."

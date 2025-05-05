@@ -44,6 +44,7 @@ module "copilot_build" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_volumes"></a> [additional\_volumes](#input\_additional\_volumes) | n/a | <pre>map(object({<br/>    device_name = string,<br/>    volume_id   = string,<br/>  }))</pre> | `{}` | no |
 | <a name="input_allowed_cidrs"></a> [allowed\_cidrs](#input\_allowed\_cidrs) | n/a | <pre>map(object({<br/>    protocol = string,<br/>    port     = number,<br/>    cidrs    = set(string),<br/>  }))</pre> | n/a | yes |
+| <a name="input_ami_id"></a> [ami\_id](#input\_ami\_id) | AMI ID for copilot. If unset, use official image. | `string` | `""` | no |
 | <a name="input_availability_zone"></a> [availability\_zone](#input\_availability\_zone) | Availability zone | `string` | `""` | no |
 | <a name="input_controller_private_ip"></a> [controller\_private\_ip](#input\_controller\_private\_ip) | Controller private IP | `string` | n/a | yes |
 | <a name="input_controller_public_ip"></a> [controller\_public\_ip](#input\_controller\_public\_ip) | Controller public IP | `string` | `"0.0.0.0"` | no |

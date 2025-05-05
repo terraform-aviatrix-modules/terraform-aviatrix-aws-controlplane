@@ -56,6 +56,7 @@ variable "type" {
   type        = string
   description = "Type of billing, can be 'Copilot' or 'CopilotARM'"
   default     = "Copilot"
+  nullable    = false
 }
 
 variable "root_volume_size" {
@@ -87,6 +88,7 @@ variable "instance_type" {
   type        = string
   description = "Copilot instance size"
   default     = ""
+  nullable    = false
 }
 
 variable "ami_id" {

@@ -25,6 +25,7 @@ module "controller_build" {
   key_pair_name        = var.controller_key_pair_name        #For internal use only
   tags                 = var.tags
   name_prefix          = var.name_prefix
+  ec2_role_name        = var.controller_ec2_role_name
   depends_on = [
     module.iam_roles
   ]
@@ -117,6 +118,7 @@ module "account_onboarding" {
 
   access_account_name = var.access_account_name
   account_email       = var.account_email
+  aws_role_ec2        = var.controller_ec2_role_name
 
   depends_on = [
     module.controller_init,
