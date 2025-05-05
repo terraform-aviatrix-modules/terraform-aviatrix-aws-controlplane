@@ -9,13 +9,13 @@ This module deploys the Aviatrix control plane, or individual parts thereof.
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v0.9.0 | >= 1.3.0
+v0.9.2 | >= 1.3.0
 
 ### Usage Example
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
-  version = "0.9.0"
+  version = "0.9.2"
 
   controller_name           = "my_controller"
   incoming_ssl_cidrs        = ["1.2.3.4"]
