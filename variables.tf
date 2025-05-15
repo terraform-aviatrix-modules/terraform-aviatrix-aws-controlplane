@@ -40,6 +40,12 @@ variable "controller_name" {
   }
 }
 
+variable "controller_ec2_role_name" {
+  type        = string
+  description = "EC2 role for controller"
+  default     = null
+}
+
 # terraform-docs-ignore
 variable "controller_ami_id" {
   type        = string
