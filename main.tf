@@ -124,6 +124,6 @@ module "account_onboarding" {
   aws_role_ec2        = var.controller_ec2_role_name
 
   depends_on = [
-    module.controller_init,
+    module.copilot_init,
   ]
 }
