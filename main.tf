@@ -86,6 +86,11 @@ module "copilot_build" {
       port     = 31283
       cidrs    = [format("%s/32", module.controller_build[0].public_ip)]
     }
+    "tcp_31283_cidrs" = {
+      protocol = "Tcp"
+      port     = 31283
+      cidrs    = [format("%s/32", module.controller_build[0].public_ip)]
+    }
   }
 }
 
