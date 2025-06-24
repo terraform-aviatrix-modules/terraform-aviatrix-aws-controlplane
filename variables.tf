@@ -23,6 +23,11 @@ variable "controller_admin_password" {
   description = "aviatrix controller admin password"
 }
 
+variable "copilot_service_account_username" {
+  type    = string
+  default = "copilot_service_account"
+}
+
 variable "copilot_service_account_password" {
   type     = string
   default  = ""

@@ -102,6 +102,7 @@ module "copilot_init" {
   copilot_public_ip                = module.copilot_build[0].public_ip
   service_account_email            = var.controller_admin_email
   copilot_service_account_password = local.copilot_service_account_password
+  copilot_service_account_username = var.copilot_service_account_username
 
   depends_on = [
     module.controller_init
