@@ -40,10 +40,24 @@ variable "controller_name" {
   }
 }
 
+variable "controller_ec2_role_name" {
+  type        = string
+  description = "EC2 role for controller"
+  default     = null
+}
+
 # terraform-docs-ignore
 variable "controller_ami_id" {
   type        = string
   description = "AMI ID for controller. If unset, use official image."
+  default     = ""
+  nullable    = false
+}
+
+# terraform-docs-ignore
+variable "copilot_ami_id" {
+  type        = string
+  description = "AMI ID for copilot. If unset, use official image."
   default     = ""
   nullable    = false
 }
@@ -144,6 +158,12 @@ variable "controller_instance_type" {
   default     = "t3.large"
 }
 
+variable "copilot_instance_type" {
+  type        = string
+  description = "The instance type used for deploying copilot."
+  default     = null
+}
+
 variable "module_config" {
   default = {
     controller_deployment     = true,
@@ -181,4 +201,16 @@ variable "additional_bootstrap_args" {
   description = "Additional bootstrap arguments. For internal use only."
   type        = map(any)
   default     = {}
+}
+
+variable "tags" {
+  description = "Tags to apply to all resources"
+  type        = map(string)
+  default     = {}
+}
+
+variable "name_prefix" {
+  description = "Prefix to apply to all resources"
+  type        = string
+  default     = ""
 }

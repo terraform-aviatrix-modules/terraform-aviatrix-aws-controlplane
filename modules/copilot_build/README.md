@@ -44,6 +44,7 @@ module "copilot_build" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_volumes"></a> [additional\_volumes](#input\_additional\_volumes) | n/a | <pre>map(object({<br/>    device_name = string,<br/>    volume_id   = string,<br/>  }))</pre> | `{}` | no |
 | <a name="input_allowed_cidrs"></a> [allowed\_cidrs](#input\_allowed\_cidrs) | n/a | <pre>map(object({<br/>    protocol = string,<br/>    port     = number,<br/>    cidrs    = set(string),<br/>  }))</pre> | n/a | yes |
+| <a name="input_ami_id"></a> [ami\_id](#input\_ami\_id) | AMI ID for copilot. If unset, use official image. | `string` | `""` | no |
 | <a name="input_availability_zone"></a> [availability\_zone](#input\_availability\_zone) | Availability zone | `string` | `""` | no |
 | <a name="input_controller_private_ip"></a> [controller\_private\_ip](#input\_controller\_private\_ip) | Controller private IP | `string` | n/a | yes |
 | <a name="input_controller_public_ip"></a> [controller\_public\_ip](#input\_controller\_public\_ip) | Controller public IP | `string` | `"0.0.0.0"` | no |
@@ -71,9 +72,11 @@ module "copilot_build" {
 | Name | Description |
 |------|-------------|
 | <a name="output_ec2-info"></a> [ec2-info](#output\_ec2-info) | EC2 instance info |
+| <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | Copilot Instance ID |
 | <a name="output_private_ip"></a> [private\_ip](#output\_private\_ip) | Private IP address of the Aviatrix Copilot |
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | Public IP address of the Aviatrix Copilot |
 | <a name="output_region"></a> [region](#output\_region) | Current AWS region |
+| <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | Copilot Security group ID |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | VPC ID |
 | <a name="output_vpc_name"></a> [vpc\_name](#output\_vpc\_name) | VPC name |
 <!-- END_TF_DOCS -->

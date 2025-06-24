@@ -150,31 +150,6 @@ variable "root_volume_kms_key_id" {
 
 data "aws_region" "current" {}
 
-data "aws_availability_zones" "all" {
-  filter {
-    name   = "opt-in-status"
-    values = ["opt-in-not-required"]
-  }
-}
-
-data "aws_ec2_instance_type_offering" "offering" {
-  for_each = toset(data.aws_availability_zones.all.names)
-
-  filter {
-    name   = "instance-type"
-    values = ["t2.micro", "t3.micro", var.instance_type]
-  }
-
-  filter {
-    name   = "location"
-    values = [each.value]
-  }
-
-  location_type = "availability-zone"
-
-  preferred_instance_types = [var.instance_type, "t3.micro", "t2.micro"]
-}
-
 # terraform-docs-ignore
 variable "environment" {
   description = "Determines the deployment environment. For internal use only."
@@ -203,15 +178,13 @@ variable "additional_bootstrap_args" {
 }
 
 locals {
-  name_prefix       = var.name_prefix != "" ? "${var.name_prefix}_" : ""
-  controller_name   = var.controller_name != "" ? var.controller_name : "${local.name_prefix}AviatrixController"
-  key_pair_name     = var.key_pair_name != "" ? var.key_pair_name : "aviatrix_controller_kp"
-  ec2_role_name     = var.ec2_role_name != "" ? var.ec2_role_name : "aviatrix-role-ec2"
-  is_aws_cn         = element(split("-", data.aws_region.current.name), 0) == "cn" ? true : false
-  images            = jsondecode(data.http.avx_ami_id.response_body)["g4"]["amd64"]
-  ami_id            = var.ami_id != "" ? var.ami_id : local.images[data.aws_region.current.name]
-  default_az        = keys({ for az, details in data.aws_ec2_instance_type_offering.offering : az => details.instance_type if details.instance_type == var.instance_type })[0]
-  availability_zone = var.availability_zone != "" ? var.availability_zone : local.default_az
+  name_prefix     = var.name_prefix != "" ? "${var.name_prefix}_" : ""
+  controller_name = var.controller_name != "" ? var.controller_name : "${local.name_prefix}AviatrixController"
+  key_pair_name   = var.key_pair_name != "" ? var.key_pair_name : "aviatrix_controller_kp"
+  ec2_role_name   = var.ec2_role_name != "" ? var.ec2_role_name : "aviatrix-role-ec2"
+  is_aws_cn       = element(split("-", data.aws_region.current.name), 0) == "cn" ? true : false
+  images          = var.environment == "prod" ? jsondecode(data.http.avx_ami_id.response_body)["g3"]["amd64"] : jsondecode(data.http.avx_ami_id.response_body)["g4"]["amd64"]
+  ami_id          = var.ami_id != "" ? var.ami_id : local.images[data.aws_region.current.name]
 
   common_tags = merge(
     var.tags, {
