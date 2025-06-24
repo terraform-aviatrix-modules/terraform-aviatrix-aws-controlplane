@@ -1,5 +1,8 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v0.9.3
+- Make copilot service account name configurable.
+
 ## v0.9.2
 - Fix issue where variable got nulled
 - Add support for providing custom ec2 role

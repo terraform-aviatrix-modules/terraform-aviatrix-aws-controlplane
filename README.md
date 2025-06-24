@@ -9,13 +9,13 @@ This module deploys the Aviatrix control plane, or individual parts thereof.
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v0.9.2 | >= 1.3.0
+v0.9.3 | >= 1.3.0
 
 ### Usage Example
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
-  version = "0.9.2"
+  version = "0.9.3"
 
   controller_name           = "my_controller"
   incoming_ssl_cidrs        = ["1.2.3.4"]
@@ -48,6 +48,7 @@ output "controlplane_data" {
 | <a name="input_copilot_instance_type"></a> [copilot\_instance\_type](#input\_copilot\_instance\_type) | The instance type used for deploying copilot. | `string` | `null` | no |
 | <a name="input_copilot_name"></a> [copilot\_name](#input\_copilot\_name) | Customized Name for Aviatrix Copilot | `string` | `"Aviatrix-Copilot"` | no |
 | <a name="input_copilot_service_account_password"></a> [copilot\_service\_account\_password](#input\_copilot\_service\_account\_password) | n/a | `string` | `""` | no |
+| <a name="input_copilot_service_account_username"></a> [copilot\_service\_account\_username](#input\_copilot\_service\_account\_username) | n/a | `string` | `"copilot_service_account"` | no |
 | <a name="input_customer_id"></a> [customer\_id](#input\_customer\_id) | aviatrix customer license id | `string` | n/a | yes |
 | <a name="input_incoming_ssl_cidrs"></a> [incoming\_ssl\_cidrs](#input\_incoming\_ssl\_cidrs) | Incoming cidrs for security group used by controller | `list(string)` | n/a | yes |
 | <a name="input_module_config"></a> [module\_config](#input\_module\_config) | n/a | `map` | <pre>{<br/>  "account_onboarding": true,<br/>  "controller_deployment": true,<br/>  "controller_initialization": true,<br/>  "copilot_deployment": true,<br/>  "copilot_initialization": true,<br/>  "iam_roles": true<br/>}</pre> | no |
