@@ -91,6 +91,11 @@ module "copilot_build" {
       port     = 31283
       cidrs    = var.incoming_ssl_cidrs
     }
+    "udp_5000_cidrs" = {
+      protocol = "Udp"
+      port     = 5000
+      cidrs    = var.incoming_ssl_cidrs
+    }
   }
 }
 
