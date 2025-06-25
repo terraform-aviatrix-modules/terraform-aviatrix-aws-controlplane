@@ -17,7 +17,7 @@ module "controller_build" {
   vpc_id             = var.vpc_id
   subnet_id          = var.subnet_id
 
-  availability_zone         = var.availability_zone
+  availability_zone         = var.availability_zone == "" ? local.default_az : var.availability_zone
   vpc_cidr                  = var.controlplane_vpc_cidr
   subnet_cidr               = var.controlplane_subnet_cidr
   environment               = var.environment                     #For internal use only
@@ -26,7 +26,9 @@ module "controller_build" {
   key_pair_name             = var.controller_key_pair_name        #For internal use only
   registry_auth_token       = var.registry_auth_token             #For internal use only
   additional_bootstrap_args = var.additional_bootstrap_args       #For internal use only
-
+  tags                      = var.tags
+  name_prefix               = var.name_prefix
+  ec2_role_name             = var.controller_ec2_role_name
   depends_on = [
     module.iam_roles
   ]
@@ -64,12 +66,15 @@ module "copilot_build" {
   controller_public_ip     = module.controller_build[0].public_ip
   controller_private_ip    = module.controller_build[0].private_ip
   copilot_name             = var.copilot_name
+  ami_id                   = var.copilot_ami_id
+  instance_type            = var.copilot_instance_type
   default_data_volume_name = "/dev/sdf"
   default_data_volume_size = "100"
   environment              = var.environment                  #For internal use only
   use_existing_keypair     = var.copilot_use_existing_keypair #For internal use only
   key_pair_name            = var.copilot_key_pair_name        #For internal use only
-
+  tags                     = var.tags
+  name_prefix              = var.name_prefix
   allowed_cidrs = {
     "tcp_cidrs" = {
       protocol = "Tcp"
@@ -103,7 +108,7 @@ module "copilot_init" {
   count = var.module_config.copilot_initialization ? 1 : 0
 
   source  = "terraform-aviatrix-modules/copilot-init/aviatrix"
-  version = "v1.0.5"
+  version = "v1.0.6"
 
   controller_public_ip             = module.controller_build[0].public_ip
   controller_admin_password        = var.controller_admin_password
@@ -126,8 +131,9 @@ module "account_onboarding" {
 
   access_account_name = var.access_account_name
   account_email       = var.account_email
+  aws_role_ec2        = var.controller_ec2_role_name
 
   depends_on = [
-    module.controller_init,
+    module.copilot_init,
   ]
 }

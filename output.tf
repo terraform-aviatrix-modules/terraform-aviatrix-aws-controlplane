@@ -14,6 +14,14 @@ output "copilot_private_ip" {
   value = var.module_config.copilot_deployment ? module.copilot_build[0].private_ip : null
 }
 
+output "copilot_security_group_id" {
+  value = var.module_config.copilot_deployment ? module.copilot_build[0].security_group_id : null
+}
+
+output "copilot_instance_id" {
+  value = var.module_config.copilot_deployment ? module.copilot_build[0].instance_id : null
+}
+
 output "controller_instance_id" {
   value = var.module_config.controller_deployment ? module.controller_build[0].instance_id : null
 }
