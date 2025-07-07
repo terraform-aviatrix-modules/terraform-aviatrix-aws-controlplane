@@ -183,7 +183,7 @@ locals {
   key_pair_name   = var.key_pair_name != "" ? var.key_pair_name : "aviatrix_controller_kp"
   ec2_role_name   = var.ec2_role_name != "" ? var.ec2_role_name : "aviatrix-role-ec2"
   is_aws_cn       = element(split("-", data.aws_region.current.name), 0) == "cn" ? true : false
-  images          = var.environment == "prod" ? jsondecode(data.http.avx_ami_id.response_body)["g3"]["amd64"] : jsondecode(data.http.avx_ami_id.response_body)["g4"]["amd64"]
+  images          = jsondecode(data.http.avx_ami_id.response_body)["g4"]["amd64"]
   ami_id          = var.ami_id != "" ? var.ami_id : local.images[data.aws_region.current.name]
 
   common_tags = merge(
