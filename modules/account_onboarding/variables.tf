@@ -27,8 +27,9 @@ variable "account_email" {
 }
 
 variable "aws_role_ec2" {
-  type    = string
-  default = "aviatrix-role-ec2"
+  type     = string
+  default  = "aviatrix-role-ec2"
+  nullable = false
 }
 
 # terraform-docs-ignore
