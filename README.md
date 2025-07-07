@@ -67,4 +67,5 @@ output "controlplane_data" {
 | <a name="output_controller_vpc_id"></a> [controller\_vpc\_id](#output\_controller\_vpc\_id) | n/a |
 | <a name="output_copilot_private_ip"></a> [copilot\_private\_ip](#output\_copilot\_private\_ip) | n/a |
 | <a name="output_copilot_public_ip"></a> [copilot\_public\_ip](#output\_copilot\_public\_ip) | n/a |
+| <a name="output_copilot_vpc_id"></a> [copilot\_vpc\_id](#output\_copilot\_vpc\_id) | n/a |
 <!-- END_TF_DOCS -->
