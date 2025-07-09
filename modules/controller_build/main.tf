@@ -90,6 +90,8 @@ resource "aws_security_group_rule" "ingress_rule" {
 }
 
 resource "aws_security_group_rule" "copilot-50441-50443" {
+  count = var.copilot_ips != [] ? 1 : 0
+
   type              = "ingress"
   from_port         = 50441
   to_port           = 50443
