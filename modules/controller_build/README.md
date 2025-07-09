@@ -23,6 +23,7 @@ module "controller_build" {
 | <a name="input_availability_zone"></a> [availability\_zone](#input\_availability\_zone) | Availability zone | `string` | `""` | no |
 | <a name="input_controller_name"></a> [controller\_name](#input\_controller\_name) | Name of controller that will be launched. If not set, default name will be used. | `string` | `""` | no |
 | <a name="input_controller_version"></a> [controller\_version](#input\_controller\_version) | Aviatrix Controller version | `string` | `"latest"` | no |
+| <a name="input_copilot_ips"></a> [copilot\_ips](#input\_copilot\_ips) | The list of Copilot IP's, for security group management. | `list(string)` | `[]` | no |
 | <a name="input_ec2_role_name"></a> [ec2\_role\_name](#input\_ec2\_role\_name) | EC2 role for controller | `string` | `""` | no |
 | <a name="input_incoming_ssl_cidrs"></a> [incoming\_ssl\_cidrs](#input\_incoming\_ssl\_cidrs) | Incoming cidr for security group used by controller | `list(string)` | n/a | yes |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Controller instance size | `string` | `"t3.xlarge"` | no |

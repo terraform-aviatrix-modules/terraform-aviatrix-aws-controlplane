@@ -173,8 +173,16 @@ variable "registry_auth_token" {
 
 # terraform-docs-ignore
 variable "additional_bootstrap_args" {
-  type    = map(any)
-  default = {}
+  type     = map(any)
+  default  = {}
+  nullable = false
+}
+
+variable "copilot_ips" {
+  description = "The list of Copilot IP's, for security group management."
+  type        = list(string)
+  default     = []
+  nullable    = false
 }
 
 locals {
