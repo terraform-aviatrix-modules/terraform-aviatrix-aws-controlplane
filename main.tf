@@ -78,19 +78,28 @@ module "copilot_build" {
   name_prefix              = var.name_prefix
   allowed_cidrs = {
     "tcp_cidrs" = {
-      protocol = "Tcp"
-      port     = 443
-      cidrs    = var.incoming_ssl_cidrs
+      protocol  = "Tcp"
+      from_port = 443
+      cidrs     = var.incoming_ssl_cidrs
     }
     "udp_5000_cidrs" = {
-      protocol = "Udp"
-      port     = 5000
-      cidrs    = [format("%s/32", module.controller_build[0].public_ip)]
+      protocol  = "Udp"
+      from_port = 5000
+      cidrs     = [format("%s/32", module.controller_build[0].public_ip)]
     },
     "udp_31283_cidrs" = {
-      protocol = "Udp"
-      port     = 31283
-      cidrs    = [format("%s/32", module.controller_build[0].public_ip)]
+      protocol  = "Udp"
+      from_port = 31283
+      cidrs     = [format("%s/32", module.controller_build[0].public_ip)]
+    }
+    "tcp_50441_50443_cidrs" = {
+      protocol  = "Tcp"
+      from_port = 50441
+      to_port   = 50443
+      cidrs = [
+        format("%s/32", module.controller_build[0].public_ip),
+        format("%s/32", module.controller_build[0].private_ip)
+      ]
     }
   }
 }

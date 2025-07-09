@@ -78,9 +78,10 @@ variable "root_volume_type" {
 
 variable "allowed_cidrs" {
   type = map(object({
-    protocol = string,
-    port     = number,
-    cidrs    = set(string),
+    protocol  = string,
+    from_port = number,
+    to_port   = optional(number),
+    cidrs     = set(string),
   }))
 }
 
@@ -211,6 +212,7 @@ locals {
   default_az          = keys({ for az, details in data.aws_ec2_instance_type_offering.offering : az => details.instance_type if details.instance_type == local.instance_type })[0]
   availability_zone   = var.availability_zone != "" ? var.availability_zone : local.default_az
   controller_ip       = var.private_mode ? var.controller_private_ip : var.controller_public_ip
+  controller_ips      = [var.controller_private_ip, var.controller_public_ip]
   validate_public_ips = (var.private_mode == false && var.controller_public_ip == "0.0.0.0") ? tobool("Please pass in valid controller_public_ip when private_mode is false.") : true
 
   common_tags = merge(

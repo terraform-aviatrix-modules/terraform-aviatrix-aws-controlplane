@@ -81,22 +81,12 @@ resource "aws_security_group" "aviatrix_security_group" {
 }
 
 resource "aws_security_group_rule" "ingress_rule" {
+  count             = length(var.incoming_ssl_cidrs) > 0 ? 1 : 0
   type              = "ingress"
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
   cidr_blocks       = var.incoming_ssl_cidrs
-  security_group_id = aws_security_group.aviatrix_security_group.id
-}
-
-resource "aws_security_group_rule" "copilot-50441-50443" {
-  count = var.copilot_ips != [] ? 1 : 0
-
-  type              = "ingress"
-  from_port         = 50441
-  to_port           = 50443
-  protocol          = "tcp"
-  cidr_blocks       = var.copilot_ips
   security_group_id = aws_security_group.aviatrix_security_group.id
 }
 

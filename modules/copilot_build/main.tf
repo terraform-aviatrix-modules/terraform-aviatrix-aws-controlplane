@@ -79,8 +79,8 @@ resource "aws_security_group" "AviatrixCopilotSecurityGroup" {
     for_each = var.allowed_cidrs
     content {
       description      = ingress.key
-      from_port        = ingress.value["port"]
-      to_port          = ingress.value["port"]
+      from_port        = ingress.value["from_port"]
+      to_port          = coalesce(ingress.value["to_port"], ingress.value["from_port"])
       protocol         = ingress.value["protocol"]
       cidr_blocks      = ingress.value["cidrs"]
       ipv6_cidr_blocks = []
