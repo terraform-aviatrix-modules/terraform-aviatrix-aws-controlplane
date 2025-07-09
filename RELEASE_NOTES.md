@@ -1,5 +1,8 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.0.3
+- Fix an issue with security groups
+
 ## v1.0.2
 - Update security group entries for controller to allow copilot to connect on tcp ports 50441-50443.
 

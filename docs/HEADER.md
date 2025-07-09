@@ -8,4 +8,4 @@ This module deploys the Aviatrix control plane, or individual parts thereof.
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.2 | >= 1.3.0
+v1.0.3 | >= 1.3.0
