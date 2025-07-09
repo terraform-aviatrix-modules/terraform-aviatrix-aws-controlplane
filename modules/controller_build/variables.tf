@@ -178,13 +178,6 @@ variable "additional_bootstrap_args" {
   nullable = false
 }
 
-variable "copilot_ips" {
-  description = "The list of Copilot IP's, for security group management."
-  type        = list(string)
-  default     = []
-  nullable    = false
-}
-
 locals {
   name_prefix     = var.name_prefix != "" ? "${var.name_prefix}_" : ""
   controller_name = var.controller_name != "" ? var.controller_name : "${local.name_prefix}AviatrixController"
