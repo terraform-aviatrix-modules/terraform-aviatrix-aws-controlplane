@@ -448,11 +448,19 @@ get_copilot_choice() {
         write_hint "CoPilot requires additional AWS resources and will increase deployment cost"
         
         while true; do
-            local choice
-            choice=$(get_user_input "Deploy CoPilot for analytics? (y/n)" "y" false)
+            echo -e "${CYAN}Deploy CoPilot for analytics? (y/n) [default: y]: ${NC}"
+            read choice
+            
+            # Use default if no input provided
+            if [[ -z "$choice" ]]; then
+                choice="y"
+            fi
+            
+            # Convert to lowercase and trim whitespace
+            choice=$(echo "$choice" | tr '[:upper:]' '[:lower:]' | xargs)
             
             # Convert various user inputs to boolean
-            case "${choice,,}" in  # Convert to lowercase
+            case "$choice" in
                 y|yes|true)
                     INCLUDE_COPILOT=true
                     break
@@ -462,7 +470,7 @@ get_copilot_choice() {
                     break
                     ;;
                 *)
-                    write_error "Invalid input. Please enter 'y', 'yes', 'n', or 'no'"
+                    write_error "Invalid input '$choice'. Please enter 'y', 'yes', 'n', or 'no'"
                     ;;
             esac
         done
