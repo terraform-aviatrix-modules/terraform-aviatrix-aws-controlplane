@@ -62,13 +62,16 @@ Your AWS user/role needs the following permissions:
 ### Option 1: Interactive Mode (Recommended)
 ```bash
 # Download and run the script
-curl -O https://raw.githubusercontent.com/your-repo/aws-cloudshell-launcher/deploy-aviatrix-controlplane.sh
+curl -O https://raw.githubusercontent.com/terraform-aviatrix-modules/terraform-aviatrix-aws-controlplane/refs/heads/main/cloudshell/deploy-aviatrix-controlplane.sh
 chmod +x deploy-aviatrix-controlplane.sh
 ./deploy-aviatrix-controlplane.sh
 ```
 
 ### Option 2: Automated Mode
 ```bash
+# Download and run the script
+curl -O https://raw.githubusercontent.com/terraform-aviatrix-modules/terraform-aviatrix-aws-controlplane/refs/heads/main/cloudshell/deploy-aviatrix-controlplane.sh
+chmod +x deploy-aviatrix-controlplane.sh
 ./deploy-aviatrix-controlplane.sh \
   --deployment-name "my-avx-prod" \
   --region "us-east-1" \
@@ -79,6 +82,9 @@ chmod +x deploy-aviatrix-controlplane.sh
 
 ### Option 3: With CoPilot
 ```bash
+# Download and run the script
+curl -O https://raw.githubusercontent.com/terraform-aviatrix-modules/terraform-aviatrix-aws-controlplane/refs/heads/main/cloudshell/deploy-aviatrix-controlplane.sh
+chmod +x deploy-aviatrix-controlplane.sh
 ./deploy-aviatrix-controlplane.sh \
   --deployment-name "my-avx-prod" \
   --include-copilot \
