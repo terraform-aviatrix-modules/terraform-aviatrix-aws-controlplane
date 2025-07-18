@@ -447,22 +447,25 @@ get_copilot_choice() {
         write_info "CoPilot can be deployed later if you choose not to include it now"
         write_hint "CoPilot requires additional AWS resources and will increase deployment cost"
         
-        local choice
-        choice=$(get_user_input "Deploy CoPilot for analytics? (y/n)" "y" false)
-        
-        # Convert various user inputs to boolean
-        case "${choice,,}" in  # Convert to lowercase
-            y|yes|true)
-                INCLUDE_COPILOT=true
-                ;;
-            n|no|false)
-                INCLUDE_COPILOT=false
-                ;;
-            *)
-                write_error "Invalid input. Please enter 'y', 'yes', 'n', or 'no'"
-                get_copilot_choice  # Recursive call to retry
-                ;;
-        esac
+        while true; do
+            local choice
+            choice=$(get_user_input "Deploy CoPilot for analytics? (y/n)" "y" false)
+            
+            # Convert various user inputs to boolean
+            case "${choice,,}" in  # Convert to lowercase
+                y|yes|true)
+                    INCLUDE_COPILOT=true
+                    break
+                    ;;
+                n|no|false)
+                    INCLUDE_COPILOT=false
+                    break
+                    ;;
+                *)
+                    write_error "Invalid input. Please enter 'y', 'yes', 'n', or 'no'"
+                    ;;
+            esac
+        done
     fi
 }
 
