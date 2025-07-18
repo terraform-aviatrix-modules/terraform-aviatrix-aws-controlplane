@@ -696,6 +696,10 @@ create_terraform_config() {
         cidr_string+="\"${all_cidrs[$i]}\""
     done
     
+    # Escape special characters in password for Terraform
+    local escaped_password
+    escaped_password=$(printf '%s\n' "$ADMIN_PASSWORD" | sed 's/[[\.*^$()+?{|]/\\&/g')
+    
     # Create main.tf
     cat > "$TERRAFORM_DIR/main.tf" << EOF
 terraform {
@@ -719,7 +723,7 @@ module "aviatrix_controlplane" {
   controller_name           = "$DEPLOYMENT_NAME-controller"
   customer_id              = "$CUSTOMER_ID"
   controller_admin_email    = "$ADMIN_EMAIL"
-  controller_admin_password = "$ADMIN_PASSWORD"
+  controller_admin_password = "$escaped_password"
   
   # Network Security
   incoming_ssl_cidrs = [$cidr_string]
