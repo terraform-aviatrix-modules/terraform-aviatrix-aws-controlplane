@@ -326,6 +326,31 @@ validate_cidr() {
 }
 
 # Input collection functions
+read_password() {
+    local password=""
+    local char
+    
+    while IFS= read -r -s -n1 char; do
+        # Handle Enter key (empty char)
+        if [[ -z "$char" ]]; then
+            echo
+            echo "$password"
+            return 0
+        fi
+        
+        # Handle backspace (char code 127 or 8)
+        if [[ "$char" == $'\177' ]] || [[ "$char" == $'\b' ]]; then
+            if [[ ${#password} -gt 0 ]]; then
+                password="${password%?}"
+                echo -ne "\b \b"
+            fi
+        else
+            password+="$char"
+            echo -n "*"
+        fi
+    done
+}
+
 get_user_input() {
     local prompt="$1"
     local default_value="${2:-}"
@@ -386,7 +411,23 @@ get_deployment_name() {
         echo ""
         write_info "Enter a unique name for your deployment (3-20 characters, alphanumeric and hyphens only)"
         write_hint "This will be used to name AWS resources and must be unique in your account"
-        DEPLOYMENT_NAME=$(get_user_input "Deployment Name" "" false validate_deployment_name)
+        
+        while true; do
+            echo -e "${CYAN}Deployment Name: ${NC}"
+            read DEPLOYMENT_NAME
+            
+            if [[ -z "$DEPLOYMENT_NAME" ]]; then
+                write_error "Deployment name is required. Please enter a value."
+                continue
+            fi
+            
+            if validate_deployment_name "$DEPLOYMENT_NAME"; then
+                break
+            else
+                write_error "Invalid deployment name. Please try again."
+                continue
+            fi
+        done
     fi
 }
 
@@ -404,7 +445,23 @@ get_region() {
         echo "Asia Pacific: ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-south-1"
         echo "Middle East & Africa: me-south-1, af-south-1"
         echo ""
-        REGION=$(get_user_input "AWS Region" "us-east-1" false validate_region)
+        
+        while true; do
+            echo -e "${CYAN}AWS Region [default: us-east-1]: ${NC}"
+            read REGION
+            
+            # Use default if no input provided
+            if [[ -z "$REGION" ]]; then
+                REGION="us-east-1"
+            fi
+            
+            if validate_region "$REGION"; then
+                break
+            else
+                write_error "Invalid region. Please try again."
+                continue
+            fi
+        done
     fi
 }
 
@@ -412,7 +469,23 @@ get_admin_email() {
     if [[ -z "$ADMIN_EMAIL" ]]; then
         echo ""
         write_info "Enter the email address for the Aviatrix Controller administrator account"
-        ADMIN_EMAIL=$(get_user_input "Administrator Email" "" false validate_email)
+        
+        while true; do
+            echo -e "${CYAN}Administrator Email: ${NC}"
+            read ADMIN_EMAIL
+            
+            if [[ -z "$ADMIN_EMAIL" ]]; then
+                write_error "Email is required. Please enter a value."
+                continue
+            fi
+            
+            if validate_email "$ADMIN_EMAIL"; then
+                break
+            else
+                write_error "Invalid email format. Please try again."
+                continue
+            fi
+        done
     fi
 }
 
@@ -427,7 +500,23 @@ get_admin_password() {
         echo "├─ At least one number (0-9)"
         echo "└─ At least one symbol (!@#\$%^&*)"
         echo ""
-        ADMIN_PASSWORD=$(get_user_input "Administrator Password" "" true validate_password)
+        
+        while true; do
+            echo -e "${CYAN}Administrator Password: ${NC}"
+            ADMIN_PASSWORD=$(read_password)
+            
+            if [[ -z "$ADMIN_PASSWORD" ]]; then
+                write_error "Password is required. Please enter a value."
+                continue
+            fi
+            
+            if validate_password "$ADMIN_PASSWORD"; then
+                break
+            else
+                write_error "Invalid password. Please try again."
+                continue
+            fi
+        done
     fi
 }
 
@@ -436,7 +525,18 @@ get_customer_id() {
         echo ""
         write_info "Enter your Aviatrix customer license ID (required for controller initialization)"
         write_hint "Contact Aviatrix support if you don't have your customer license ID"
-        CUSTOMER_ID=$(get_user_input "Aviatrix Customer License ID" "" false)
+        
+        while true; do
+            echo -e "${CYAN}Aviatrix Customer License ID: ${NC}"
+            read CUSTOMER_ID
+            
+            if [[ -z "$CUSTOMER_ID" ]]; then
+                write_error "Customer ID is required. Please enter a value."
+                continue
+            fi
+            
+            break
+        done
     fi
 }
 
@@ -697,7 +797,7 @@ create_terraform_config() {
     done
     
     # Create main.tf
-    cat > "$TERRAFORM_DIR/main.tf" << 'EOF'
+    cat > "$TERRAFORM_DIR/main.tf" << EOF
 terraform {
   required_providers {
     aws = {
@@ -708,33 +808,33 @@ terraform {
 }
 
 provider "aws" {
-  region = "REGION_PLACEHOLDER"
+  region = "$REGION"
 }
 
 module "aviatrix_controlplane" {
-  source  = "MODULE_SOURCE_PLACEHOLDER"
-  version = "MODULE_VERSION_PLACEHOLDER"
+  source  = "$MODULE_SOURCE"
+  version = "$MODULE_VERSION"
 
   # Basic Configuration
-  controller_name           = "DEPLOYMENT_NAME_PLACEHOLDER-controller"
-  customer_id              = "CUSTOMER_ID_PLACEHOLDER"
-  controller_admin_email    = "ADMIN_EMAIL_PLACEHOLDER"
-  controller_admin_password = "ADMIN_PASSWORD_PLACEHOLDER"
+  controller_name           = "$DEPLOYMENT_NAME-controller"
+  customer_id              = "$CUSTOMER_ID"
+  controller_admin_email    = "$ADMIN_EMAIL"
+  controller_admin_password = "$ADMIN_PASSWORD"
   
   # Network Security
-  incoming_ssl_cidrs = [CIDR_STRING_PLACEHOLDER]
+  incoming_ssl_cidrs = [$cidr_string]
   
   # Account Configuration  
   access_account_name = "AWS-Primary"
-  account_email      = "ADMIN_EMAIL_PLACEHOLDER"
+  account_email      = "$ADMIN_EMAIL"
   
   # Deployment Configuration
   module_config = {
     controller_deployment     = true
     controller_initialization = true
-    copilot_deployment       = COPILOT_DEPLOYMENT_PLACEHOLDER
-    copilot_initialization   = COPILOT_INITIALIZATION_PLACEHOLDER
-    iam_roles                = IAM_ROLES_PLACEHOLDER
+    copilot_deployment       = $(echo "$INCLUDE_COPILOT" | tr '[:upper:]' '[:lower:]')
+    copilot_initialization   = $(echo "$INCLUDE_COPILOT" | tr '[:upper:]' '[:lower:]')
+    iam_roles                = $create_iam_roles
     account_onboarding       = true
   }
 EOF
@@ -792,30 +892,12 @@ output "connection_info" {
 }
 HEREDOC_EOF
 
-    # Replace placeholders with actual values using safe delimiters
-    sed -i "s|REGION_PLACEHOLDER|$REGION|g" "$TERRAFORM_DIR/main.tf"
-    sed -i "s|MODULE_SOURCE_PLACEHOLDER|$MODULE_SOURCE|g" "$TERRAFORM_DIR/main.tf"
-    sed -i "s|MODULE_VERSION_PLACEHOLDER|$MODULE_VERSION|g" "$TERRAFORM_DIR/main.tf"
-    sed -i "s|DEPLOYMENT_NAME_PLACEHOLDER|$DEPLOYMENT_NAME|g" "$TERRAFORM_DIR/main.tf"
-    sed -i "s|CUSTOMER_ID_PLACEHOLDER|$CUSTOMER_ID|g" "$TERRAFORM_DIR/main.tf"
-    sed -i "s|ADMIN_EMAIL_PLACEHOLDER|$ADMIN_EMAIL|g" "$TERRAFORM_DIR/main.tf"
-    sed -i "s|CIDR_STRING_PLACEHOLDER|$cidr_string|g" "$TERRAFORM_DIR/main.tf"
-    sed -i "s|COPILOT_DEPLOYMENT_PLACEHOLDER|$(echo "$INCLUDE_COPILOT" | tr '[:upper:]' '[:lower:]')|g" "$TERRAFORM_DIR/main.tf"
-    sed -i "s|COPILOT_INITIALIZATION_PLACEHOLDER|$(echo "$INCLUDE_COPILOT" | tr '[:upper:]' '[:lower:]')|g" "$TERRAFORM_DIR/main.tf"
-    sed -i "s|IAM_ROLES_PLACEHOLDER|$create_iam_roles|g" "$TERRAFORM_DIR/main.tf"
-    
-    # Handle password separately with a more robust approach
-    # Use printf to ensure proper escaping and perl for safer substitution
-    printf '%s\n' "$ADMIN_PASSWORD" | sed 's/[[\.*^$()+?{|\\]/\\&/g' | sed 's/"/\\"/g' > "$TERRAFORM_DIR/.password.tmp"
-    sed -i "s|ADMIN_PASSWORD_PLACEHOLDER|$(cat "$TERRAFORM_DIR/.password.tmp")|g" "$TERRAFORM_DIR/main.tf"
-    rm -f "$TERRAFORM_DIR/.password.tmp"
-
     write_success "Terraform configuration created in $TERRAFORM_DIR"
     
     # Replace placeholders in outputs.tf
-    sed -i "s|DEPLOYMENT_NAME_PLACEHOLDER|$DEPLOYMENT_NAME|g" "$TERRAFORM_DIR/outputs.tf"
-    sed -i "s|REGION_PLACEHOLDER|$REGION|g" "$TERRAFORM_DIR/outputs.tf"
-    sed -i "s|ADMIN_EMAIL_PLACEHOLDER|$ADMIN_EMAIL|g" "$TERRAFORM_DIR/outputs.tf"
+    sed -i "s/DEPLOYMENT_NAME_PLACEHOLDER/$DEPLOYMENT_NAME/g" "$TERRAFORM_DIR/outputs.tf"
+    sed -i "s/REGION_PLACEHOLDER/$REGION/g" "$TERRAFORM_DIR/outputs.tf"
+    sed -i "s/ADMIN_EMAIL_PLACEHOLDER/$ADMIN_EMAIL/g" "$TERRAFORM_DIR/outputs.tf"
     sed -i "s|COPILOT_STEP_PLACEHOLDER|$copilot_step|g" "$TERRAFORM_DIR/outputs.tf"
 }
 
