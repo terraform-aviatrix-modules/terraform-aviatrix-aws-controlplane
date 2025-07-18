@@ -326,31 +326,6 @@ validate_cidr() {
 }
 
 # Input collection functions
-read_password() {
-    local password=""
-    local char
-    
-    while IFS= read -r -s -n1 char; do
-        # Handle Enter key (empty char)
-        if [[ -z "$char" ]]; then
-            echo
-            echo "$password"
-            return 0
-        fi
-        
-        # Handle backspace (char code 127 or 8)
-        if [[ "$char" == $'\177' ]] || [[ "$char" == $'\b' ]]; then
-            if [[ ${#password} -gt 0 ]]; then
-                password="${password%?}"
-                echo -ne "\b \b"
-            fi
-        else
-            password+="$char"
-            echo -n "*"
-        fi
-    done
-}
-
 get_user_input() {
     local prompt="$1"
     local default_value="${2:-}"
@@ -503,7 +478,7 @@ get_admin_password() {
         
         while true; do
             echo -e "${CYAN}Administrator Password: ${NC}"
-            ADMIN_PASSWORD=$(read_password)
+            read ADMIN_PASSWORD
             
             if [[ -z "$ADMIN_PASSWORD" ]]; then
                 write_error "Password is required. Please enter a value."
