@@ -595,11 +595,11 @@ get_additional_mgmt_ips() {
     # This assumes user doesn't want additional prompts if they provided CLI args
     if [[ -z "$MGMT_IPS" && "$INCOMING_CIDRS_PROVIDED" != "true" ]]; then
         echo ""
-        write_info "Specify additional IP addresses that should have access to the Controller and CoPilot"
+        write_info "Specify additional CIDR blocks that should have access to the Controller and CoPilot"
         write_info "This is recommended for allowing access from your laptop, office network, etc."
-        write_hint "Leave empty if you only want to manually edit security groups later"
+        write_hint "Examples: 192.168.1.0/24, 10.0.0.50/32 (leave empty to skip)"
         
-        echo -e "${CYAN}Additional Management IPs (comma-separated, optional): ${NC}"
+        echo -ne "${CYAN}Additional Management CIDRs (comma-separated, optional): ${NC}"
         read additional_ips
         
         if [[ -n "$additional_ips" ]]; then
