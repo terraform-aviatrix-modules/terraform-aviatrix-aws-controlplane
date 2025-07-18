@@ -449,9 +449,20 @@ get_copilot_choice() {
         
         local choice
         choice=$(get_user_input "Deploy CoPilot for analytics? (y/n)" "y" false)
-        if [[ "$choice" =~ ^[Yy]([Ee][Ss])?$ ]]; then
-            INCLUDE_COPILOT=true
-        fi
+        
+        # Convert various user inputs to boolean
+        case "${choice,,}" in  # Convert to lowercase
+            y|yes|true)
+                INCLUDE_COPILOT=true
+                ;;
+            n|no|false)
+                INCLUDE_COPILOT=false
+                ;;
+            *)
+                write_error "Invalid input. Please enter 'y', 'yes', 'n', or 'no'"
+                get_copilot_choice  # Recursive call to retry
+                ;;
+        esac
     fi
 }
 
@@ -771,9 +782,9 @@ output "connection_info" {
 HEREDOC_EOF
 
     # Replace placeholders with actual values
-    sed -i "s/DEPLOYMENT_NAME_PLACEHOLDER/$DEPLOYMENT_NAME/g" "$TERRAFORM_DIR/outputs.tf"
-    sed -i "s/REGION_PLACEHOLDER/$REGION/g" "$TERRAFORM_DIR/outputs.tf"
-    sed -i "s/ADMIN_EMAIL_PLACEHOLDER/$ADMIN_EMAIL/g" "$TERRAFORM_DIR/outputs.tf"
+    sed -i "s|DEPLOYMENT_NAME_PLACEHOLDER|$DEPLOYMENT_NAME|g" "$TERRAFORM_DIR/outputs.tf"
+    sed -i "s|REGION_PLACEHOLDER|$REGION|g" "$TERRAFORM_DIR/outputs.tf"
+    sed -i "s|ADMIN_EMAIL_PLACEHOLDER|$ADMIN_EMAIL|g" "$TERRAFORM_DIR/outputs.tf"
     sed -i "s|COPILOT_STEP_PLACEHOLDER|$copilot_step|g" "$TERRAFORM_DIR/outputs.tf"
 
     write_success "Terraform configuration created in $TERRAFORM_DIR"
