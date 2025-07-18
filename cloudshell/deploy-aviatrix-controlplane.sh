@@ -696,12 +696,8 @@ create_terraform_config() {
         cidr_string+="\"${all_cidrs[$i]}\""
     done
     
-    # Escape special characters in password for Terraform
-    local escaped_password
-    escaped_password=$(printf '%s\n' "$ADMIN_PASSWORD" | sed 's/[[\.*^$()+?{|]/\\&/g')
-    
     # Create main.tf
-    cat > "$TERRAFORM_DIR/main.tf" << EOF
+    cat > "$TERRAFORM_DIR/main.tf" << 'EOF'
 terraform {
   required_providers {
     aws = {
@@ -712,33 +708,33 @@ terraform {
 }
 
 provider "aws" {
-  region = "$REGION"
+  region = "REGION_PLACEHOLDER"
 }
 
 module "aviatrix_controlplane" {
-  source  = "$MODULE_SOURCE"
-  version = "$MODULE_VERSION"
+  source  = "MODULE_SOURCE_PLACEHOLDER"
+  version = "MODULE_VERSION_PLACEHOLDER"
 
   # Basic Configuration
-  controller_name           = "$DEPLOYMENT_NAME-controller"
-  customer_id              = "$CUSTOMER_ID"
-  controller_admin_email    = "$ADMIN_EMAIL"
-  controller_admin_password = "$escaped_password"
+  controller_name           = "DEPLOYMENT_NAME_PLACEHOLDER-controller"
+  customer_id              = "CUSTOMER_ID_PLACEHOLDER"
+  controller_admin_email    = "ADMIN_EMAIL_PLACEHOLDER"
+  controller_admin_password = "ADMIN_PASSWORD_PLACEHOLDER"
   
   # Network Security
-  incoming_ssl_cidrs = [$cidr_string]
+  incoming_ssl_cidrs = [CIDR_STRING_PLACEHOLDER]
   
   # Account Configuration  
   access_account_name = "AWS-Primary"
-  account_email      = "$ADMIN_EMAIL"
+  account_email      = "ADMIN_EMAIL_PLACEHOLDER"
   
   # Deployment Configuration
   module_config = {
     controller_deployment     = true
     controller_initialization = true
-    copilot_deployment       = $(echo "$INCLUDE_COPILOT" | tr '[:upper:]' '[:lower:]')
-    copilot_initialization   = $(echo "$INCLUDE_COPILOT" | tr '[:upper:]' '[:lower:]')
-    iam_roles                = $create_iam_roles
+    copilot_deployment       = COPILOT_DEPLOYMENT_PLACEHOLDER
+    copilot_initialization   = COPILOT_INITIALIZATION_PLACEHOLDER
+    iam_roles                = IAM_ROLES_PLACEHOLDER
     account_onboarding       = true
   }
 EOF
@@ -796,13 +792,31 @@ output "connection_info" {
 }
 HEREDOC_EOF
 
-    # Replace placeholders with actual values
+    # Replace placeholders with actual values using safe delimiters
+    sed -i "s|REGION_PLACEHOLDER|$REGION|g" "$TERRAFORM_DIR/main.tf"
+    sed -i "s|MODULE_SOURCE_PLACEHOLDER|$MODULE_SOURCE|g" "$TERRAFORM_DIR/main.tf"
+    sed -i "s|MODULE_VERSION_PLACEHOLDER|$MODULE_VERSION|g" "$TERRAFORM_DIR/main.tf"
+    sed -i "s|DEPLOYMENT_NAME_PLACEHOLDER|$DEPLOYMENT_NAME|g" "$TERRAFORM_DIR/main.tf"
+    sed -i "s|CUSTOMER_ID_PLACEHOLDER|$CUSTOMER_ID|g" "$TERRAFORM_DIR/main.tf"
+    sed -i "s|ADMIN_EMAIL_PLACEHOLDER|$ADMIN_EMAIL|g" "$TERRAFORM_DIR/main.tf"
+    sed -i "s|CIDR_STRING_PLACEHOLDER|$cidr_string|g" "$TERRAFORM_DIR/main.tf"
+    sed -i "s|COPILOT_DEPLOYMENT_PLACEHOLDER|$(echo "$INCLUDE_COPILOT" | tr '[:upper:]' '[:lower:]')|g" "$TERRAFORM_DIR/main.tf"
+    sed -i "s|COPILOT_INITIALIZATION_PLACEHOLDER|$(echo "$INCLUDE_COPILOT" | tr '[:upper:]' '[:lower:]')|g" "$TERRAFORM_DIR/main.tf"
+    sed -i "s|IAM_ROLES_PLACEHOLDER|$create_iam_roles|g" "$TERRAFORM_DIR/main.tf"
+    
+    # Handle password separately with a more robust approach
+    # Use printf to ensure proper escaping and perl for safer substitution
+    printf '%s\n' "$ADMIN_PASSWORD" | sed 's/[[\.*^$()+?{|\\]/\\&/g' | sed 's/"/\\"/g' > "$TERRAFORM_DIR/.password.tmp"
+    sed -i "s|ADMIN_PASSWORD_PLACEHOLDER|$(cat "$TERRAFORM_DIR/.password.tmp")|g" "$TERRAFORM_DIR/main.tf"
+    rm -f "$TERRAFORM_DIR/.password.tmp"
+
+    write_success "Terraform configuration created in $TERRAFORM_DIR"
+    
+    # Replace placeholders in outputs.tf
     sed -i "s|DEPLOYMENT_NAME_PLACEHOLDER|$DEPLOYMENT_NAME|g" "$TERRAFORM_DIR/outputs.tf"
     sed -i "s|REGION_PLACEHOLDER|$REGION|g" "$TERRAFORM_DIR/outputs.tf"
     sed -i "s|ADMIN_EMAIL_PLACEHOLDER|$ADMIN_EMAIL|g" "$TERRAFORM_DIR/outputs.tf"
     sed -i "s|COPILOT_STEP_PLACEHOLDER|$copilot_step|g" "$TERRAFORM_DIR/outputs.tf"
-
-    write_success "Terraform configuration created in $TERRAFORM_DIR"
 }
 
 # Terraform execution
