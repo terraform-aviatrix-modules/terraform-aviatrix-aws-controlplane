@@ -388,7 +388,7 @@ get_deployment_name() {
         write_hint "This will be used to name AWS resources and must be unique in your account"
         
         while true; do
-            echo -e "${CYAN}Deployment Name: ${NC}"
+            echo -ne "${CYAN}Deployment Name: ${NC}"
             read DEPLOYMENT_NAME
             
             if [[ -z "$DEPLOYMENT_NAME" ]]; then
@@ -422,7 +422,7 @@ get_region() {
         echo ""
         
         while true; do
-            echo -e "${CYAN}AWS Region [default: us-east-1]: ${NC}"
+            echo -ne "${CYAN}AWS Region [default: us-east-1]: ${NC}"
             read REGION
             
             # Use default if no input provided
@@ -446,7 +446,7 @@ get_admin_email() {
         write_info "Enter the email address for the Aviatrix Controller administrator account"
         
         while true; do
-            echo -e "${CYAN}Administrator Email: ${NC}"
+            echo -ne "${CYAN}Administrator Email: ${NC}"
             read ADMIN_EMAIL
             
             if [[ -z "$ADMIN_EMAIL" ]]; then
@@ -477,7 +477,7 @@ get_admin_password() {
         echo ""
         
         while true; do
-            echo -e "${CYAN}Administrator Password: ${NC}"
+            echo -ne "${CYAN}Administrator Password: ${NC}"
             read ADMIN_PASSWORD
             
             if [[ -z "$ADMIN_PASSWORD" ]]; then
@@ -502,7 +502,7 @@ get_customer_id() {
         write_hint "Contact Aviatrix support if you don't have your customer license ID"
         
         while true; do
-            echo -e "${CYAN}Aviatrix Customer License ID: ${NC}"
+            echo -ne "${CYAN}Aviatrix Customer License ID: ${NC}"
             read CUSTOMER_ID
             
             if [[ -z "$CUSTOMER_ID" ]]; then
@@ -523,7 +523,7 @@ get_copilot_choice() {
         write_hint "CoPilot requires additional AWS resources and will increase deployment cost"
         
         while true; do
-            echo -e "${CYAN}Deploy CoPilot for analytics? (y/n) [default: y]: ${NC}"
+            echo -ne "${CYAN}Deploy CoPilot for analytics? (y/n) [default: y]: ${NC}"
             read choice
             
             # Use default if no input provided
