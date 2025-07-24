@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains a Bash script that provides a user-friendly wrapper around the `terraform-aviatrix-aws-controlplane` Terraform module. It's designed to guide users through deploying a complete Aviatrix control plane in AWS without requiring deep Terraform knowledge.
+This directory contains a Bash script that provides a user-friendly wrapper around the [terraform-aviatrix-aws-controlplane](../terraform-aviatrix-aws-controlplane-main/) Terraform module. It's designed to guide users through deploying a complete Aviatrix control plane in AWS without requiring deep Terraform knowledge.
 
 ## Who should (not) use it?
 
@@ -24,7 +24,7 @@ This directory contains a Bash script that provides a user-friendly wrapper arou
 - You need infrastructure-as-code practices with version control
 
 ### 🔧 **Alternative: Use the Terraform Module Directly**
-If this script doesn't meet your needs, use the underlying `terraform-aviatrix-aws-controlplane` Terraform module directly:
+If this script doesn't meet your needs, use the underlying [terraform-aviatrix-aws-controlplane](../terraform-aviatrix-aws-controlplane-main/) Terraform module directly:
 - Full control over Terraform state management
 - Integration with existing Terraform workflows
 - Version control and infrastructure-as-code practices
