@@ -77,19 +77,26 @@ chmod +x deploy-aviatrix-controlplane.sh
   --region "us-east-1" \
   --admin-email "admin@company.com" \
   --admin-password "MySecure123!" \
-  --customer-id "aviatrix-abc-123456"
+  --customer-id "aviatrix-abc-123456"\
+  --include-copilot \
 ```
 
-### Option 3: With CoPilot
+### Option 3: launch.aviatrix.com
+When cloudshell commands are assembled from launch.aviatrix.com the following command is used for deployment.
 ```bash
 # Download and run the script
 curl -O https://raw.githubusercontent.com/terraform-aviatrix-modules/terraform-aviatrix-aws-controlplane/refs/heads/main/cloudshell/deploy-aviatrix-controlplane.sh
 chmod +x deploy-aviatrix-controlplane.sh
 ./deploy-aviatrix-controlplane.sh \
-  --deployment-name "my-avx-prod" \
-  --include-copilot \
-  --region "us-east-1"
-```
+  --deployment-name "<name>" \
+  --region "<region>" \
+  --admin-email "<admin_email>" \
+  --admin-password "<admin_password>" \
+  --customer-id "<customer_id>" \
+  --incoming-cidrs "<user_public_ip>/32"\
+  --include-copilot
+  ```
+
 
 ## Script Parameters
 
