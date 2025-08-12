@@ -70,7 +70,7 @@ variable "tags" {
 variable "termination_protection" {
   type        = bool
   description = "Enable/disable switch for termination protection"
-  default     = true
+  default     = false
   nullable    = false
 }
 
