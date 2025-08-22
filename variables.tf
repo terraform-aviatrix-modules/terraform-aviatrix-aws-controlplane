@@ -214,3 +214,9 @@ variable "name_prefix" {
   type        = string
   default     = ""
 }
+
+variable "controller_termination_protection" {
+  type        = bool
+  description = "Enable/disable switch for termination protection"
+  default     = null
+}
