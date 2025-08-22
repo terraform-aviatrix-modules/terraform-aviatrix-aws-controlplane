@@ -29,6 +29,7 @@ module "controller_build" {
   tags                      = var.tags
   name_prefix               = var.name_prefix
   ec2_role_name             = var.controller_ec2_role_name
+  termination_protection    = var.controller_termination_protection
   depends_on = [
     module.iam_roles
   ]
