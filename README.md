@@ -14,13 +14,13 @@ For users who want to deploy quickly without managing Terraform state or complex
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.3 | >= 1.3.0
+v1.0.4 | >= 1.3.0
 
 ### Usage Example
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
-  version = "1.0.3"
+  version = "1.0.4"
 
   controller_name           = "my_controller"
   incoming_ssl_cidrs        = ["1.2.3.4"]
@@ -47,7 +47,7 @@ output "controlplane_data" {
 | <a name="input_controller_ec2_role_name"></a> [controller\_ec2\_role\_name](#input\_controller\_ec2\_role\_name) | EC2 role for controller | `string` | `null` | no |
 | <a name="input_controller_instance_type"></a> [controller\_instance\_type](#input\_controller\_instance\_type) | The instance type used for deploying the controller. | `string` | `"t3.large"` | no |
 | <a name="input_controller_name"></a> [controller\_name](#input\_controller\_name) | Customized Name for Aviatrix Controller | `string` | `"Aviatrix-Controller"` | no |
-| <a name="input_controller_termination_protection"></a> [controller\_termination\_protection](#input\_controller\_termination\_protection) | Enable/disable switch for termination protection | `bool` | `false` | no |
+| <a name="input_controller_termination_protection"></a> [controller\_termination\_protection](#input\_controller\_termination\_protection) | Enable/disable switch for termination protection | `bool` | `null` | no |
 | <a name="input_controller_version"></a> [controller\_version](#input\_controller\_version) | Aviatrix Controller version | `string` | `"latest"` | no |
 | <a name="input_controlplane_subnet_cidr"></a> [controlplane\_subnet\_cidr](#input\_controlplane\_subnet\_cidr) | CIDR for controlplane subnet. | `string` | `"10.0.0.0/24"` | no |
 | <a name="input_controlplane_vpc_cidr"></a> [controlplane\_vpc\_cidr](#input\_controlplane\_vpc\_cidr) | CIDR for controller VPC. | `string` | `"10.0.0.0/24"` | no |

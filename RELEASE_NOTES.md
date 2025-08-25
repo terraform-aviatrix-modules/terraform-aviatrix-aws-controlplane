@@ -1,5 +1,9 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.0.4
+- Add cloudshell launch option
+- Add ability to disable termination protection
+
 ## v1.0.3
 - Fix an issue with security groups
 
