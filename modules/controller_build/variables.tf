@@ -150,6 +150,15 @@ variable "root_volume_kms_key_id" {
 
 data "aws_region" "current" {}
 
+resource "random_integer" "fetch_jitter" {
+  min = 0
+  max = 3
+}
+
+resource "time_sleep" "before_http" {
+  create_duration = "${random_integer.fetch_jitter.result}s"
+}
+
 # terraform-docs-ignore
 variable "environment" {
   description = "Determines the deployment environment. For internal use only."
@@ -202,9 +211,15 @@ locals {
 }
 
 data "http" "avx_ami_id" {
-  url = format("https://cdn.%s.sre.aviatrix.com/image-details/aws_controller_image_details.json", var.environment)
+  depends_on = [time_sleep.before_http]
+  url = format(
+    "https://cdn.%s.sre.aviatrix.com/image-details/aws_controller_image_details.json",
+    var.environment
+  )
 
   request_headers = {
-    "Accept" = "application/json"
+    Accept = "application/json"
   }
+
+  request_timeout = 60
 }
