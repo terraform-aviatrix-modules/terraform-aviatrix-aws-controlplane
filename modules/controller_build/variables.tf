@@ -221,5 +221,5 @@ data "http" "avx_ami_id" {
     Accept = "application/json"
   }
 
-  request_timeout = 60
+  request_timeout_ms = 60000
 }
