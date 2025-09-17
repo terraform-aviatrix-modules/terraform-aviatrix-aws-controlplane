@@ -165,6 +165,7 @@ variable "copilot_instance_type" {
 }
 
 variable "module_config" {
+  type = map(bool)
   default = {
     controller_deployment     = true,
     controller_initialization = true,
