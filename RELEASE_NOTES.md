@@ -1,5 +1,8 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.0.5
+- Increase timeout for fetching controller image data.
+
 ## v1.0.4
 - Add cloudshell launch option
 - Add ability to disable termination protection
