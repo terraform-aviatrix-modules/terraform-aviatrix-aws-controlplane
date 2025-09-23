@@ -221,3 +221,8 @@ variable "controller_termination_protection" {
   description = "Enable/disable switch for termination protection"
   default     = null
 }
+
+variable "secondary_account_ids" {
+  type    = list(string)
+  default = []
+}
