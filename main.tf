@@ -2,7 +2,8 @@ module "iam_roles" {
   count  = var.module_config.iam_roles ? 1 : 0
   source = "./modules/iam_roles"
 
-  secondary_account_ids = var.secondary_account_ids
+  secondary_account_ids          = var.secondary_account_ids
+  external_controller_account_id = var.external_controller_account_id
 }
 
 module "controller_build" {
