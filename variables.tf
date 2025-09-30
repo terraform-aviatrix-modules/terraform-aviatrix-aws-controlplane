@@ -226,3 +226,8 @@ variable "secondary_account_ids" {
   type    = list(string)
   default = []
 }
+
+variable "external_controller_account_id" {
+  type    = string
+  default = ""
+}
