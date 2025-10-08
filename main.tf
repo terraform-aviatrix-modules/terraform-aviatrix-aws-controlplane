@@ -73,7 +73,7 @@ module "copilot_build" {
   ami_id                   = var.copilot_ami_id
   instance_type            = var.copilot_instance_type
   default_data_volume_name = "/dev/sdf"
-  default_data_volume_size = "100"
+  default_data_volume_size = var.default_data_volume_size
   environment              = var.environment                  #For internal use only
   use_existing_keypair     = var.copilot_use_existing_keypair #For internal use only
   key_pair_name            = var.copilot_key_pair_name        #For internal use only
