@@ -231,3 +231,8 @@ variable "external_controller_account_id" {
   type    = string
   default = ""
 }
+
+variable "default_data_volume_size" {
+  type    = string
+  default = "100"
+}
