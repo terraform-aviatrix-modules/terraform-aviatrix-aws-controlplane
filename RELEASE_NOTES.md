@@ -1,5 +1,9 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.0.6
+- Add ability to provide secondary account ID's
+- Expose controller data volume size
+
 ## v1.0.5
 - Increase timeout for fetching controller image data.
 
