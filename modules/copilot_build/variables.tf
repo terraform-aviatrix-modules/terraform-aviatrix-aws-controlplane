@@ -76,6 +76,20 @@ variable "root_volume_type" {
   default     = "gp3"
 }
 
+variable "root_volume_encrypted" {
+  type        = bool
+  description = "Whether the root volume is encrypted"
+  default     = true
+  nullable    = false
+}
+
+variable "root_volume_kms_key_id" {
+  type        = string
+  description = "ARN for the key used to encrypt the root volume"
+  default     = ""
+  nullable    = false
+}
+
 variable "allowed_cidrs" {
   type = map(object({
     protocol  = string,
@@ -121,6 +135,20 @@ variable "default_data_volume_size" {
   default     = 50
   type        = number
   description = "Size of default data volume"
+}
+
+variable "default_data_volume_encrypted" {
+  type        = bool
+  description = "Whether the default data volume is encrypted"
+  default     = true
+  nullable    = false
+}
+
+variable "default_data_volume_kms_key_id" {
+  type        = string
+  description = "ARN for the key used to encrypt the default data volume"
+  default     = ""
+  nullable    = false
 }
 
 variable "additional_volumes" {

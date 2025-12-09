@@ -143,6 +143,9 @@ resource "aws_instance" "aviatrix_controller" {
     encrypted             = var.root_volume_encrypted
     kms_key_id            = var.root_volume_kms_key_id
     delete_on_termination = true
+    tags = {
+      Name = "${local.name_prefix}controller"
+    }
   }
 
   user_data = var.user_data != "" ? var.user_data : local.cloud_init
