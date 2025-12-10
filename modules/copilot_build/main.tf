@@ -179,6 +179,7 @@ resource "aws_ebs_volume" "default" {
   count             = var.default_data_volume_name == "" ? 0 : 1
   availability_zone = data.aws_subnet.subnet.availability_zone
   size              = var.default_data_volume_size
+  type              = var.default_data_volume_type
   encrypted         = var.default_data_volume_encrypted
   kms_key_id        = var.default_data_volume_kms_key_id
   tags = {

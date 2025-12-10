@@ -137,6 +137,12 @@ variable "default_data_volume_size" {
   description = "Size of default data volume"
 }
 
+variable "default_data_volume_type" {
+  type        = string
+  description = "Type of default data volume"
+  default     = "gp3"
+}
+
 variable "default_data_volume_encrypted" {
   type        = bool
   description = "Whether the default data volume is encrypted"
