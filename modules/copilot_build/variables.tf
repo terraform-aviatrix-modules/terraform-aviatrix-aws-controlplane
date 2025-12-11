@@ -241,7 +241,7 @@ locals {
   name_prefix         = var.name_prefix != "" ? "${var.name_prefix}_" : ""
   images_copilot      = jsondecode(data.http.copilot_iam_id.response_body).Copilot
   images_copilotarm   = jsondecode(data.http.copilot_iam_id.response_body).CopilotARM
-  ami_id              = var.ami_id != "" ? var.ami_id : var.type == "Copilot" ? local.images_copilot[data.aws_region.current.name] : local.images_copilotarm[data.aws_region.current.name]
+  ami_id              = var.ami_id != "" ? var.ami_id : var.type == "Copilot" ? local.images_copilot[data.aws_region.current.region] : local.images_copilotarm[data.aws_region.current.region]
   instance_type       = var.instance_type != "" ? var.instance_type : (var.type == "Copilot" ? "m5.2xlarge" : "t4g.2xlarge")
   default_az          = keys({ for az, details in data.aws_ec2_instance_type_offering.offering : az => details.instance_type if details.instance_type == local.instance_type })[0]
   availability_zone   = var.availability_zone != "" ? var.availability_zone : local.default_az
