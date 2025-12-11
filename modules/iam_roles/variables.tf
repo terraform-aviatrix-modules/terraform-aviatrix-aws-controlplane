@@ -34,8 +34,8 @@ locals {
   name_prefix          = var.name_prefix != "" ? "${var.name_prefix}-" : ""
   ec2_role_name        = var.ec2_role_name != "" ? var.ec2_role_name : "${local.name_prefix}aviatrix-role-ec2"
   app_role_name        = var.app_role_name != "" ? var.app_role_name : "${local.name_prefix}aviatrix-role-app"
-  arn_partition        = element(split("-", data.aws_region.current.name), 0) == "cn" ? "aws-cn" : (element(split("-", data.aws_region.current.name), 1) == "gov" ? "aws-us-gov" : "aws")
-  is_aws_cn            = element(split("-", data.aws_region.current.name), 0) == "cn" ? ".cn" : ""
+  arn_partition        = element(split("-", data.aws_region.current.region), 0) == "cn" ? "aws-cn" : (element(split("-", data.aws_region.current.region), 1) == "gov" ? "aws-us-gov" : "aws")
+  is_aws_cn            = element(split("-", data.aws_region.current.region), 0) == "cn" ? ".cn" : ""
   other_account_id     = data.aws_caller_identity.current.account_id
   resource_account_ids = length(var.secondary_account_ids) == 0 ? [local.other_account_id] : concat(var.secondary_account_ids, [local.other_account_id])
   resource_strings = [
