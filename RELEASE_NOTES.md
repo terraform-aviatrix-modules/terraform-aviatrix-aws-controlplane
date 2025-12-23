@@ -1,5 +1,10 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.0.7
+- Copilot root disk is now gp3 and encrypted.
+- Resolved an issue where empty optional `user_data` values were preventing the controller from fully initializing with the latest g4 image (released 2025-12-22).
+- Moved from using `user_data` to using `user_data_base64` for bootstrapping the controller.
+
 ## v1.0.6
 - Add ability to provide secondary account ID's
 - Expose controller data volume size

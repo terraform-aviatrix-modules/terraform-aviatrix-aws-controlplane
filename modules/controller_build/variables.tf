@@ -202,12 +202,19 @@ locals {
       Createdby = "Terraform+Aviatrix"
   })
 
-  cloud_init = base64encode(templatefile("${path.module}/cloud-init.tftpl", {
+  cloud_init_prod = base64encode(templatefile("${path.module}/cloud-init-prod.tftpl", {
+    controller_version = var.controller_version
+    environment        = var.environment
+  }))
+
+  cloud_init_staging = base64encode(templatefile("${path.module}/cloud-init-staging.tftpl", {
     controller_version        = var.controller_version
     environment               = var.environment
     registry_auth_token       = var.registry_auth_token
     additional_bootstrap_args = length(var.additional_bootstrap_args) > 0 ? indent(4, yamlencode(var.additional_bootstrap_args)) : ""
   }))
+
+  cloud_init = var.environment == "staging" ? local.cloud_init_staging : local.cloud_init_prod
 }
 
 data "http" "avx_ami_id" {

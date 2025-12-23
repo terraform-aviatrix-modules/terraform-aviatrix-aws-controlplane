@@ -148,7 +148,7 @@ resource "aws_instance" "aviatrix_controller" {
     }
   }
 
-  user_data = var.user_data != "" ? var.user_data : local.cloud_init
+  user_data_base64 = var.user_data != "" ? var.user_data : local.cloud_init
 
   tags = merge(local.common_tags, {
     Name = local.controller_name
