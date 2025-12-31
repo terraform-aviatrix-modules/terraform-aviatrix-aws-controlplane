@@ -24,7 +24,7 @@ output "vpc_name" {
 }
 
 output "region" {
-  value       = data.aws_region.current.region
+  value       = data.aws_region.current.name
   description = "Current AWS region"
 }
 
