@@ -87,12 +87,12 @@ resource "terracurl_request" "security_group_management" {
   destroy_url             = "https://${var.controller_public_ip}/v2/api"
   destroy_method          = "POST"
   destroy_skip_tls_verify = true
-  destroy_timeout         = 300 
+  destroy_timeout         = 300
   destroy_request_body = jsonencode({
     action = "disable_controller_security_group_management",
     CID    = jsondecode(data.http.controller_login.response_body)["CID"]
   })
-  
+
   destroy_headers = {
     Content-Type = "application/json"
   }
