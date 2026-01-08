@@ -140,3 +140,14 @@ module "account_onboarding" {
     module.copilot_init,
   ]
 }
+
+#disable security group management during tf destroy 
+module "controller_sg_mgmt" {
+  source                    = "./modules/controller_sg_mgmt"
+  controller_public_ip      = module.controller_build[0].public_ip
+  controller_admin_password = var.controller_admin_password
+
+  depends_on = [
+    module.account_onboarding,
+  ]
+}
