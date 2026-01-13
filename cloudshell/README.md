@@ -78,7 +78,7 @@ chmod +x deploy-aviatrix-controlplane.sh
   --admin-email "admin@company.com" \
   --admin-password "MySecure123!" \
   --customer-id "aviatrix-abc-123456"\
-  --include-copilot \
+  --include-copilot
 ```
 
 ### Option 3: launch.aviatrix.com
