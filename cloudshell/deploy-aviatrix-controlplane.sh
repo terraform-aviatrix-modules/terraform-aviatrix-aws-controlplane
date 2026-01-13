@@ -774,6 +774,11 @@ create_terraform_config() {
     #Check if default keypair exists
     write_step "Checking for existing AWS key pair 'aviatrix_controller_kp'..."
     use_existing_keypair=$(aws ec2 describe-key-pairs --key-names aviatrix_controller_kp --region "$REGION" &>/dev/null && echo "true" || echo "false")
+    if [[ "$use_existing_keypair" == "true" ]]; then
+        write_info "Found existing key pair 'aviatrix_controller_kp' - will reuse it"
+        else
+        write_info "Key pair 'aviatrix_controller_kp' not found - will create a new one"
+        fi
 
     # Create main.tf
     cat > "$TERRAFORM_DIR/main.tf" << EOF
