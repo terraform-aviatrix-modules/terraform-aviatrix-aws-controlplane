@@ -771,6 +771,10 @@ create_terraform_config() {
         cidr_string+="\"${all_cidrs[$i]}\""
     done
     
+    #Check if default keypair exists
+    write_step "Checking for existing AWS key pair 'aviatrix_controller_kp'..."
+    use_existing_keypair=$(aws ec2 describe-key-pairs --key-names aviatrix_controller_kp --region "$REGION" &>/dev/null && echo "true" || echo "false")
+
     # Create main.tf
     cat > "$TERRAFORM_DIR/main.tf" << EOF
 terraform {
@@ -803,6 +807,10 @@ module "aviatrix_controlplane" {
   access_account_name = "AWS-Primary"
   account_email      = "$ADMIN_EMAIL"
   
+  # SSH Keys
+  controller_use_existing_keypair = "$use_existing_keypair"
+  controller_key_pair_name        = "aviatrix_controller_kp"
+
   # Deployment Configuration
   module_config = {
     controller_deployment     = true
