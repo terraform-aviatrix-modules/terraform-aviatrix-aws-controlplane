@@ -14,13 +14,13 @@ For users who want to deploy quickly without managing Terraform state or complex
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.7 | >= 1.3.0
+v1.0.8 | >= 1.3.0
 
 ### Usage Example
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
-  version = "1.0.7"
+  version = "1.0.8"
 
   controller_name           = "my_controller"
   incoming_ssl_cidrs        = ["1.2.3.4"]

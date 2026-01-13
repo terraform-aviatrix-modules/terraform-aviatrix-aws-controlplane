@@ -50,7 +50,7 @@ set -euo pipefail
 
 # Global variables
 MODULE_SOURCE="terraform-aviatrix-modules/aws-controlplane/aviatrix"
-MODULE_VERSION="1.0.7"
+MODULE_VERSION="1.0.8"
 TERRAFORM_DIR="./aviatrix-deployment"
 
 # Available AWS regions
