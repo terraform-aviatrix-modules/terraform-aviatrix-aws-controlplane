@@ -14,7 +14,7 @@ output "vpc_id" {
 }
 
 output "subnet_id" {
-  value       = data.aws_subnet.controller_subnet.id
+  value       = var.use_existing_vpc ? var.subnet_id : aws_subnet.controller_subnet[0].id
   description = "Subnet where Aviatrix controller was built"
 }
 

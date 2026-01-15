@@ -120,21 +120,15 @@ resource "aws_network_interface" "eni_controller" {
   }
 }
 
-data "aws_subnet" "controller_subnet" {
-  id = var.use_existing_vpc ? var.subnet_id : aws_subnet.controller_subnet[0].id
-}
-
 resource "aws_instance" "aviatrix_controller" {
   ami                     = local.ami_id
   instance_type           = var.instance_type
   key_name                = local.key_pair_name
   iam_instance_profile    = local.ec2_role_name
   disable_api_termination = var.termination_protection
-  availability_zone       = data.aws_subnet.controller_subnet.availability_zone
 
-  network_interface {
+  primary_network_interface {
     network_interface_id = aws_network_interface.eni_controller.id
-    device_index         = 0
   }
 
   root_block_device {
