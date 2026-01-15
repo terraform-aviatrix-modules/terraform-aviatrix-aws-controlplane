@@ -4,6 +4,8 @@
 - Fixed an issue where refreshing availability-related data could trigger an unintended controller instance replacement.
 - Removed an unused variable.
 - Updated EC2 network interface attachment to use the supported (non-deprecated) method.
+- Fixed an issue with custom ec2 role names.
+- Implemented a mechanism to disable security group management on destroy (Credits @ashishavx)
 
 ## v1.0.8
 - Fix issue with incorrect AWS provider version

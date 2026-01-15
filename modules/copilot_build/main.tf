@@ -155,9 +155,8 @@ jq '.config.controllerIp="${local.controller_ip}" | .config.controllerPublicIp="
 mv /etc/copilot/db.json.tmp /etc/copilot/db.json
 EOF
 
-  network_interface {
+  primary_network_interface {
     network_interface_id = aws_network_interface.eni-copilot.id
-    device_index         = 0
   }
 
   root_block_device {
