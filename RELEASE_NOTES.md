@@ -1,5 +1,10 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.0.9
+- Fixed an issue where refreshing availability-related data could trigger an unintended controller instance replacement.
+- Removed an unused variable.
+- Updated EC2 network interface attachment to use the supported (non-deprecated) method.
+
 ## v1.0.8
 - Fix issue with incorrect AWS provider version
 

@@ -13,4 +13,4 @@ For users who want to deploy quickly without managing Terraform state or complex
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.8 | >= 1.3.0
+v1.0.9 | >= 1.3.0
