@@ -34,7 +34,7 @@ module "controller_build" {
   additional_bootstrap_args = var.additional_bootstrap_args       #For internal use only
   tags                      = var.tags
   name_prefix               = var.name_prefix
-  ec2_role_name             = var.controller_ec2_role_name
+  ec2_role_name             = var.module_config.iam_roles ? module.iam_roles[0].aviatrix_role_ec2_name : var.controller_ec2_role_name
   termination_protection    = var.controller_termination_protection
   depends_on = [
     module.iam_roles
@@ -137,7 +137,8 @@ module "account_onboarding" {
 
   access_account_name = var.access_account_name
   account_email       = var.account_email
-  aws_role_ec2        = var.controller_ec2_role_name
+  aws_role_ec2        = var.module_config.iam_roles ? module.iam_roles[0].aviatrix_role_ec2_name : var.controller_ec2_role_name
+  aws_role_app        = var.module_config.iam_roles ? module.iam_roles[0].aviatrix_role_app_name : var.controller_app_role_name
 
   depends_on = [
     module.copilot_init,
@@ -149,6 +150,7 @@ module "controller_sg_mgmt" {
   source                    = "./modules/controller_sg_mgmt"
   controller_public_ip      = module.controller_build[0].public_ip
   controller_admin_password = var.controller_admin_password
+  controller_admin_username = null #Placeholder for future use
 
   depends_on = [
     module.account_onboarding,

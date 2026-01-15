@@ -39,7 +39,8 @@ resource "terracurl_request" "aws_access_account" {
     account_email      = var.account_email,
     aws_account_number = data.aws_caller_identity.current.account_id,
     aws_iam            = true,
-    aws_role_ec2       = format("arn:aws:iam::%s:role/%s", data.aws_caller_identity.current.account_id, var.aws_role_ec2)
+    aws_role_ec2       = format("arn:aws:iam::%s:role/%s", data.aws_caller_identity.current.account_id, var.aws_role_ec2),
+    aws_role_arn       = format("arn:aws:iam::%s:role/%s", data.aws_caller_identity.current.account_id, var.aws_role_app)
   })
 
   headers = {
