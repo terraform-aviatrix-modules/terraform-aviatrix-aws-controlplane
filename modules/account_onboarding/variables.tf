@@ -32,6 +32,12 @@ variable "aws_role_ec2" {
   nullable = false
 }
 
+variable "aws_role_app" {
+  type     = string
+  default  = "aviatrix-role-app"
+  nullable = false
+}
+
 # terraform-docs-ignore
 variable "destroy_url" {
   type        = string
