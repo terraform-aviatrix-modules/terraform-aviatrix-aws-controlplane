@@ -8,12 +8,14 @@ variable "ec2_role_name" {
   type        = string
   description = "EC2 role name"
   default     = ""
+  nullable    = false
 }
 
 variable "app_role_name" {
   type        = string
   description = "APP role name"
   default     = ""
+  nullable    = false
 }
 
 variable "external_controller_account_id" {

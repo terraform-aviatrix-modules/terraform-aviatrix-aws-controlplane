@@ -4,6 +4,9 @@ module "iam_roles" {
 
   secondary_account_ids          = var.secondary_account_ids
   external_controller_account_id = var.external_controller_account_id
+  ec2_role_name                  = var.controller_ec2_role_name
+  app_role_name                  = var.controller_app_role_name
+  name_prefix                    = var.name_prefix
 }
 
 module "controller_build" {
