@@ -142,12 +142,6 @@ variable "vpc_id" {
   default     = ""
 }
 
-variable "subnet_name" {
-  type        = string
-  description = "subnet name, only required when use_existing_vpc is true."
-  default     = ""
-}
-
 variable "subnet_id" {
   type        = string
   description = "Subnet ID, only required when use_existing_vpc is true."
