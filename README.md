@@ -83,4 +83,7 @@ output "controlplane_data" {
 | <a name="output_copilot_public_ip"></a> [copilot\_public\_ip](#output\_copilot\_public\_ip) | n/a |
 | <a name="output_copilot_security_group_id"></a> [copilot\_security\_group\_id](#output\_copilot\_security\_group\_id) | n/a |
 | <a name="output_copilot_vpc_id"></a> [copilot\_vpc\_id](#output\_copilot\_vpc\_id) | n/a |
+
+## Common issues
+If you run into any issues, please check the [Common Issues Page](./docs/COMMON-ISSUES.md), to help you with troubleshooting.
 <!-- END_TF_DOCS -->

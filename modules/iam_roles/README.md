@@ -32,4 +32,5 @@ module "iam_roles" {
 | <a name="output_aviatrix_role_ec2_name"></a> [aviatrix\_role\_ec2\_name](#output\_aviatrix\_role\_ec2\_name) | Aviatrix role name for EC2 |
 | <a name="output_aviatrix_role_ec2_profile_arn"></a> [aviatrix\_role\_ec2\_profile\_arn](#output\_aviatrix\_role\_ec2\_profile\_arn) | Aviatrix role EC2 profile ARN for application |
 | <a name="output_aws_account_id"></a> [aws\_account\_id](#output\_aws\_account\_id) | AWS account Id |
+
 <!-- END_TF_DOCS -->

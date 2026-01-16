@@ -1,6 +1,7 @@
 formatter: "markdown" # this is required
 
 header-from: docs/HEADER.md
+footer-from: docs/FOOTER.md
 
 recursive:
   enabled: false
@@ -21,6 +22,8 @@ content: |-
   {{ .Inputs }}
 
   {{ .Outputs }}
+
+  {{ .Footer }}
 
 output:
   file: "README.md"

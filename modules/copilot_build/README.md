@@ -84,4 +84,5 @@ module "copilot_build" {
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | Copilot Security group ID |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | VPC ID |
 | <a name="output_vpc_name"></a> [vpc\_name](#output\_vpc\_name) | VPC name |
+
 <!-- END_TF_DOCS -->

@@ -25,4 +25,5 @@ module "controller_sg_mgmt" {
 ## Outputs
 
 No outputs.
+
 <!-- END_TF_DOCS -->

@@ -53,4 +53,5 @@ module "controller_build" {
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | Security group id used by Aviatrix controller |
 | <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | Subnet where Aviatrix controller was built |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | VPC where Aviatrix controller was built |
+
 <!-- END_TF_DOCS -->
