@@ -8,7 +8,8 @@ For users who want to deploy quickly without managing Terraform state or complex
 
 👉 **[CloudShell Deployment Guide](./cloudshell/README.md)**
 
-### Requirements
+### Common issues
+If you run into any issues, please check the [Common Issues Page](./docs/COMMON-ISSUES.md), to help you with troubleshooting.
 
 ### Compatibility
 Module version | Terraform version
