@@ -43,15 +43,13 @@ variable "controller_name" {
 variable "controller_ec2_role_name" {
   type        = string
   description = "EC2 role for controller"
-  default     = ""
-  nullable    = false
+  default     = null
 }
 
 variable "controller_app_role_name" {
   type        = string
   description = "APP role for controller"
-  default     = ""
-  nullable    = false
+  default     = null
 }
 
 # terraform-docs-ignore
