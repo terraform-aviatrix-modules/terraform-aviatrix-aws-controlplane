@@ -9,13 +9,13 @@ For users who want to deploy quickly without managing Terraform state or complex
 
 👉 **[CloudShell Deployment Guide](./cloudshell/README.md)**
 
-## Common issues
+### Common issues
 If you run into any issues, please check the [Common Issues Page](./docs/COMMON-ISSUES.md), to help you with troubleshooting.
 
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.9 | >= 1.3.0
+v1.0.10 | >= 1.3.0
 
 ### Usage Example
 ```hcl
@@ -45,8 +45,8 @@ output "controlplane_data" {
 | <a name="input_availability_zone"></a> [availability\_zone](#input\_availability\_zone) | The Availability zone in which to deploy the controlplane. | `string` | `""` | no |
 | <a name="input_controller_admin_email"></a> [controller\_admin\_email](#input\_controller\_admin\_email) | aviatrix controller admin email address | `string` | n/a | yes |
 | <a name="input_controller_admin_password"></a> [controller\_admin\_password](#input\_controller\_admin\_password) | aviatrix controller admin password | `string` | n/a | yes |
-| <a name="input_controller_app_role_name"></a> [controller\_app\_role\_name](#input\_controller\_app\_role\_name) | APP role for controller | `string` | `""` | no |
-| <a name="input_controller_ec2_role_name"></a> [controller\_ec2\_role\_name](#input\_controller\_ec2\_role\_name) | EC2 role for controller | `string` | `""` | no |
+| <a name="input_controller_app_role_name"></a> [controller\_app\_role\_name](#input\_controller\_app\_role\_name) | APP role for controller | `string` | `null` | no |
+| <a name="input_controller_ec2_role_name"></a> [controller\_ec2\_role\_name](#input\_controller\_ec2\_role\_name) | EC2 role for controller | `string` | `null` | no |
 | <a name="input_controller_instance_type"></a> [controller\_instance\_type](#input\_controller\_instance\_type) | The instance type used for deploying the controller. | `string` | `"t3.large"` | no |
 | <a name="input_controller_name"></a> [controller\_name](#input\_controller\_name) | Customized Name for Aviatrix Controller | `string` | `"Aviatrix-Controller"` | no |
 | <a name="input_controller_termination_protection"></a> [controller\_termination\_protection](#input\_controller\_termination\_protection) | Enable/disable switch for termination protection | `bool` | `null` | no |

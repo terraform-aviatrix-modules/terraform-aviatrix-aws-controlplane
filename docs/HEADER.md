@@ -14,4 +14,4 @@ If you run into any issues, please check the [Common Issues Page](./docs/COMMON-
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.9 | >= 1.3.0
+v1.0.10 | >= 1.3.0
