@@ -128,6 +128,14 @@ variable "incoming_ssl_cidrs" {
   description = "Incoming cidrs for security group used by controller"
 }
 
+# terraform-docs-ignore
+variable "ssh_sg_rule" {
+  type        = bool
+  description = "Enable/disable SSH security group rule"
+  default     = false
+  nullable    = false
+}
+
 variable "use_existing_vpc" {
   type        = bool
   description = "Flag to indicate whether to use an existing VPC"

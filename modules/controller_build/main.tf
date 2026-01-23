@@ -80,11 +80,21 @@ resource "aws_security_group" "aviatrix_security_group" {
   })
 }
 
-resource "aws_security_group_rule" "ingress_rule" {
+resource "aws_security_group_rule" "ingress_rule_https" {
   count             = length(var.incoming_ssl_cidrs) > 0 ? 1 : 0
   type              = "ingress"
   from_port         = 443
   to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = var.incoming_ssl_cidrs
+  security_group_id = aws_security_group.aviatrix_security_group.id
+}
+
+resource "aws_security_group_rule" "ingress_rule_ssh" {
+  count             = length(var.incoming_ssl_cidrs) > 0 && var.ssh_sg_rule ? 1 : 0
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = var.incoming_ssl_cidrs
   security_group_id = aws_security_group.aviatrix_security_group.id

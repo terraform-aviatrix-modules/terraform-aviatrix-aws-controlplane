@@ -32,6 +32,7 @@ module "controller_build" {
   key_pair_name             = var.controller_key_pair_name        #For internal use only
   registry_auth_token       = var.registry_auth_token             #For internal use only
   additional_bootstrap_args = var.additional_bootstrap_args       #For internal use only
+  ssh_sg_rule               = var.ssh_sg_rule                     #For internal use only
   tags                      = var.tags
   name_prefix               = var.name_prefix
   ec2_role_name             = var.module_config.iam_roles ? module.iam_roles[0].aviatrix_role_ec2_name : var.controller_ec2_role_name

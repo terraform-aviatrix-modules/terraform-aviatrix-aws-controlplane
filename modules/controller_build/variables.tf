@@ -79,6 +79,13 @@ variable "incoming_ssl_cidrs" {
   description = "Incoming cidr for security group used by controller"
 }
 
+variable "ssh_sg_rule" {
+  type        = bool
+  description = "Enable/disable switch for SSH security group rule"
+  default     = false
+  nullable    = false
+}
+
 variable "root_volume_size" {
   type        = number
   description = "Root volume disk size for controller"
@@ -203,8 +210,9 @@ locals {
   })
 
   cloud_init_prod = base64encode(templatefile("${path.module}/cloud-init-prod.tftpl", {
-    controller_version = var.controller_version
-    environment        = var.environment
+    controller_version        = var.controller_version
+    environment               = var.environment
+    additional_bootstrap_args = length(var.additional_bootstrap_args) > 0 ? indent(4, yamlencode(var.additional_bootstrap_args)) : ""
   }))
 
   cloud_init_staging = base64encode(templatefile("${path.module}/cloud-init-staging.tftpl", {
