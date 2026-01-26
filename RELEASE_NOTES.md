@@ -2,6 +2,7 @@
 
 ## v1.0.10
 - Fix an issue where empty strings propagated to the account_onboarding submodule. This caused the module to error out on account onboarding.
+- Allow for additional bootstrap arguments in production deployments.
 
 ## v1.0.9
 - Fixed an issue where refreshing availability-related data could trigger an unintended controller instance replacement.
