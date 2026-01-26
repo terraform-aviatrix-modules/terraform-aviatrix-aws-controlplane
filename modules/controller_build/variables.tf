@@ -79,6 +79,7 @@ variable "incoming_ssl_cidrs" {
   description = "Incoming cidr for security group used by controller"
 }
 
+# terraform-docs-ignore
 variable "ssh_sg_rule" {
   type        = bool
   description = "Enable/disable switch for SSH security group rule"
