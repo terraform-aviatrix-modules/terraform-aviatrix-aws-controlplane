@@ -160,7 +160,7 @@ resource "aws_instance" "aviatrix_controller" {
 
   lifecycle {
     ignore_changes = [
-      ami, key_name, user_data, user_data_base64, network_interface
+      ami, key_name, user_data, user_data_base64, network_interface, hibernation, source_dest_check 
     ]
   }
 }
