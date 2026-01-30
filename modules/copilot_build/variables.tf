@@ -46,6 +46,20 @@ variable "key_pair_name" {
   default     = "aviatrix_copilot_kp"
 }
 
+variable "use_existing_eip" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether to use an existing EIP"
+  nullable    = false
+}
+
+variable "eip_id" {
+  type        = string
+  description = "Allocation ID of existing EIP"
+  default     = ""
+  nullable    = false
+}
+
 variable "tags" {
   type        = map(string)
   description = "Map of common tags which should be used for module resources"

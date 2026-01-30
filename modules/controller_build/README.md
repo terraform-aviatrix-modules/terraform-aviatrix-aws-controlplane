@@ -24,6 +24,7 @@ module "controller_build" {
 | <a name="input_controller_name"></a> [controller\_name](#input\_controller\_name) | Name of controller that will be launched. If not set, default name will be used. | `string` | `""` | no |
 | <a name="input_controller_version"></a> [controller\_version](#input\_controller\_version) | Aviatrix Controller version | `string` | `"latest"` | no |
 | <a name="input_ec2_role_name"></a> [ec2\_role\_name](#input\_ec2\_role\_name) | EC2 role for controller | `string` | `""` | no |
+| <a name="input_eip_id"></a> [eip\_id](#input\_eip\_id) | Allocation ID of existing EIP | `string` | `""` | no |
 | <a name="input_incoming_ssl_cidrs"></a> [incoming\_ssl\_cidrs](#input\_incoming\_ssl\_cidrs) | Incoming cidr for security group used by controller | `list(string)` | n/a | yes |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Controller instance size | `string` | `"t3.xlarge"` | no |
 | <a name="input_key_pair_name"></a> [key\_pair\_name](#input\_key\_pair\_name) | Key pair name | `string` | `""` | no |
@@ -36,6 +37,7 @@ module "controller_build" {
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | Subnet ID, only required when use\_existing\_vpc is true | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Map of common tags which should be used for module resources | `map(string)` | `{}` | no |
 | <a name="input_termination_protection"></a> [termination\_protection](#input\_termination\_protection) | Enable/disable switch for termination protection | `bool` | `true` | no |
+| <a name="input_use_existing_eip"></a> [use\_existing\_eip](#input\_use\_existing\_eip) | Flag to indicate whether to use an existing EIP | `bool` | `false` | no |
 | <a name="input_use_existing_keypair"></a> [use\_existing\_keypair](#input\_use\_existing\_keypair) | Flag to indicate whether to use an existing key pair | `bool` | `false` | no |
 | <a name="input_use_existing_vpc"></a> [use\_existing\_vpc](#input\_use\_existing\_vpc) | Flag to indicate whether to use an existing VPC | `bool` | `false` | no |
 | <a name="input_user_data"></a> [user\_data](#input\_user\_data) | User data for starting the controller | `string` | `""` | no |

@@ -104,6 +104,32 @@ variable "copilot_key_pair_name" {
   nullable    = false
 }
 
+variable "controller_use_existing_eip" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether to use an existing EIP for controller"
+}
+
+variable "controller_eip_id" {
+  type        = string
+  description = "Allocation ID of existing EIP for controller"
+  default     = ""
+  nullable    = false
+}
+
+variable "copilot_use_existing_eip" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether to use an existing EIP for copilot"
+}
+
+variable "copilot_eip_id" {
+  type        = string
+  description = "Allocation ID of existing EIP for copilot"
+  default     = ""
+  nullable    = false
+}
+
 variable "controlplane_subnet_cidr" {
   type        = string
   description = "CIDR for controlplane subnet."

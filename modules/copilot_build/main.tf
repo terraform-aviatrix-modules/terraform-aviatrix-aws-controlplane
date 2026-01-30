@@ -115,15 +115,27 @@ resource "aws_security_group" "AviatrixCopilotSecurityGroup" {
   }
 }
 
+data "aws_eip" "existing_eip" {
+  count = var.use_existing_eip && var.private_mode == false ? 1 : 0
+  id    = var.eip_id
+}
+
 resource "aws_eip" "copilot_eip" {
-  count = var.private_mode == false ? 1 : 0
+  count = var.use_existing_eip == false && var.private_mode == false ? 1 : 0
   tags  = local.common_tags
 }
 
 resource "aws_eip_association" "eip_assoc" {
   count         = var.private_mode == false ? 1 : 0
   instance_id   = aws_instance.aviatrixcopilot.id
-  allocation_id = aws_eip.copilot_eip[0].id
+  allocation_id = var.use_existing_eip ? var.eip_id : aws_eip.copilot_eip[0].id
+
+  lifecycle {
+    precondition {
+      condition     = !var.use_existing_eip || (var.use_existing_eip && var.eip_id != "")
+      error_message = "The copilot eip_id must be provided when use_existing_eip is true."
+    }
+  }
 }
 
 resource "aws_network_interface" "eni-copilot" {

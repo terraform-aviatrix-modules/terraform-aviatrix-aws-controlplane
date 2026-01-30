@@ -53,6 +53,20 @@ variable "key_pair_name" {
   nullable    = false
 }
 
+variable "use_existing_eip" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether to use an existing EIP"
+  nullable    = false
+}
+
+variable "eip_id" {
+  type        = string
+  description = "Allocation ID of existing EIP"
+  default     = ""
+  nullable    = false
+}
+
 variable "ec2_role_name" {
   type        = string
   description = "EC2 role for controller"

@@ -4,7 +4,7 @@ output "private_ip" {
 }
 
 output "public_ip" {
-  value       = aws_eip.controller_eip.public_ip
+  value       = var.use_existing_eip ? data.aws_eip.existing_eip[0].public_ip : aws_eip.controller_eip[0].public_ip
   description = "Public IP of the controller"
 }
 

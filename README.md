@@ -15,13 +15,13 @@ If you run into any issues, please check the [Common Issues Page](./docs/COMMON-
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.10 | >= 1.3.0
+v1.0.11 | >= 1.3.0
 
 ### Usage Example
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
-  version = "1.0.9"
+  version = "1.0.11"
 
   controller_name           = "my_controller"
   incoming_ssl_cidrs        = ["1.2.3.4"]
@@ -47,15 +47,19 @@ output "controlplane_data" {
 | <a name="input_controller_admin_password"></a> [controller\_admin\_password](#input\_controller\_admin\_password) | aviatrix controller admin password | `string` | n/a | yes |
 | <a name="input_controller_app_role_name"></a> [controller\_app\_role\_name](#input\_controller\_app\_role\_name) | APP role for controller | `string` | `null` | no |
 | <a name="input_controller_ec2_role_name"></a> [controller\_ec2\_role\_name](#input\_controller\_ec2\_role\_name) | EC2 role for controller | `string` | `null` | no |
+| <a name="input_controller_eip_id"></a> [controller\_eip\_id](#input\_controller\_eip\_id) | Allocation ID of existing EIP for controller | `string` | `""` | no |
 | <a name="input_controller_instance_type"></a> [controller\_instance\_type](#input\_controller\_instance\_type) | The instance type used for deploying the controller. | `string` | `"t3.large"` | no |
 | <a name="input_controller_name"></a> [controller\_name](#input\_controller\_name) | Customized Name for Aviatrix Controller | `string` | `"Aviatrix-Controller"` | no |
 | <a name="input_controller_termination_protection"></a> [controller\_termination\_protection](#input\_controller\_termination\_protection) | Enable/disable switch for termination protection | `bool` | `null` | no |
+| <a name="input_controller_use_existing_eip"></a> [controller\_use\_existing\_eip](#input\_controller\_use\_existing\_eip) | Flag to indicate whether to use an existing EIP for controller | `bool` | `false` | no |
 | <a name="input_controller_version"></a> [controller\_version](#input\_controller\_version) | Aviatrix Controller version | `string` | `"latest"` | no |
 | <a name="input_controlplane_subnet_cidr"></a> [controlplane\_subnet\_cidr](#input\_controlplane\_subnet\_cidr) | CIDR for controlplane subnet. | `string` | `"10.0.0.0/24"` | no |
 | <a name="input_controlplane_vpc_cidr"></a> [controlplane\_vpc\_cidr](#input\_controlplane\_vpc\_cidr) | CIDR for controller VPC. | `string` | `"10.0.0.0/24"` | no |
+| <a name="input_copilot_eip_id"></a> [copilot\_eip\_id](#input\_copilot\_eip\_id) | Allocation ID of existing EIP for copilot | `string` | `""` | no |
 | <a name="input_copilot_instance_type"></a> [copilot\_instance\_type](#input\_copilot\_instance\_type) | The instance type used for deploying copilot. | `string` | `null` | no |
 | <a name="input_copilot_name"></a> [copilot\_name](#input\_copilot\_name) | Customized Name for Aviatrix Copilot | `string` | `"Aviatrix-Copilot"` | no |
 | <a name="input_copilot_service_account_password"></a> [copilot\_service\_account\_password](#input\_copilot\_service\_account\_password) | n/a | `string` | `""` | no |
+| <a name="input_copilot_use_existing_eip"></a> [copilot\_use\_existing\_eip](#input\_copilot\_use\_existing\_eip) | Flag to indicate whether to use an existing EIP for copilot | `bool` | `false` | no |
 | <a name="input_customer_id"></a> [customer\_id](#input\_customer\_id) | aviatrix customer license id | `string` | n/a | yes |
 | <a name="input_default_data_volume_size"></a> [default\_data\_volume\_size](#input\_default\_data\_volume\_size) | n/a | `string` | `"100"` | no |
 | <a name="input_external_controller_account_id"></a> [external\_controller\_account\_id](#input\_external\_controller\_account\_id) | n/a | `string` | `""` | no |

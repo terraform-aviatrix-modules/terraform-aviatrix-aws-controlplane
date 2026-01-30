@@ -37,6 +37,8 @@ module "controller_build" {
   name_prefix               = var.name_prefix
   ec2_role_name             = var.module_config.iam_roles ? module.iam_roles[0].aviatrix_role_ec2_name : var.controller_ec2_role_name
   termination_protection    = var.controller_termination_protection
+  use_existing_eip          = var.controller_use_existing_eip #For internal use only
+  eip_id                    = var.controller_eip_id           #For internal use only
   depends_on = [
     module.iam_roles
   ]
@@ -83,6 +85,8 @@ module "copilot_build" {
   key_pair_name            = var.copilot_key_pair_name        #For internal use only
   tags                     = var.tags
   name_prefix              = var.name_prefix
+  use_existing_eip         = var.copilot_use_existing_eip #For internal use only
+  eip_id                   = var.copilot_eip_id           #For internal use only
   allowed_cidrs = {
     "tcp_cidrs" = {
       protocol  = "Tcp"

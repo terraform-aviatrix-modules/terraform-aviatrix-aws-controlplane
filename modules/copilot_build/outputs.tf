@@ -9,7 +9,11 @@ output "private_ip" {
 }
 
 output "public_ip" {
-  value       = concat(aws_eip.copilot_eip.*.public_ip, [null])[0]
+  value = (
+    var.private_mode ? null :
+    var.use_existing_eip ? data.aws_eip.existing_eip[0].public_ip :
+    aws_eip.copilot_eip[0].public_ip
+  )
   description = "Public IP address of the Aviatrix Copilot"
 }
 

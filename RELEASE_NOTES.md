@@ -1,5 +1,8 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.0.11
+- Add support for bring your own EIP for controller and Copilot.
+
 ## v1.0.10
 - Fix an issue where empty strings propagated to the account_onboarding submodule. This caused the module to error out on account onboarding.
 - Allow for additional bootstrap arguments in production deployments.

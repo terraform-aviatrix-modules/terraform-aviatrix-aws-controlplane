@@ -10,6 +10,11 @@ data "aws_vpc" "controller_vpc" {
   id = var.vpc_id != "" ? var.vpc_id : aws_vpc.controller_vpc[0].id
 }
 
+data "aws_eip" "existing_eip" {
+  count = var.use_existing_eip ? 1 : 0
+  id    = var.eip_id
+}
+
 resource "aws_internet_gateway" "igw" {
   count  = var.use_existing_vpc ? 0 : 1
   vpc_id = aws_vpc.controller_vpc[0].id
@@ -110,13 +115,21 @@ resource "aws_security_group_rule" "egress_rule" {
 }
 
 resource "aws_eip" "controller_eip" {
+  count  = var.use_existing_eip ? 0 : 1
   domain = "vpc"
   tags   = local.common_tags
 }
 
 resource "aws_eip_association" "eip_assoc" {
   instance_id   = aws_instance.aviatrix_controller.id
-  allocation_id = aws_eip.controller_eip.id
+  allocation_id = var.use_existing_eip ? var.eip_id : aws_eip.controller_eip[0].id
+
+  lifecycle {
+    precondition {
+      condition     = !var.use_existing_eip || (var.use_existing_eip && var.eip_id != "")
+      error_message = "The controller eip_id must be provided when use_existing_eip is true."
+    }
+  }
 }
 
 resource "aws_network_interface" "eni_controller" {
