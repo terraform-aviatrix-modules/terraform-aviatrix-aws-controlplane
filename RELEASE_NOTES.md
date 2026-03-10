@@ -1,5 +1,8 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.0.12
+- Add support for enabling Copilot Security Group Management
+
 ## v1.0.11
 - Add support for bring your own EIP for controller and Copilot.
 
