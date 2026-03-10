@@ -150,14 +150,19 @@ module "account_onboarding" {
   ]
 }
 
-#disable security group management during tf destroy 
-module "controller_sg_mgmt" {
-  source                    = "./modules/controller_sg_mgmt"
-  controller_public_ip      = module.controller_build[0].public_ip
-  controller_admin_password = var.controller_admin_password
-  controller_admin_username = null #Placeholder for future use
+#Security group management on controller and Copilot
+module "sg_mgmt" {
+  source                                   = "./modules/sg_mgmt"
+  controller_public_ip                     = module.controller_build[0].public_ip
+  controller_admin_password                = var.controller_admin_password
+  controller_admin_username                = null #Placeholder for future use
+  enable_copilot_security_group_management = var.module_config.copilot_deployment
+  access_account_name                      = var.access_account_name
+  vpc_id                                   = local.vpc_id
+  instance_id                              = var.module_config.copilot_deployment ? module.copilot_build[0].instance_id : ""
 
   depends_on = [
     module.account_onboarding,
+    module.copilot_init,
   ]
 }

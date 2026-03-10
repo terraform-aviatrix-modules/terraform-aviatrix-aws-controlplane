@@ -23,3 +23,26 @@ variable "dummy_url" {
   default     = "https://checkip.amazonaws.com"
   nullable    = false
 }
+
+variable "access_account_name" {
+  type        = string
+  description = "Aviatrix access account name"
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID where the copilot instance is deployed."
+}
+
+variable "instance_id" {
+  type        = string
+  description = "EC2 instance ID for the Aviatrix Copilot instance."
+  nullable    = false
+}
+
+variable "enable_copilot_security_group_management" {
+  type        = bool
+  description = "Enable Copilot security group management"
+  default     = true
+  nullable    = false
+}

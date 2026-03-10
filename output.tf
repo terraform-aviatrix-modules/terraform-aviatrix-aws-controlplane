@@ -39,7 +39,7 @@ output "controller_security_group_id" {
 }
 
 output "controller_vpc_id" {
-  value = var.module_config.controller_deployment ? module.controller_build[0].vpc_id : null
+  value = local.vpc_id
 }
 
 output "controller_subnet_id" {
