@@ -47,8 +47,8 @@ module "controller_build" {
 module "controller_init" {
   count = var.module_config.controller_initialization ? 1 : 0
 
-  source  = "terraform-aviatrix-modules/controller-init/aviatrix"
-  version = "v1.0.4"
+  source  = "git::https://github.com/terraform-aviatrix-modules/terraform-aviatrix-controller-init.git?ref=test-staffan"
+  #version = "v1.0.4"
 
   controller_public_ip      = module.controller_build[0].public_ip
   controller_private_ip     = module.controller_build[0].private_ip
