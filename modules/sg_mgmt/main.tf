@@ -28,6 +28,11 @@ resource "terracurl_request" "security_group_management" {
   method         = "GET"
   response_codes = [200]
 
+
+  max_retry      = 10
+  retry_interval = 10
+  timeout = 1200
+
   # Destroy Phase Configuration
   destroy_url             = "https://${var.controller_public_ip}/v2/api"
   destroy_method          = "POST"
@@ -37,6 +42,7 @@ resource "terracurl_request" "security_group_management" {
     action = "disable_controller_security_group_management",
     CID    = local.current_cid
   })
+  
 
   destroy_headers = {
     Content-Type = "application/json"
@@ -51,7 +57,6 @@ resource "terracurl_request" "copilot_security_group_management" {
   method          = "POST"
   response_codes  = [200]
   skip_tls_verify = true
-  timeout         = 300
   request_body = jsonencode({
     action       = "enable_copilot_sg",
     CID          = local.current_cid,
@@ -64,6 +69,10 @@ resource "terracurl_request" "copilot_security_group_management" {
   headers = {
     Content-Type = "application/json"
   }
+
+  max_retry      = 10
+  retry_interval = 10
+  timeout = 1200
 
   # Destroy Phase Configuration
   destroy_url             = "https://${var.controller_public_ip}/v2/api"
