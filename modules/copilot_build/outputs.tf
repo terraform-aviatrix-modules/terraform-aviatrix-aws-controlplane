@@ -23,7 +23,7 @@ output "vpc_id" {
 }
 
 output "vpc_name" {
-  value       = data.aws_vpc.copilot_vpc.tags.Name
+  value       = lookup(data.aws_vpc.copilot_vpc.tags, "Name", null)
   description = "VPC name"
 }
 
