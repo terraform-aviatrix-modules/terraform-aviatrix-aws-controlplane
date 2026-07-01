@@ -15,13 +15,13 @@ If you run into any issues, please check the [Common Issues Page](./docs/COMMON-
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.11 | >= 1.3.0
+v1.0.13 | >= 1.3.0
 
 ### Usage Example
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
-  version = "1.0.12"
+  version = "1.0.13"
 
   controller_name           = "my_controller"
   incoming_ssl_cidrs        = ["1.2.3.4"]

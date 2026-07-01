@@ -1,5 +1,8 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.0.13
+- Resolved an issue where VPC's without a name were causing an error.
+
 ## v1.0.12
 - Add support for enabling Copilot Security Group Management
 
