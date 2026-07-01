@@ -15,13 +15,13 @@ If you run into any issues, please check the [Common Issues Page](./docs/COMMON-
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.13 | >= 1.3.0
+v1.1.0 | >= 1.3.0
 
 ### Usage Example
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
-  version = "1.0.13"
+  version = "1.1.0"
 
   controller_name           = "my_controller"
   incoming_ssl_cidrs        = ["1.2.3.4"]
@@ -76,6 +76,8 @@ output "controlplane_data" {
 
 | Name | Description |
 |------|-------------|
+| <a name="output_controller_ami_id"></a> [controller\_ami\_id](#output\_controller\_ami\_id) | n/a |
+| <a name="output_controller_image_family"></a> [controller\_image\_family](#output\_controller\_image\_family) | n/a |
 | <a name="output_controller_instance_id"></a> [controller\_instance\_id](#output\_controller\_instance\_id) | n/a |
 | <a name="output_controller_name"></a> [controller\_name](#output\_controller\_name) | n/a |
 | <a name="output_controller_private_ip"></a> [controller\_private\_ip](#output\_controller\_private\_ip) | n/a |

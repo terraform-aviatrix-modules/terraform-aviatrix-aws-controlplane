@@ -33,3 +33,13 @@ output "controller_name" {
   description = "Name of the Aviatrix controller created."
 }
 
+output "ami_id" {
+  value       = aws_instance.aviatrix_controller.ami
+  description = "AMI ID used by the Aviatrix controller"
+}
+
+output "image_family" {
+  value       = local.image_family
+  description = "Image family of the Aviatrix controller AMI"
+}
+
