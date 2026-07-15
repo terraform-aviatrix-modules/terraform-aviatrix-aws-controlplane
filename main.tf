@@ -152,6 +152,7 @@ module "account_onboarding" {
 
 #Security group management on controller and Copilot
 module "sg_mgmt" {
+  count                                    = var.module_config.sg_management ? 1 : 0
   source                                   = "./modules/sg_mgmt"
   controller_public_ip                     = module.controller_build[0].public_ip
   controller_admin_password                = var.controller_admin_password
