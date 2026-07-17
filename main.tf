@@ -142,6 +142,7 @@ module "account_onboarding" {
 
   access_account_name = var.access_account_name
   account_email       = var.account_email
+  cloud_type          = var.cloud_type
   aws_role_ec2        = var.module_config.iam_roles ? module.iam_roles[0].aviatrix_role_ec2_name : var.controller_ec2_role_name
   aws_role_app        = var.module_config.iam_roles ? module.iam_roles[0].aviatrix_role_app_name : var.controller_app_role_name
 
@@ -157,6 +158,7 @@ module "sg_mgmt" {
   controller_admin_password                = var.controller_admin_password
   controller_admin_username                = null #Placeholder for future use
   enable_copilot_security_group_management = var.module_config.copilot_deployment
+  cloud_type                               = var.cloud_type
   access_account_name                      = var.access_account_name
   vpc_id                                   = local.vpc_id
   instance_id                              = var.module_config.copilot_deployment ? module.copilot_build[0].instance_id : ""

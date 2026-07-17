@@ -15,7 +15,7 @@ If you run into any issues, please check the [Common Issues Page](./docs/COMMON-
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.0.13 | >= 1.3.0
+v1.0.11 | >= 1.3.0
 
 ### Usage Example
 ```hcl
@@ -43,6 +43,7 @@ output "controlplane_data" {
 | <a name="input_access_account_name"></a> [access\_account\_name](#input\_access\_account\_name) | aviatrix controller access account name | `string` | n/a | yes |
 | <a name="input_account_email"></a> [account\_email](#input\_account\_email) | aviatrix controller access account email | `string` | n/a | yes |
 | <a name="input_availability_zone"></a> [availability\_zone](#input\_availability\_zone) | The Availability zone in which to deploy the controlplane. | `string` | `""` | no |
+| <a name="input_cloud_type"></a> [cloud\_type](#input\_cloud\_type) | Aviatrix cloud type of the access account used for account onboarding and CoPilot security group management (1 = AWS Commercial, 256 = AWS GovCloud, 1024 = AWS China). | `number` | `1` | no |
 | <a name="input_controller_admin_email"></a> [controller\_admin\_email](#input\_controller\_admin\_email) | aviatrix controller admin email address | `string` | n/a | yes |
 | <a name="input_controller_admin_password"></a> [controller\_admin\_password](#input\_controller\_admin\_password) | aviatrix controller admin password | `string` | n/a | yes |
 | <a name="input_controller_app_role_name"></a> [controller\_app\_role\_name](#input\_controller\_app\_role\_name) | APP role for controller | `string` | `null` | no |
