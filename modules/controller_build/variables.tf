@@ -215,14 +215,20 @@ locals {
   key_pair_name   = var.key_pair_name != "" ? var.key_pair_name : "aviatrix_controller_kp"
   ec2_role_name   = var.ec2_role_name != "" ? var.ec2_role_name : "aviatrix-role-ec2"
   is_aws_cn       = element(split("-", data.aws_region.current.region), 0) == "cn" ? true : false
-  images          = jsondecode(data.http.avx_ami_id.response_body)["g4"]["amd64"]
-  ami_id          = var.ami_id != "" ? var.ami_id : local.images[data.aws_region.current.region]
 
   common_tags = merge(
     var.tags, {
       module    = "aviatrix-controller-build"
       Createdby = "Terraform+Aviatrix"
   })
+
+  #Image selection
+  ## Single boundary at major version 10: below 10 uses g4, 10 and above uses g5.
+  ## To be refactored to some sort of list of map if/when g6 and up become available.
+  controller_major = try(tonumber(split(".", var.controller_version)[0]), 999) #Default to 999 for non-numeric versions (latest), which will resolve to g5.
+  image_family     = local.controller_major < 10 ? "g4" : "g5"
+  images           = jsondecode(data.http.avx_ami_id.response_body)[local.image_family]["amd64"]
+  ami_id           = var.ami_id != "" ? var.ami_id : local.images[data.aws_region.current.region]
 
   cloud_init_prod = base64encode(templatefile("${path.module}/cloud-init-prod.tftpl", {
     controller_version        = var.controller_version

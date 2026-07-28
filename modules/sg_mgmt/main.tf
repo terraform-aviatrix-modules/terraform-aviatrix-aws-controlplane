@@ -18,7 +18,7 @@ data "http" "ctrl_login" {
 
 locals {
   current_cid = jsondecode(data.http.ctrl_login.response_body)["CID"]
-  region      = data.aws_region.current.name
+  region      = data.aws_region.current.region
 }
 
 resource "terracurl_request" "security_group_management" {

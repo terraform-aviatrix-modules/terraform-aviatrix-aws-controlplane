@@ -48,7 +48,9 @@ module "controller_build" {
 
 | Name | Description |
 |------|-------------|
+| <a name="output_ami_id"></a> [ami\_id](#output\_ami\_id) | AMI ID used by the Aviatrix controller |
 | <a name="output_controller_name"></a> [controller\_name](#output\_controller\_name) | Name of the Aviatrix controller created. |
+| <a name="output_image_family"></a> [image\_family](#output\_image\_family) | Image family of the Aviatrix controller AMI |
 | <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | Controller instance ID |
 | <a name="output_private_ip"></a> [private\_ip](#output\_private\_ip) | Private IP of the controller |
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | Public IP of the controller |
