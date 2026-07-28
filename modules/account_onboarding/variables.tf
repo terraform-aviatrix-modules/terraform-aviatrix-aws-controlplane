@@ -38,6 +38,18 @@ variable "aws_role_app" {
   nullable = false
 }
 
+variable "cloud_type" {
+  type        = number
+  description = "Aviatrix cloud type of the access account (1 = AWS Commercial, 256 = AWS GovCloud, 1024 = AWS China)."
+  default     = 1
+  nullable    = false
+
+  validation {
+    condition     = contains([1, 256, 1024], var.cloud_type)
+    error_message = "cloud_type must be one of 1 (AWS), 256 (AWS GovCloud), or 1024 (AWS China)."
+  }
+}
+
 # terraform-docs-ignore
 variable "destroy_url" {
   type        = string

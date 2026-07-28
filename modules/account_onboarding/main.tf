@@ -25,6 +25,12 @@ data "http" "controller_login" {
 
 data "aws_caller_identity" "current" {}
 
+locals {
+  # IAM ARN partition must match the target cloud (GovCloud/China use a
+  # different partition than AWS Commercial).
+  arn_partition = var.cloud_type == 256 ? "aws-us-gov" : (var.cloud_type == 1024 ? "aws-cn" : "aws")
+}
+
 resource "terracurl_request" "aws_access_account" {
   name            = "aws_access_account"
   url             = "https://${var.controller_public_ip}/v2/api"
@@ -35,12 +41,12 @@ resource "terracurl_request" "aws_access_account" {
     action             = "setup_account_profile",
     CID                = jsondecode(data.http.controller_login.response_body)["CID"],
     account_name       = var.access_account_name,
-    cloud_type         = "1",
+    cloud_type         = tostring(var.cloud_type),
     account_email      = var.account_email,
     aws_account_number = data.aws_caller_identity.current.account_id,
     aws_iam            = true,
-    aws_role_ec2       = format("arn:aws:iam::%s:role/%s", data.aws_caller_identity.current.account_id, var.aws_role_ec2),
-    aws_role_arn       = format("arn:aws:iam::%s:role/%s", data.aws_caller_identity.current.account_id, var.aws_role_app)
+    aws_role_ec2       = format("arn:%s:iam::%s:role/%s", local.arn_partition, data.aws_caller_identity.current.account_id, var.aws_role_ec2),
+    aws_role_arn       = format("arn:%s:iam::%s:role/%s", local.arn_partition, data.aws_caller_identity.current.account_id, var.aws_role_app)
   })
 
   headers = {

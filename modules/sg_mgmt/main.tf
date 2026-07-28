@@ -55,7 +55,7 @@ resource "terracurl_request" "copilot_security_group_management" {
   request_body = jsonencode({
     action       = "enable_copilot_sg",
     CID          = local.current_cid,
-    cloud_type   = 1,
+    cloud_type   = var.cloud_type,
     account_name = var.access_account_name
     vpc_id       = var.vpc_id,
     instance_id  = var.instance_id,
@@ -73,7 +73,7 @@ resource "terracurl_request" "copilot_security_group_management" {
   destroy_request_body = jsonencode({
     action       = "disable_copilot_sg",
     CID          = local.current_cid
-    cloud_type   = 1,
+    cloud_type   = var.cloud_type,
     account_name = var.access_account_name,
     vpc_id       = var.vpc_id,
     instance_id  = var.instance_id,
