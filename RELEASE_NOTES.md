@@ -1,7 +1,7 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
 ## v1.1.0
-- Add suppport dor g5 images, for v10.0 and up.
+- Add support for g5 images for version 10.0 and later.
 
 ## v1.0.13
 - Resolved an issue where VPC's without a name were causing an error.
