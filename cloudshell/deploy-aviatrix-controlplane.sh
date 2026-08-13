@@ -824,6 +824,7 @@ module "aviatrix_controlplane" {
     copilot_initialization   = $(echo "$INCLUDE_COPILOT" | tr '[:upper:]' '[:lower:]')
     iam_roles                = $create_iam_roles
     account_onboarding       = true
+    sg_management            = true
   }
 EOF
 
