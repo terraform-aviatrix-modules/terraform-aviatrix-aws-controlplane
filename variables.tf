@@ -57,6 +57,11 @@ variable "controller_app_role_max_session_duration" {
   description = "Maximum session duration (in seconds) for the controller APP role"
   default     = 3600
   nullable    = false
+
+  validation {
+    condition     = var.controller_app_role_max_session_duration >= 3600 && var.controller_app_role_max_session_duration <= 43200
+    error_message = "controller_app_role_max_session_duration must be between 3600 and 43200 seconds."
+  }
 }
 
 # terraform-docs-ignore
