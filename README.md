@@ -46,6 +46,7 @@ output "controlplane_data" {
 | <a name="input_cloud_type"></a> [cloud\_type](#input\_cloud\_type) | Aviatrix cloud type of the access account used for account onboarding and CoPilot security group management (1 = AWS Commercial, 256 = AWS GovCloud, 1024 = AWS China). | `number` | `1` | no |
 | <a name="input_controller_admin_email"></a> [controller\_admin\_email](#input\_controller\_admin\_email) | aviatrix controller admin email address | `string` | n/a | yes |
 | <a name="input_controller_admin_password"></a> [controller\_admin\_password](#input\_controller\_admin\_password) | aviatrix controller admin password | `string` | n/a | yes |
+| <a name="input_controller_app_role_max_session_duration"></a> [controller\_app\_role\_max\_session\_duration](#input\_controller\_app\_role\_max\_session\_duration) | Maximum session duration (in seconds) for the controller APP role | `number` | `3600` | no |
 | <a name="input_controller_app_role_name"></a> [controller\_app\_role\_name](#input\_controller\_app\_role\_name) | APP role for controller | `string` | `null` | no |
 | <a name="input_controller_ec2_role_name"></a> [controller\_ec2\_role\_name](#input\_controller\_ec2\_role\_name) | EC2 role for controller | `string` | `null` | no |
 | <a name="input_controller_eip_id"></a> [controller\_eip\_id](#input\_controller\_eip\_id) | Allocation ID of existing EIP for controller | `string` | `""` | no |

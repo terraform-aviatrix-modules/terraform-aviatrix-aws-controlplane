@@ -52,6 +52,13 @@ variable "controller_app_role_name" {
   default     = null
 }
 
+variable "controller_app_role_max_session_duration" {
+  type        = number
+  description = "Maximum session duration (in seconds) for the controller APP role"
+  default     = 3600
+  nullable    = false
+}
+
 # terraform-docs-ignore
 variable "controller_ami_id" {
   type        = string
