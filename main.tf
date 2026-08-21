@@ -6,6 +6,7 @@ module "iam_roles" {
   external_controller_account_id = var.external_controller_account_id
   ec2_role_name                  = var.controller_ec2_role_name
   app_role_name                  = var.controller_app_role_name
+  app_role_max_session_duration  = var.controller_app_role_max_session_duration
   name_prefix                    = var.name_prefix
 }
 

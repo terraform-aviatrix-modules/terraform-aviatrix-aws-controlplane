@@ -18,6 +18,18 @@ variable "app_role_name" {
   nullable    = false
 }
 
+variable "app_role_max_session_duration" {
+  type        = number
+  description = "Maximum session duration (in seconds) for the Aviatrix APP role"
+  default     = 3600
+  nullable    = false
+
+  validation {
+    condition     = var.app_role_max_session_duration >= 3600 && var.app_role_max_session_duration <= 43200
+    error_message = "app_role_max_session_duration must be between 3600 and 43200 seconds."
+  }
+}
+
 variable "external_controller_account_id" {
   type    = string
   default = ""

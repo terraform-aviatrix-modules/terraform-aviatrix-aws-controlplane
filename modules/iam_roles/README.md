@@ -14,6 +14,7 @@ module "iam_roles" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_app_role_max_session_duration"></a> [app\_role\_max\_session\_duration](#input\_app\_role\_max\_session\_duration) | Maximum session duration (in seconds) for the Aviatrix APP role | `number` | `3600` | no |
 | <a name="input_app_role_name"></a> [app\_role\_name](#input\_app\_role\_name) | APP role name | `string` | `""` | no |
 | <a name="input_ec2_role_name"></a> [ec2\_role\_name](#input\_ec2\_role\_name) | EC2 role name | `string` | `""` | no |
 | <a name="input_external_controller_account_id"></a> [external\_controller\_account\_id](#input\_external\_controller\_account\_id) | n/a | `string` | `""` | no |
