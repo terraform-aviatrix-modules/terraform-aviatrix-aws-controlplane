@@ -316,6 +316,7 @@ variable "external_controller_account_id" {
 }
 
 variable "default_data_volume_size" {
-  type    = string
-  default = "100"
+  type        = number
+  description = "Size (GiB) of the Copilot data volume. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk."
+  default     = null
 }

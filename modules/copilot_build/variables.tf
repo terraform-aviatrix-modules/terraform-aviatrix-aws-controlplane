@@ -148,9 +148,10 @@ variable "default_data_volume_name" {
 }
 
 variable "default_data_volume_size" {
-  default     = 50
+  default     = 100
   type        = number
   description = "Size of default data volume"
+  nullable    = false
 }
 
 variable "default_data_volume_type" {

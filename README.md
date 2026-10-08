@@ -67,7 +67,7 @@ output "controlplane_data" {
 | <a name="input_copilot_service_account_password"></a> [copilot\_service\_account\_password](#input\_copilot\_service\_account\_password) | n/a | `string` | `""` | no |
 | <a name="input_copilot_use_existing_eip"></a> [copilot\_use\_existing\_eip](#input\_copilot\_use\_existing\_eip) | Flag to indicate whether to use an existing EIP for copilot | `bool` | `false` | no |
 | <a name="input_customer_id"></a> [customer\_id](#input\_customer\_id) | aviatrix customer license id | `string` | n/a | yes |
-| <a name="input_default_data_volume_size"></a> [default\_data\_volume\_size](#input\_default\_data\_volume\_size) | n/a | `string` | `"100"` | no |
+| <a name="input_default_data_volume_size"></a> [default\_data\_volume\_size](#input\_default\_data\_volume\_size) | Size (GiB) of the Copilot data volume. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk. | `number` | `null` | no |
 | <a name="input_external_controller_account_id"></a> [external\_controller\_account\_id](#input\_external\_controller\_account\_id) | n/a | `string` | `""` | no |
 | <a name="input_incoming_ssl_cidrs"></a> [incoming\_ssl\_cidrs](#input\_incoming\_ssl\_cidrs) | Incoming cidrs for security group used by controller | `list(string)` | n/a | yes |
 | <a name="input_module_config"></a> [module\_config](#input\_module\_config) | n/a | `map(bool)` | <pre>{<br/>  "account_onboarding": true,<br/>  "controller_deployment": true,<br/>  "controller_initialization": true,<br/>  "copilot_deployment": true,<br/>  "copilot_initialization": true,<br/>  "iam_roles": true,<br/>  "sg_management": true<br/>}</pre> | no |
