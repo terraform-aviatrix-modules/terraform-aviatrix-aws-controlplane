@@ -77,6 +77,7 @@ variable "root_volume_size" {
   type        = number
   description = "Root volume size for copilot"
   default     = 30
+  nullable    = false
 
   validation {
     condition     = var.root_volume_size >= 30
@@ -88,6 +89,7 @@ variable "root_volume_type" {
   type        = string
   description = "Root volume type for copilot"
   default     = "gp3"
+  nullable    = false
 }
 
 variable "root_volume_encrypted" {

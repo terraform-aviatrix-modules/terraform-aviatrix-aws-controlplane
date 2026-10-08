@@ -213,39 +213,25 @@ variable "copilot_instance_type" {
 variable "controller_root_volume_size" {
   type        = number
   description = "Root volume size (GiB) for the controller. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk."
-  default     = 64
-  nullable    = false
-
-  validation {
-    condition     = var.controller_root_volume_size >= 64
-    error_message = "The minimum controller root volume size is 64 GiB."
-  }
+  default     = null
 }
 
 variable "controller_root_volume_type" {
   type        = string
   description = "Root volume type for the controller."
-  default     = "gp3"
-  nullable    = false
+  default     = null
 }
 
 variable "copilot_root_volume_size" {
   type        = number
   description = "Root volume size (GiB) for copilot. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk."
-  default     = 30
-  nullable    = false
-
-  validation {
-    condition     = var.copilot_root_volume_size >= 30
-    error_message = "The minimum copilot root volume size is 30 GiB."
-  }
+  default     = null
 }
 
 variable "copilot_root_volume_type" {
   type        = string
   description = "Root volume type for copilot."
-  default     = "gp3"
-  nullable    = false
+  default     = null
 }
 
 variable "module_config" {
