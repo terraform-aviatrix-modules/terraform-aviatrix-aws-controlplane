@@ -52,7 +52,7 @@ module "copilot_build" {
 | <a name="input_default_data_volume_encrypted"></a> [default\_data\_volume\_encrypted](#input\_default\_data\_volume\_encrypted) | Whether the default data volume is encrypted | `bool` | `true` | no |
 | <a name="input_default_data_volume_kms_key_id"></a> [default\_data\_volume\_kms\_key\_id](#input\_default\_data\_volume\_kms\_key\_id) | ARN for the key used to encrypt the default data volume | `string` | `""` | no |
 | <a name="input_default_data_volume_name"></a> [default\_data\_volume\_name](#input\_default\_data\_volume\_name) | Name of default data volume. If not set, no default data volume will be created | `string` | `""` | no |
-| <a name="input_default_data_volume_size"></a> [default\_data\_volume\_size](#input\_default\_data\_volume\_size) | Size of default data volume | `number` | `50` | no |
+| <a name="input_default_data_volume_size"></a> [default\_data\_volume\_size](#input\_default\_data\_volume\_size) | Size of default data volume | `number` | `100` | no |
 | <a name="input_default_data_volume_type"></a> [default\_data\_volume\_type](#input\_default\_data\_volume\_type) | Type of default data volume | `string` | `"gp3"` | no |
 | <a name="input_eip_id"></a> [eip\_id](#input\_eip\_id) | Allocation ID of existing EIP | `string` | `""` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Copilot instance size | `string` | `""` | no |

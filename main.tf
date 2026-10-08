@@ -19,6 +19,8 @@ module "controller_build" {
   controller_version = var.controller_version
 
   instance_type      = var.controller_instance_type
+  root_volume_size   = var.controller_root_volume_size
+  root_volume_type   = var.controller_root_volume_type
   incoming_ssl_cidrs = local.controller_allowed_cidrs
   use_existing_vpc   = var.use_existing_vpc
   vpc_id             = var.vpc_id
@@ -79,6 +81,8 @@ module "copilot_build" {
   copilot_name             = var.copilot_name
   ami_id                   = var.copilot_ami_id
   instance_type            = var.copilot_instance_type
+  root_volume_size         = var.copilot_root_volume_size
+  root_volume_type         = var.copilot_root_volume_type
   default_data_volume_name = "/dev/sdf"
   default_data_volume_size = var.default_data_volume_size
   environment              = var.environment                  #For internal use only

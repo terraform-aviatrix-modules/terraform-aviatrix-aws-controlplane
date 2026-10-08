@@ -52,6 +52,8 @@ output "controlplane_data" {
 | <a name="input_controller_eip_id"></a> [controller\_eip\_id](#input\_controller\_eip\_id) | Allocation ID of existing EIP for controller | `string` | `""` | no |
 | <a name="input_controller_instance_type"></a> [controller\_instance\_type](#input\_controller\_instance\_type) | The instance type used for deploying the controller. | `string` | `"t3.large"` | no |
 | <a name="input_controller_name"></a> [controller\_name](#input\_controller\_name) | Customized Name for Aviatrix Controller | `string` | `"Aviatrix-Controller"` | no |
+| <a name="input_controller_root_volume_size"></a> [controller\_root\_volume\_size](#input\_controller\_root\_volume\_size) | Root volume size (GiB) for the controller. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk. | `number` | `null` | no |
+| <a name="input_controller_root_volume_type"></a> [controller\_root\_volume\_type](#input\_controller\_root\_volume\_type) | Root volume type for the controller. | `string` | `null` | no |
 | <a name="input_controller_termination_protection"></a> [controller\_termination\_protection](#input\_controller\_termination\_protection) | Enable/disable switch for termination protection | `bool` | `null` | no |
 | <a name="input_controller_use_existing_eip"></a> [controller\_use\_existing\_eip](#input\_controller\_use\_existing\_eip) | Flag to indicate whether to use an existing EIP for controller | `bool` | `false` | no |
 | <a name="input_controller_version"></a> [controller\_version](#input\_controller\_version) | Aviatrix Controller version | `string` | `"latest"` | no |
@@ -60,10 +62,12 @@ output "controlplane_data" {
 | <a name="input_copilot_eip_id"></a> [copilot\_eip\_id](#input\_copilot\_eip\_id) | Allocation ID of existing EIP for copilot | `string` | `""` | no |
 | <a name="input_copilot_instance_type"></a> [copilot\_instance\_type](#input\_copilot\_instance\_type) | The instance type used for deploying copilot. | `string` | `null` | no |
 | <a name="input_copilot_name"></a> [copilot\_name](#input\_copilot\_name) | Customized Name for Aviatrix Copilot | `string` | `"Aviatrix-Copilot"` | no |
+| <a name="input_copilot_root_volume_size"></a> [copilot\_root\_volume\_size](#input\_copilot\_root\_volume\_size) | Root volume size (GiB) for copilot. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk. | `number` | `null` | no |
+| <a name="input_copilot_root_volume_type"></a> [copilot\_root\_volume\_type](#input\_copilot\_root\_volume\_type) | Root volume type for copilot. | `string` | `null` | no |
 | <a name="input_copilot_service_account_password"></a> [copilot\_service\_account\_password](#input\_copilot\_service\_account\_password) | n/a | `string` | `""` | no |
 | <a name="input_copilot_use_existing_eip"></a> [copilot\_use\_existing\_eip](#input\_copilot\_use\_existing\_eip) | Flag to indicate whether to use an existing EIP for copilot | `bool` | `false` | no |
 | <a name="input_customer_id"></a> [customer\_id](#input\_customer\_id) | aviatrix customer license id | `string` | n/a | yes |
-| <a name="input_default_data_volume_size"></a> [default\_data\_volume\_size](#input\_default\_data\_volume\_size) | n/a | `string` | `"100"` | no |
+| <a name="input_default_data_volume_size"></a> [default\_data\_volume\_size](#input\_default\_data\_volume\_size) | Size (GiB) of the Copilot data volume. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk. | `number` | `null` | no |
 | <a name="input_external_controller_account_id"></a> [external\_controller\_account\_id](#input\_external\_controller\_account\_id) | n/a | `string` | `""` | no |
 | <a name="input_incoming_ssl_cidrs"></a> [incoming\_ssl\_cidrs](#input\_incoming\_ssl\_cidrs) | Incoming cidrs for security group used by controller | `list(string)` | n/a | yes |
 | <a name="input_module_config"></a> [module\_config](#input\_module\_config) | n/a | `map(bool)` | <pre>{<br/>  "account_onboarding": true,<br/>  "controller_deployment": true,<br/>  "controller_initialization": true,<br/>  "copilot_deployment": true,<br/>  "copilot_initialization": true,<br/>  "iam_roles": true,<br/>  "sg_management": true<br/>}</pre> | no |
