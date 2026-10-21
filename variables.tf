@@ -210,6 +210,30 @@ variable "copilot_instance_type" {
   default     = null
 }
 
+variable "controller_root_volume_size" {
+  type        = number
+  description = "Root volume size (GiB) for the controller. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk."
+  default     = null
+}
+
+variable "controller_root_volume_type" {
+  type        = string
+  description = "Root volume type for the controller."
+  default     = null
+}
+
+variable "copilot_root_volume_size" {
+  type        = number
+  description = "Root volume size (GiB) for copilot. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk."
+  default     = null
+}
+
+variable "copilot_root_volume_type" {
+  type        = string
+  description = "Root volume type for copilot."
+  default     = null
+}
+
 variable "module_config" {
   type = map(bool)
   default = {
@@ -292,6 +316,7 @@ variable "external_controller_account_id" {
 }
 
 variable "default_data_volume_size" {
-  type    = string
-  default = "100"
+  type        = number
+  description = "Size (GiB) of the Copilot data volume. Can be increased in place on an existing deployment; EBS volumes cannot be shrunk."
+  default     = null
 }

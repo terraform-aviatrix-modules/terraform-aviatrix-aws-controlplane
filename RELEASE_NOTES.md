@@ -1,5 +1,10 @@
 # terraform-aviatrix-aws-controlplane - release notes
 
+## v1.1.1
+- Expose root volume size and type for the controller and Copilot (`controller_root_volume_size`, `controller_root_volume_type`, `copilot_root_volume_size`, `copilot_root_volume_type`). Left unset, the submodule defaults apply (64 GiB / 30 GiB, gp3), so existing deployments see no change.
+- The controller root volume size is now validated to be at least 64 GiB.
+- `default_data_volume_size` on the root module is now a `number` defaulting to `null`, and the `copilot_build` submodule's default is now 100 GiB (was 50) with `nullable = false`. Root module users see no change. **Direct callers of `copilot_build` that did not set `default_data_volume_size` will see their data volume grow from 50 to 100 GiB in place** (EBS volumes cannot be shrunk); set it to 50 explicitly to keep the current size.
+
 ## v1.1.0
 - Add support for g5 images for version 10.0 and later.
 
