@@ -57,7 +57,7 @@ module "copilot_build" {
 | <a name="input_eip_id"></a> [eip\_id](#input\_eip\_id) | Allocation ID of existing EIP | `string` | `""` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Copilot instance size | `string` | `""` | no |
 | <a name="input_is_cluster"></a> [is\_cluster](#input\_is\_cluster) | Flag to indicate whether the copilot is for a cluster | `bool` | `false` | no |
-| <a name="input_key_pair_name"></a> [key\_pair\_name](#input\_key\_pair\_name) | Key pair which should be used by Aviatrix Copilot | `string` | `"aviatrix_copilot_kp"` | no |
+| <a name="input_key_pair_name"></a> [key\_pair\_name](#input\_key\_pair\_name) | Name of the key pair to create, or of the existing key pair when use\_existing\_keypair is true | `string` | `"aviatrix_copilot_kp"` | no |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Additional name prefix for your environment resources | `string` | `""` | no |
 | <a name="input_private_mode"></a> [private\_mode](#input\_private\_mode) | Flag to indicate whether the copilot is for private mode | `bool` | `false` | no |
 | <a name="input_root_volume_encrypted"></a> [root\_volume\_encrypted](#input\_root\_volume\_encrypted) | Whether the root volume is encrypted | `bool` | `true` | no |
@@ -69,7 +69,7 @@ module "copilot_build" {
 | <a name="input_tags"></a> [tags](#input\_tags) | Map of common tags which should be used for module resources | `map(string)` | `{}` | no |
 | <a name="input_type"></a> [type](#input\_type) | Type of billing, can be 'Copilot' or 'CopilotARM' | `string` | `"Copilot"` | no |
 | <a name="input_use_existing_eip"></a> [use\_existing\_eip](#input\_use\_existing\_eip) | Flag to indicate whether to use an existing EIP | `bool` | `false` | no |
-| <a name="input_use_existing_keypair"></a> [use\_existing\_keypair](#input\_use\_existing\_keypair) | Flag to indicate whether to use an existing key pair | `bool` | `false` | no |
+| <a name="input_use_existing_keypair"></a> [use\_existing\_keypair](#input\_use\_existing\_keypair) | Use an existing key pair instead of creating one | `bool` | `false` | no |
 | <a name="input_use_existing_vpc"></a> [use\_existing\_vpc](#input\_use\_existing\_vpc) | Flag to indicate whether to use an existing VPC | `bool` | `false` | no |
 | <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | VPC in which you want launch Aviatrix Copilot | `string` | `"10.0.0.0/16"` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC ID, required when use\_existing\_vpc is true | `string` | `""` | no |

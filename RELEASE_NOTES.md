@@ -4,6 +4,8 @@
 - Expose root volume size and type for the controller and Copilot (`controller_root_volume_size`, `controller_root_volume_type`, `copilot_root_volume_size`, `copilot_root_volume_type`).
 - Controller root volume now defaults to 100 GiB (was 64) and must be at least 100 GiB. Existing deployments using the default grow in place.
 - `default_data_volume_size` on the root module is now a `number` defaulting to `null`, and the `copilot_build` submodule's default is now 100 GiB (was 50) with `nullable = false`. Root module users see no change. **Direct callers of `copilot_build` that did not set `default_data_volume_size` will see their data volume grow from 50 to 100 GiB in place** (EBS volumes cannot be shrunk); set it to 50 explicitly to keep the current size.
+- Expose key pair settings for the controller and Copilot (`controller_key_pair_name`, `controller_use_existing_keypair`, `copilot_key_pair_name`, `copilot_use_existing_keypair`), so multiple control planes can be deployed in one account and region ([#32](https://github.com/terraform-aviatrix-modules/terraform-aviatrix-aws-controlplane/issues/32)).
+- Fix Copilot being deployed without a key pair. Copilot now uses `aviatrix_copilot_kp` by default; existing Copilot instances are not replaced.
 - Cloud Shell script now deploys module v1.1.1 and adds `--controller-version` (default `latest`).
 
 ## v1.1.0

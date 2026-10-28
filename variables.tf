@@ -80,19 +80,16 @@ variable "copilot_ami_id" {
   nullable    = false
 }
 
-# terraform-docs-ignore
 variable "controller_use_existing_keypair" {
   type        = bool
-  default     = false
-  description = "Flag to indicate whether to use an existing key pair"
+  description = "Use an existing key pair for the controller instead of creating one. If null, the submodule default (false) is used."
+  default     = null
 }
 
-# terraform-docs-ignore
 variable "controller_key_pair_name" {
   type        = string
-  description = "Key pair name"
-  default     = ""
-  nullable    = false
+  description = "Name of the controller key pair to create, or of the existing key pair when controller_use_existing_keypair is true. If null, the submodule default (aviatrix_controller_kp) is used."
+  default     = null
 }
 
 variable "copilot_name" {
@@ -101,19 +98,16 @@ variable "copilot_name" {
   default     = "Aviatrix-Copilot"
 }
 
-# terraform-docs-ignore
 variable "copilot_use_existing_keypair" {
   type        = bool
-  default     = false
-  description = "Flag to indicate whether to use an existing key pair"
+  description = "Use an existing key pair for Copilot instead of creating one. If null, the submodule default (false) is used."
+  default     = null
 }
 
-# terraform-docs-ignore
 variable "copilot_key_pair_name" {
   type        = string
-  description = "Key pair name"
-  default     = ""
-  nullable    = false
+  description = "Name of the Copilot key pair to create, or of the existing key pair when copilot_use_existing_keypair is true. If null, the submodule default (aviatrix_copilot_kp) is used."
+  default     = null
 }
 
 variable "controller_use_existing_eip" {

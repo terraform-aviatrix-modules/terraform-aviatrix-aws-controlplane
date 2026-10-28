@@ -71,7 +71,7 @@ resource "local_file" "private_key" {
 
 resource "aws_key_pair" "controller_key_pair" {
   count      = var.use_existing_keypair ? 0 : 1
-  key_name   = local.key_pair_name
+  key_name   = var.key_pair_name
   public_key = tls_private_key.key_pair_material[0].public_key_openssh
 }
 
@@ -146,7 +146,7 @@ resource "aws_network_interface" "eni_controller" {
 resource "aws_instance" "aviatrix_controller" {
   ami                     = local.ami_id
   instance_type           = var.instance_type
-  key_name                = local.key_pair_name
+  key_name                = var.key_pair_name
   iam_instance_profile    = local.ec2_role_name
   disable_api_termination = var.termination_protection
 

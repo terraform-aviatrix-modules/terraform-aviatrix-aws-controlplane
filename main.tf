@@ -29,13 +29,13 @@ module "controller_build" {
   availability_zone         = var.availability_zone == "" ? local.default_az : var.availability_zone
   vpc_cidr                  = var.controlplane_vpc_cidr
   subnet_cidr               = var.controlplane_subnet_cidr
-  environment               = var.environment                     #For internal use only
-  ami_id                    = var.controller_ami_id               #For internal use only
-  use_existing_keypair      = var.controller_use_existing_keypair #For internal use only
-  key_pair_name             = var.controller_key_pair_name        #For internal use only
-  registry_auth_token       = var.registry_auth_token             #For internal use only
-  additional_bootstrap_args = var.additional_bootstrap_args       #For internal use only
-  ssh_sg_rule               = var.ssh_sg_rule                     #For internal use only
+  environment               = var.environment       #For internal use only
+  ami_id                    = var.controller_ami_id #For internal use only
+  use_existing_keypair      = var.controller_use_existing_keypair
+  key_pair_name             = var.controller_key_pair_name
+  registry_auth_token       = var.registry_auth_token       #For internal use only
+  additional_bootstrap_args = var.additional_bootstrap_args #For internal use only
+  ssh_sg_rule               = var.ssh_sg_rule               #For internal use only
   tags                      = var.tags
   name_prefix               = var.name_prefix
   ec2_role_name             = var.module_config.iam_roles ? module.iam_roles[0].aviatrix_role_ec2_name : var.controller_ec2_role_name
@@ -85,9 +85,9 @@ module "copilot_build" {
   root_volume_type         = var.copilot_root_volume_type
   default_data_volume_name = "/dev/sdf"
   default_data_volume_size = var.default_data_volume_size
-  environment              = var.environment                  #For internal use only
-  use_existing_keypair     = var.copilot_use_existing_keypair #For internal use only
-  key_pair_name            = var.copilot_key_pair_name        #For internal use only
+  environment              = var.environment #For internal use only
+  use_existing_keypair     = var.copilot_use_existing_keypair
+  key_pair_name            = var.copilot_key_pair_name
   tags                     = var.tags
   name_prefix              = var.name_prefix
   use_existing_eip         = var.copilot_use_existing_eip #For internal use only

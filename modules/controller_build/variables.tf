@@ -43,13 +43,14 @@ variable "subnet_id" {
 variable "use_existing_keypair" {
   type        = bool
   default     = false
-  description = "Flag to indicate whether to use an existing key pair"
+  description = "Use an existing key pair instead of creating one"
+  nullable    = false
 }
 
 variable "key_pair_name" {
   type        = string
-  description = "Key pair name"
-  default     = ""
+  description = "Name of the key pair to create, or of the existing key pair when use_existing_keypair is true"
+  default     = "aviatrix_controller_kp"
   nullable    = false
 }
 
@@ -217,7 +218,6 @@ variable "additional_bootstrap_args" {
 locals {
   name_prefix     = var.name_prefix != "" ? "${var.name_prefix}_" : ""
   controller_name = var.controller_name != "" ? var.controller_name : "${local.name_prefix}AviatrixController"
-  key_pair_name   = var.key_pair_name != "" ? var.key_pair_name : "aviatrix_controller_kp"
   ec2_role_name   = var.ec2_role_name != "" ? var.ec2_role_name : "aviatrix-role-ec2"
   is_aws_cn       = element(split("-", data.aws_region.current.region), 0) == "cn" ? true : false
 

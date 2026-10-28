@@ -36,14 +36,16 @@ variable "subnet_id" {
 
 variable "use_existing_keypair" {
   type        = bool
-  description = "Flag to indicate whether to use an existing key pair"
+  description = "Use an existing key pair instead of creating one"
   default     = false
+  nullable    = false
 }
 
 variable "key_pair_name" {
   type        = string
-  description = "Key pair which should be used by Aviatrix Copilot"
+  description = "Name of the key pair to create, or of the existing key pair when use_existing_keypair is true"
   default     = "aviatrix_copilot_kp"
+  nullable    = false
 }
 
 variable "use_existing_eip" {
