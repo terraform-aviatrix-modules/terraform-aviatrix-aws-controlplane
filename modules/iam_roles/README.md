@@ -13,7 +13,7 @@ module "iam_roles" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_app_role_max_session_duration"></a> [app\_role\_max\_session\_duration](#input\_app\_role\_max\_session\_duration) | Maximum session duration (in seconds) for the Aviatrix APP role | `number` | `3600` | no |
 | <a name="input_app_role_name"></a> [app\_role\_name](#input\_app\_role\_name) | APP role name | `string` | `""` | no |
 | <a name="input_ec2_role_name"></a> [ec2\_role\_name](#input\_ec2\_role\_name) | EC2 role name | `string` | `""` | no |
@@ -24,7 +24,7 @@ module "iam_roles" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_aviatrix_app_policy_arn"></a> [aviatrix\_app\_policy\_arn](#output\_aviatrix\_app\_policy\_arn) | Aviatrix policy ARN for application |
 | <a name="output_aviatrix_assume_role_policy_arn"></a> [aviatrix\_assume\_role\_policy\_arn](#output\_aviatrix\_assume\_role\_policy\_arn) | Aviatrix assume role policy ARN |
 | <a name="output_aviatrix_role_app_arn"></a> [aviatrix\_role\_app\_arn](#output\_aviatrix\_role\_app\_arn) | Aviatrix role ARN for application |

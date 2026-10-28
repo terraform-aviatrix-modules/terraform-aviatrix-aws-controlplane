@@ -10,7 +10,6 @@
 # - IAM roles and policies for API access
 # - AWS account onboarding
 # - Optional CoPilot deployment for analytics
-# - AWS Marketplace agreement acceptance
 #
 # Designed for execution in AWS CloudShell by users who don't know Terraform.
 #
@@ -23,6 +22,7 @@
 #   -e, --admin-email EMAIL      Email address for the Aviatrix controller admin
 #   -p, --admin-password PASS    Secure password for the controller admin
 #   -c, --customer-id ID         Aviatrix customer license ID
+#   -v, --controller-version VER Controller version, e.g. 8.1 or 10.1 (default: latest)
 #   -C, --include-copilot        Deploy optional CoPilot for advanced analytics
 #   -i, --incoming-cidrs CIDRS   Your public IP/CIDR for controller access (auto-detected if not provided)
 #   -m, --mgmt-ips IPS           Additional management IPs (comma-separated)
@@ -38,6 +38,9 @@
 #   # Automated deployment with parameters
 #   ./deploy-aviatrix-controlplane.sh -n "my-avx-ctrl" -r "us-east-1" -e "admin@company.com" -p "MySecure123!" -c "aviatrix-abc-123456"
 #   
+#   # Deploy a specific controller version
+#   ./deploy-aviatrix-controlplane.sh -n "my-avx-ctrl" -v "8.1"
+#   
 #   # Deploy with CoPilot included
 #   ./deploy-aviatrix-controlplane.sh -n "my-avx-ctrl" -C
 #   
@@ -50,7 +53,7 @@ set -euo pipefail
 
 # Global variables
 MODULE_SOURCE="terraform-aviatrix-modules/aws-controlplane/aviatrix"
-MODULE_VERSION="1.1.0"
+MODULE_VERSION="1.1.1"
 TERRAFORM_DIR="./aviatrix-deployment"
 
 # Available AWS regions
@@ -81,6 +84,7 @@ REGION=""
 ADMIN_EMAIL=""
 ADMIN_PASSWORD=""
 CUSTOMER_ID=""
+CONTROLLER_VERSION="latest"
 INCLUDE_COPILOT=false
 INCOMING_CIDRS=""
 MGMT_IPS=""
@@ -170,6 +174,7 @@ OPTIONS:
     -e, --admin-email EMAIL      Email address for the controller admin
     -p, --admin-password PASS    Secure password for the controller admin
     -c, --customer-id ID         Aviatrix customer license ID
+    -v, --controller-version VER Controller version, e.g. 8.1 or 10.1 (default: latest)
     -C, --include-copilot        Deploy CoPilot for advanced analytics
     -i, --incoming-cidrs CIDRS   Your public IP/CIDR for controller access
     -m, --mgmt-ips IPS           Additional management IPs (comma-separated)
@@ -185,6 +190,9 @@ EXAMPLES:
     # Automated deployment
     $0 -n "my-avx-ctrl" -r "us-east-1" -e "admin@company.com" \\
        -p "MySecure123!" -c "aviatrix-abc-123456"
+
+    # Deploy a specific controller version
+    $0 -n "my-avx-ctrl" -v "8.1"
 
     # Deploy with CoPilot
     $0 -n "my-avx-ctrl" -C
@@ -223,6 +231,14 @@ parse_args() {
                 ;;
             -c|--customer-id)
                 CUSTOMER_ID="$2"
+                shift 2
+                ;;
+            -v|--controller-version)
+                CONTROLLER_VERSION="$2"
+                if [[ ! "$CONTROLLER_VERSION" =~ ^(latest|[0-9]+(\.[0-9]+){0,3})$ ]]; then
+                    write_error "Invalid controller version: $CONTROLLER_VERSION. Use 'latest' or a version like 8.1 or 10.1.10"
+                    exit 1
+                fi
                 shift 2
                 ;;
             -C|--include-copilot)
@@ -673,11 +689,6 @@ test_prerequisites() {
         terraform_version=$(terraform --version | head -n1)
         write_success "Terraform available: $terraform_version"
     fi
-    
-    # Check marketplace subscriptions (skip for destroy operations)
-    if [[ "$is_destroy_operation" != "true" ]]; then
-        write_step "Marketplace subscription check will be performed during deployment configuration..."
-    fi
 }
 
 # Check for existing IAM roles
@@ -801,6 +812,7 @@ module "aviatrix_controlplane" {
 
   # Basic Configuration
   controller_name           = "$DEPLOYMENT_NAME-controller"
+  controller_version        = "$CONTROLLER_VERSION"
   customer_id              = "$CUSTOMER_ID"
   controller_admin_email    = "$ADMIN_EMAIL"
   controller_admin_password = "$ADMIN_PASSWORD"
@@ -953,8 +965,7 @@ run_terraform() {
                 if [[ "$INCLUDE_COPILOT" == "true" ]]; then
                     echo "├─ CoPilot EC2 instance for advanced analytics"
                 fi
-                echo "├─ VPC security groups (access from $INCOMING_CIDRS)"
-                echo "└─ AWS marketplace agreements"
+                echo "└─ VPC security groups (access from $INCOMING_CIDRS)"
                 echo ""
                 
                 read -p "Press Enter to continue with deployment or Ctrl+C to cancel: "
@@ -1039,6 +1050,7 @@ show_config_summary() {
     echo "├─ AWS Region: $REGION"
     echo "├─ Admin Email: $ADMIN_EMAIL"
     echo "├─ Customer License ID: $CUSTOMER_ID"
+    echo "├─ Controller Version: $CONTROLLER_VERSION"
     echo "├─ Include CoPilot: $(if [[ "$INCLUDE_COPILOT" == "true" ]]; then echo "Yes (Additional analytics and monitoring)"; else echo "No"; fi)"
     echo "├─ CloudShell IP: $INCOMING_CIDRS"
     if [[ -n "$MGMT_IPS" ]]; then

@@ -41,7 +41,7 @@ module "copilot_build" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_additional_volumes"></a> [additional\_volumes](#input\_additional\_volumes) | n/a | <pre>map(object({<br/>    device_name = string,<br/>    volume_id   = string,<br/>  }))</pre> | `{}` | no |
 | <a name="input_allowed_cidrs"></a> [allowed\_cidrs](#input\_allowed\_cidrs) | n/a | <pre>map(object({<br/>    protocol  = string,<br/>    from_port = number,<br/>    to_port   = optional(number),<br/>    cidrs     = set(string),<br/>  }))</pre> | n/a | yes |
 | <a name="input_ami_id"></a> [ami\_id](#input\_ami\_id) | AMI ID for copilot. If unset, use official image. | `string` | `""` | no |
@@ -77,7 +77,7 @@ module "copilot_build" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_ec2-info"></a> [ec2-info](#output\_ec2-info) | EC2 instance info |
 | <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | Copilot Instance ID |
 | <a name="output_private_ip"></a> [private\_ip](#output\_private\_ip) | Private IP address of the Aviatrix Copilot |

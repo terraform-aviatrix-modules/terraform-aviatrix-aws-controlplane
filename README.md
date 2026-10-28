@@ -15,13 +15,13 @@ If you run into any issues, please check the [Common Issues Page](./docs/COMMON-
 ### Compatibility
 Module version | Terraform version
 :--- | :---
-v1.1.0 | >= 1.3.0
+v1.1.1 | >= 1.3.0
 
 ### Usage Example
 ```hcl
 module "control_plane" {
   source  = "terraform-aviatrix-modules/aws-controlplane/aviatrix"
-  version = "1.1.0"
+  version = "1.1.1"
 
   controller_name           = "my_controller"
   incoming_ssl_cidrs        = ["1.2.3.4"]
@@ -39,7 +39,7 @@ output "controlplane_data" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_access_account_name"></a> [access\_account\_name](#input\_access\_account\_name) | aviatrix controller access account name | `string` | n/a | yes |
 | <a name="input_account_email"></a> [account\_email](#input\_account\_email) | aviatrix controller access account email | `string` | n/a | yes |
 | <a name="input_availability_zone"></a> [availability\_zone](#input\_availability\_zone) | The Availability zone in which to deploy the controlplane. | `string` | `""` | no |
@@ -81,7 +81,7 @@ output "controlplane_data" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_controller_ami_id"></a> [controller\_ami\_id](#output\_controller\_ami\_id) | n/a |
 | <a name="output_controller_image_family"></a> [controller\_image\_family](#output\_controller\_image\_family) | n/a |
 | <a name="output_controller_instance_id"></a> [controller\_instance\_id](#output\_controller\_instance\_id) | n/a |

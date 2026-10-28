@@ -103,13 +103,13 @@ variable "ssh_sg_rule" {
 
 variable "root_volume_size" {
   type        = number
-  description = "Root volume disk size for controller"
-  default     = 64
+  description = "Root volume disk size for controller. Minimum 100 GiB."
+  default     = 100
   nullable    = false
 
   validation {
-    condition     = var.root_volume_size >= 64
-    error_message = "The minimum root volume size is 64G."
+    condition     = var.root_volume_size >= 100
+    error_message = "The minimum root volume size is 100G."
   }
 }
 

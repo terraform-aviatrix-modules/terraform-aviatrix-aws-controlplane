@@ -107,6 +107,7 @@ chmod +x deploy-aviatrix-controlplane.sh
 | `--admin-email` | `-e` | Controller admin email | Yes | `admin@company.com` |
 | `--admin-password` | `-p` | Controller admin password | Yes | `MySecure123!` |
 | `--customer-id` | `-c` | Aviatrix customer license ID | Yes | `aviatrix-abc-123456` |
+| `--controller-version` | `-v` | Controller version (default: `latest`) | No | `8.1` |
 | `--include-copilot` | `-C` | Deploy CoPilot analytics | No | (flag only) |
 | `--incoming-cidrs` | `-i` | Your public IP/CIDR | No | `203.0.113.25/32` |
 | `--mgmt-ips` | `-m` | Additional management IPs | No | `192.168.1.0/24,10.0.0.50` |
@@ -225,7 +226,6 @@ Specify additional IP addresses that should have access:
 
 3. **Region Not Supported**
    - Use one of the supported regions listed above
-   - Check if Aviatrix marketplace offerings are available in your region
 
 4. **Deployment Timeout**
    - Check EC2 service health in AWS console

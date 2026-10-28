@@ -16,7 +16,7 @@ module "controller_sg_mgmt" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_access_account_name"></a> [access\_account\_name](#input\_access\_account\_name) | Aviatrix access account name | `string` | n/a | yes |
 | <a name="input_cloud_type"></a> [cloud\_type](#input\_cloud\_type) | Aviatrix cloud type of the access account (1 = AWS Commercial, 256 = AWS GovCloud, 1024 = AWS China). | `number` | `1` | no |
 | <a name="input_controller_admin_password"></a> [controller\_admin\_password](#input\_controller\_admin\_password) | aviatrix controller admin password | `string` | n/a | yes |

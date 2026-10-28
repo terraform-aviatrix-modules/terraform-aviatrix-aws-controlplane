@@ -18,7 +18,7 @@ module "controller_build" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_ami_id"></a> [ami\_id](#input\_ami\_id) | AMI ID for controller. If unset, use official image. | `string` | `""` | no |
 | <a name="input_availability_zone"></a> [availability\_zone](#input\_availability\_zone) | Availability zone | `string` | `""` | no |
 | <a name="input_controller_name"></a> [controller\_name](#input\_controller\_name) | Name of controller that will be launched. If not set, default name will be used. | `string` | `""` | no |
@@ -31,7 +31,7 @@ module "controller_build" {
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Additional name prefix for your environment resources | `string` | `""` | no |
 | <a name="input_root_volume_encrypted"></a> [root\_volume\_encrypted](#input\_root\_volume\_encrypted) | Whether the root volume is encrypted | `bool` | `true` | no |
 | <a name="input_root_volume_kms_key_id"></a> [root\_volume\_kms\_key\_id](#input\_root\_volume\_kms\_key\_id) | ARN for the key used to encrypt the root volume | `string` | `""` | no |
-| <a name="input_root_volume_size"></a> [root\_volume\_size](#input\_root\_volume\_size) | Root volume disk size for controller | `number` | `64` | no |
+| <a name="input_root_volume_size"></a> [root\_volume\_size](#input\_root\_volume\_size) | Root volume disk size for controller. Minimum 100 GiB. | `number` | `100` | no |
 | <a name="input_root_volume_type"></a> [root\_volume\_type](#input\_root\_volume\_type) | Root volume type for controller | `string` | `"gp3"` | no |
 | <a name="input_subnet_cidr"></a> [subnet\_cidr](#input\_subnet\_cidr) | Subnet in which you want launch Aviatrix controller | `string` | `"10.0.1.0/24"` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | Subnet ID, only required when use\_existing\_vpc is true | `string` | `""` | no |
@@ -47,7 +47,7 @@ module "controller_build" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_ami_id"></a> [ami\_id](#output\_ami\_id) | AMI ID used by the Aviatrix controller |
 | <a name="output_controller_name"></a> [controller\_name](#output\_controller\_name) | Name of the Aviatrix controller created. |
 | <a name="output_image_family"></a> [image\_family](#output\_image\_family) | Image family of the Aviatrix controller AMI |
